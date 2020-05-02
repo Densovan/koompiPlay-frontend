@@ -1,22 +1,71 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
+import axios from "axios";
+import jwt from "jsonwebtoken";
 
 const Login = () => {
   const { register, handleSubmit, errors } = useForm();
   const onSubmit = (data) => {
     // alert(JSON.stringify(data));
-    console.log(data);
+    // fetch("http://localhost:8000/login", {
+    //   method: "POST",
+    //   headers: {
+    //     Accept: "application/json, text/plain, */*",
+    //     "Content-type": "application/json",
+    //   },
+    //   body: JSON.stringify({
+    //     user_name: data.Username,
+    //     user_password: data.Password,
+    //   }),
+    // })
+    //   .then((res) => res.text())
+    //   .then((data) => {
+    //     alert(data);
+    //   })
+    //   .catch((err) => {
+    //     alert(err);
+    //     console.log(err);
+    //   });
+    // // console.log(data);
+
+    fetch("http://localhost:8000/login", {
+      method: "POST",
+      headers: {
+        Accept: "application/json, text/plain, */*",
+        "Content-type": "application/json",
+      },
+
+      body: JSON.stringify({
+        user_name: data.Username,
+        user_email: data.Email,
+        user_password: data.Password,
+      }),
+    })
+      .then((res) => res.text())
+      .then((data) => {
+        localStorage.setItem(
+          "token",
+          JSON.stringify({
+            loign: true,
+            token: data,
+          })
+        );
+        console.log("data", data);
+        const decodeToken = jwt.decode(data);
+        console.log(decodeToken);
+        if (decodeToken) {
+          window.location.replace("/userinfo");
+        } else {
+          console.log(data);
+        }
+      })
+      .catch((err) => {
+        alert(err);
+        console.log(err.res.data);
+      });
   };
-  const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
-  //   const validateUserName = async (value) => {
-  //     await sleep(1000);
-  //     if (value !== 'bill') {
-  //       setError('username', 'validate');
-  //     } else {
-  //       clearError('username');
-  //     }
-  //   };
+
   return (
     <div className="flex  items-center justify-center h-screen ">
       <div className="w-full max-w-md">
@@ -32,15 +81,15 @@ const Login = () => {
             className="mb-4"
           >
             <label className="block text-gray-700 text-sm font-bold mb-2">
-              Email
+              Username
             </label>
             <input
               className=" appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              ref={register({ required: true, minLength: 5 })}
-              name="Email"
-              type="email"
+              ref={register({ required: true, minLength: 1 })}
+              name="Username"
+              type="text"
             />
-            {errors.Email && (
+            {errors.Username && (
               <p className="text-red-500 text-xs italic">First Name required</p>
             )}
           </div>

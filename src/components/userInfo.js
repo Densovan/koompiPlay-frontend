@@ -1,19 +1,60 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import uuid from "uuid/v1";
+import jwt from "jsonwebtoken";
+import axios from "axios";
 
-const UserInfo = () => {
+const UserInfo = (props) => {
   const [profile, setProfile] = useState({
-    name: "Chhim Chany",
-    email: "chhimchany@gmail.com",
-    phone: "086280018",
+    // name: "Chhim Chany",
+    // email: "chhimchany@gmail.com",
+    // phone: "086280018",
+    // gender: "male",
+    // password: "*****",
+    // createDate: "12.12.12",
+    name: "",
+    email: "",
+    phone: "",
+    gender: "",
+    password: "",
+    createDate: "",
   });
 
+  useEffect(() => {
+    fetch("http://localhost:8000/userData", {
+      method: "POST",
+      headers: {
+        Accept: "application/json, text/plain, */*",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        user_name: profile.namme,
+        user_email: profile.email,
+        user_phone: profile.phone,
+        user_password: profile.password,
+        user_createDate: profile.createDate,
+      }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        localStorage.setItem(
+          "token",
+          JSON.stringify({
+            loign: true,
+            token: data,
+          })
+        );
+
+        let user = jwt.decode(data);
+        setProfile(user);
+      });
+  }, []);
+
   const { register, handleSubmit, errors } = useForm();
-  const onSubmit = (profile) => {
-    // alert(JSON.stringify(data));
-    console.log(profile);
-  };
+  // const onSubmit = (profile) => {
+  //   // alert(JSON.stringify(data));
+  //   console.log(profile);
+  // };
 
   const [file, setFile] = useState("");
   const [fileName, setFileName] = useState("Choose file");
@@ -73,11 +114,22 @@ const UserInfo = () => {
   // const changeName = (name) => {
   //   setProfile([...profile, { name, id: uuid() }]);
   // };
-  // const onSubmit = (e) => {
-  //   e.preventDefault();
-  //   const data = profile;
-  //   console.log(data);
-  // };
+  const onSubmit = (e) => {
+    e.preventDefault();
+    const data = profile;
+    console.log(data);
+  };
+  const cancle = (e) => {
+    setModal(false);
+    setProfile({
+      name: "Chhim Chany",
+      email: "chhimchany@gmail.com",
+      phone: "086280018",
+      gender: "male",
+      password: "*****",
+      createDate: "12.12.12",
+    });
+  };
   return (
     <div className=" flex  items-center justify-center h-screen">
       <div className=" w-full max-w-screen-md">
@@ -136,10 +188,7 @@ const UserInfo = () => {
                 </button>
                 {/* <button onClick={showButtonUplaod}>helo</button> */}
               </form>
-              <form
-                onSubmit={handleSubmit(onSubmit)}
-                className="md:flex mt-8 pb-8 px-4"
-              >
+              <form onSubmit={onSubmit} className="md:flex mt-8 pb-8 px-4">
                 {/* <div className="ml-4">
                 <img
                   className="h-20 w-20 md:h-32 md:w-32 rounded-full mx-auto md:mx-0 md:mr-6"
@@ -218,7 +267,7 @@ const UserInfo = () => {
                       Save
                     </button>
                     <button
-                      onClick={onClose}
+                      onClick={cancle}
                       className="mr-2 mt-5 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                     >
                       Cancel
@@ -240,11 +289,29 @@ const UserInfo = () => {
                     </h1>
                     <span className="text-xs ">Email</span>
                   </div>
-                  <div className=" px-3 ">
+                  <div className=" px-3 mb-3">
                     <h1 className="-mb-2 font-extrabold text-lg">
                       {profile.phone}
                     </h1>
                     <span className="text-xs ">Phone</span>
+                  </div>
+                  <div className=" px-3 mb-3">
+                    <h1 className="-mb-2 font-extrabold text-lg">
+                      {profile.gender}
+                    </h1>
+                    <span className="text-xs ">Gender</span>
+                  </div>
+                  <div className=" px-3 mb-3">
+                    <h1 className="-mb-2 font-extrabold text-lg">
+                      {profile.password}
+                    </h1>
+                    <span className="text-xs ">Password</span>
+                  </div>
+                  <div className=" px-3 mb-3">
+                    <h1 className="-mb-2 font-extrabold text-lg">
+                      {profile.createDate}
+                    </h1>
+                    <span className="text-xs ">createDate</span>
                   </div>
                 </div>
               </form>
