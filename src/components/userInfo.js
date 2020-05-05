@@ -20,33 +20,70 @@ const UserInfo = (props) => {
     createDate: "",
   });
 
+  // fetch("http://localhost:8000/userData1")
+  //   .then((res) => res.json())
+  //   .then((data) => {
+  //     console.log(data);
+  //   });
+
+  var accessTokenObj = JSON.parse(localStorage.getItem("token"));
+  // console.log(accessTokenObj);
+
+  // useEffect(() => {
+  //   // const getJwt = (data) => {
+  //   //   return localStorage.getItem(
+  //   //     "token",
+  //   //     JSON.stringify({
+  //   //       userinfo: true,
+  //   //     })
+  //   //   );
+  //   // };
+  //   const token = getJwt();
+  //   let user = jwt.decode(token);
+  //   console.log(user);
+  //   if (!user) {
+  //     alert("err");
+  //     // window.location.replace("/login");
+  //   }
+  //   axios.get("http://localhost:8000/userData1").then(
+  //     (res) =>
+  //       setProfile({
+  //         profile: res.data,
+  //       }),
+  //     console.log(setProfile)
+  //   );
+  //   // .catch((err) => {
+  //   //   localStorage.removeItem("token");
+  //   //   window.location.replace("/login");
+  //   // });
+  // });
+
   useEffect(() => {
-    fetch("http://localhost:8000/userData", {
-      method: "POST",
+    fetch("http://localhost:8000/userData1", {
+      method: "GET",
+      // headers: {
+      //   Accept: "application/json, text/plain, */*",
+      //   "Content-Type": "application/json",
+      // },
       headers: {
+        token: accessTokenObj,
         Accept: "application/json, text/plain, */*",
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({
-        user_name: profile.namme,
-        user_email: profile.email,
-        user_phone: profile.phone,
-        user_password: profile.password,
-        user_createDate: profile.createDate,
-      }),
     })
       .then((res) => res.json())
       .then((data) => {
-        localStorage.setItem(
-          "token",
-          JSON.stringify({
-            loign: true,
-            token: data,
-          })
-        );
+        console.log(data);
+        // localStorage.setItem(
+        //   "token",
+        //   JSON.stringify({
+        //     loign: true,
+        //     token: data,
+        //   })
+        // );
 
-        let user = jwt.decode(data);
-        setProfile(user);
+        // let user = jwt.decode(data);
+        // setProfile(user);
       });
   }, []);
 
@@ -139,65 +176,53 @@ const UserInfo = (props) => {
           </div>
           <div className="overflow-hidden">
             <div className="md:flex px-12 ">
-              <form onSubmit={onSubmitImage} className="mt-6 ml-4">
-                {/* <img
-                  className="h-20 w-20 md:h-32 md:w-32 rounded-full mx-auto md:mx-0 md:mr-6"
-                  src="/img/01-shutterstock_476340928-Irina-Bg.jpg"
-                /> */}
-                <div
-                  className="h-20 w-20 md:h-32 md:w-32 rounded-full mx-auto md:mx-0 md:mr-6"
-                  // style={{
-                  //   height: "60px",
-                  //   width: "60px",
-                  //   border: "1px dashed black",
-                  // }}
-                  onClick={() => imageUploader.current.click()}
-                >
-                  <img
-                    ref={uploadedImage}
-                    src="/img/01-shutterstock_476340928-Irina-Bg.jpg"
-                    className="h-20 w-20 md:h-32 md:w-32 rounded-full mx-auto md:mx-0 md:mr-6"
-                    // style={{
-                    //   width: "100%",
-                    //   height: "100%",
-                    //   position: "acsolute",
-                    // }}
-                  />
-                </div>
-                <div>
-                  <input
-                    type="file"
-                    accept="image/*"
-                    onChange={handleImageUpload}
-                    ref={imageUploader}
-                    className="hidden"
-                    onClick={showButtonUplaod}
-                  />
-                </div>
-
-                <button
-                  type="submit"
-                  onClick={showButtonUplaod}
-                  className={
-                    buttonUpload
-                      ? "bg-blue-900 rounded py-2 px-2 text-white cursor-pointer mt-2 px-3 ml-6"
-                      : "hidden"
-                  }
-                >
-                  Upload
-                </button>
-                {/* <button onClick={showButtonUplaod}>helo</button> */}
-              </form>
               <form onSubmit={onSubmit} className="md:flex mt-8 pb-8 px-4">
-                {/* <div className="ml-4">
-                <img
-                  className="h-20 w-20 md:h-32 md:w-32 rounded-full mx-auto md:mx-0 md:mr-6"
-                  src="/img/01-shutterstock_476340928-Irina-Bg.jpg"
-                  // src={image.img}
-                />
+                <div className="ml-4">
+                  <img
+                    className="h-20 w-20 md:h-32 md:w-32 rounded-full mx-auto md:mx-0 md:mr-6"
+                    src="/img/01-shutterstock_476340928-Irina-Bg.jpg"
+                    // src={image.img}
+                  />
 
-                <h1 className="mt-2">Chagne Your Profile</h1>
-              </div> */}
+                  <h1 className="mt-2">Chagne Your Profile</h1>
+                </div>
+
+                {/* <form onSubmit={onSubmitImage} className="mt-6 ml-4">
+                  <div
+                    className="h-20 w-20 md:h-32 md:w-32 rounded-full mx-auto md:mx-0 md:mr-6"
+                    // }}
+                    onClick={() => imageUploader.current.click()}
+                  >
+                    <img
+                      ref={uploadedImage}
+                      src="/img/01-shutterstock_476340928-Irina-Bg.jpg"
+                      className="h-20 w-20 md:h-32 md:w-32 rounded-full mx-auto md:mx-0 md:mr-6"
+                    />
+                  </div>
+                  <div>
+                    <input
+                      type="file"
+                      accept="image/*"
+                      onChange={handleImageUpload}
+                      ref={imageUploader}
+                      className="hidden"
+                      onClick={showButtonUplaod}
+                    />
+                  </div>
+
+                  <button
+                    type="submit"
+                    onClick={showButtonUplaod}
+                    className={
+                      buttonUpload
+                        ? "bg-blue-900 rounded py-2 px-2 text-white cursor-pointer mt-2 px-3 ml-6"
+                        : "hidden"
+                    }
+                  >
+                    Upload
+                  </button>
+                </form> */}
+
                 <div className="ml-12">
                   <div
                     className={

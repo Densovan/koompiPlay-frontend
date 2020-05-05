@@ -6,39 +6,18 @@ import jwt from "jsonwebtoken";
 
 const Login = () => {
   const { register, handleSubmit, errors } = useForm();
-  const onSubmit = (data) => {
-    // alert(JSON.stringify(data));
-    // fetch("http://localhost:8000/login", {
-    //   method: "POST",
-    //   headers: {
-    //     Accept: "application/json, text/plain, */*",
-    //     "Content-type": "application/json",
-    //   },
-    //   body: JSON.stringify({
-    //     user_name: data.Username,
-    //     user_password: data.Password,
-    //   }),
-    // })
-    //   .then((res) => res.text())
-    //   .then((data) => {
-    //     alert(data);
-    //   })
-    //   .catch((err) => {
-    //     alert(err);
-    //     console.log(err);
-    //   });
-    // // console.log(data);
 
-    fetch("http://localhost:8000/login", {
+  const onSubmit = (data) => {
+    fetch("http://localhost:8000/test_login", {
       method: "POST",
-      headers: {
-        Accept: "application/json, text/plain, */*",
-        "Content-type": "application/json",
-      },
+      // headers: {
+      //   Accept: "application/json, text/plain, */*",
+      //   "Content-type": "application/json",
+      // },
 
       body: JSON.stringify({
         user_name: data.Username,
-        user_email: data.Email,
+        // user_email: data.Email,
         user_password: data.Password,
       }),
     })
@@ -56,8 +35,10 @@ const Login = () => {
         console.log(decodeToken);
         if (decodeToken) {
           window.location.replace("/userinfo");
+          // fetch("http://localhost:")
         } else {
           console.log(data);
+          alert(data);
         }
       })
       .catch((err) => {
