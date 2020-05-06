@@ -6,42 +6,46 @@ import axios from "axios";
 const Register = () => {
   const { register, handleSubmit, errors } = useForm();
   const onSubmit = (data) => {
-    // alert(JSON.stringify(data));
     console.log(data);
-    // fetch("http://localhost:8000/register", {
-    //   method: "POST",
-    //   headers: {
-    //     Accept: "application/json, text/plain, */*",
-    //     "Content-type": "application/json",
-    //   },
+    fetch("http://localhost:8000/register", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Host: "localhost:8000",
+      },
 
-    //   body: JSON.stringify({
+      body: JSON.stringify({
+        user_name: data.Username,
+        user_gender: data.gender,
+        user_email: data.Email,
+        user_password: data.Password,
+        phone_number: data.Phone,
+      }),
+    })
+      .then((res) => res.text())
+      .then((data) => {
+        alert(data);
+      });
+    // .catch((err) => {
+    //   alert(err);
+    //   console.log(err.res.data);
+    // });
+    //   const newUser = {
     //     user_name: data.Username,
     //     user_gender: data.gender,
     //     user_email: data.Email,
     //     user_password: data.Password,
     //     phone_number: data.Phone,
-    //   }),
-    // })
-    //   .then((res) => res.text())
-    //   .then((data) => {
-    //     alert(data);
-    //   })
-    //   .catch((err) => {
-    //     alert(err);
-    //     console.log(err.res.data);
-    //   });
-    const newUser = {
-      user_name: data.Username,
-      user_gender: data.gender,
-      user_email: data.Email,
-      user_password: data.Password,
-      phone_number: data.Phone,
-    };
-    axios
-      .post("http://localhost:8000/register", newUser)
-      .then((res) => console.log(res.data))
-      .catch((err) => console.log(err.response.data));
+    //   };
+    //   var config = {
+    //     headers: {
+    //       "Content-Type": "application/json",
+    //     },
+    //   };
+    //   axios
+    //     .post("http://localhost:8000/register", newUser, config)
+    //     .then((res) => console.log(res.data))
+    //     .catch((err) => console.log(err.response.data));
   };
   return (
     <div>

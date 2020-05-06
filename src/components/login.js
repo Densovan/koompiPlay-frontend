@@ -17,19 +17,12 @@ const Login = () => {
 
       body: JSON.stringify({
         user_name: data.Username,
-        // user_email: data.Email,
         user_password: data.Password,
       }),
     })
       .then((res) => res.text())
       .then((data) => {
-        localStorage.setItem(
-          "token",
-          JSON.stringify({
-            loign: true,
-            token: data,
-          })
-        );
+        localStorage.setItem("token", data);
         console.log("data", data);
         const decodeToken = jwt.decode(data);
         console.log(decodeToken);
