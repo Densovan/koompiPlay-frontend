@@ -11,7 +11,7 @@ const Register = () => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Host: "localhost:8000",
+        // Host: "localhost:8000",
       },
 
       body: JSON.stringify({

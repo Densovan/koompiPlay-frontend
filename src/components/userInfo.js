@@ -109,7 +109,9 @@ function UserInfo() {
               <div className="px-3 ">
                 <img
                   className="overflow-hidden -mt-16  h-20 w-20 md:h-32 md:w-32 rounded-full mx-auto md:mx-0 "
-                  src="/img/01-shutterstock_476340928-Irina-Bg.jpg"
+                  // src="/img/01-shutterstock_476340928-Irina-Bg.jpg"
+                  src={`profile ? profile.user_profile : ""`}
+                  // src="{profile ? profile.user_profile:}"
                 />
                 <h1 className="mt-2 ml-6 text-blue-800 text-xl font-medium">
                   {profile ? profile.user_name : ""}
