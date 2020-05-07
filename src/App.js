@@ -5,7 +5,10 @@ import Login from "./components/login";
 import Register from "./components/register";
 import UserInfo from "./components/userInfo";
 import PrivateRoute from "./PrivateRoute";
-import Profile from "./components/Profile";
+import Start from "./components/start";
+import Play from "./components/pages/Play";
+import Result from "./components/pages/Result";
+import Logout from "./layouts/Logout";
 // import QuizState from "./Context/QuizState";
 // import QuizGame from "./components/pages/QuizGame";
 
@@ -15,10 +18,14 @@ function App() {
     <React.Fragment>
       <Router>
         <Switch>
-          <PrivateRoute path="/userinfo" component={UserInfo} />
-          {/* <Route path="/" exact component={Profile} /> */}
-          <Route path="/register" component={Register} />
-          <Route path="/login" component={Login} />
+          <PrivateRoute exact path="/userinfo" component={UserInfo} />
+          <Route exact path="/register" component={Register} />
+          <Route exact path="/login" component={Login} />
+          <Route exact path="/logout" component={Logout} />
+          <PrivateRoute exact path="/start" component={Start} />
+          <PrivateRoute exact path="/quiz" component={Play} />
+          <PrivateRoute exact path="/result" component={Result} />
+          {/* <Redirect to="/" component={Start} /> */}
         </Switch>
       </Router>
     </React.Fragment>

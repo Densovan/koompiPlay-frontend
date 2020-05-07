@@ -4,6 +4,7 @@ import uuid from "uuid/v1";
 import jwt from "jsonwebtoken";
 import axios from "axios";
 import useAxios from "axios-hooks";
+import Navbar from "../layouts/Navbar";
 
 var accessTokenObj = localStorage.getItem("token");
 
@@ -100,6 +101,7 @@ function UserInfo() {
         <input type="text" value={profile ? profile.user_email : ""} />
       </pre>
       <div>{profile ? profile.user_email : ""}</div> */}
+      <Navbar />
 
       <div className=" flex  items-center justify-center h-screen">
         <div className=" w-full max-w-screen-md">
@@ -118,7 +120,7 @@ function UserInfo() {
                   <input
                     type="button"
                     value="Edit Profile"
-                    onClick={popUp}
+                    // onClick={popUp}
                     className="bg-no-repeat border-blue-500 border-2 px-3 py-2 bg-blue-400 rounded-full hover:bg-blue-200 text-white cursor-pointer"
                   />
 
@@ -190,7 +192,7 @@ function UserInfo() {
                   <span className="text-xs ">Email</span>
                   <h1
                     // onClick={popUp}
-                    className="-mb-2 font-xl text-lg  "
+                    className="-mb-2 font-xl text-lg   "
                   >
                     {profile ? profile.user_email : ""}
                   </h1>
@@ -199,7 +201,7 @@ function UserInfo() {
                   <span className="text-xs ">Phone</span>
                   <h1
                     // onClick={popUp}
-                    className="-mb-2 font-xl text-lg  "
+                    className="-mb-2 font-xl text-lg   "
                   >
                     {profile ? profile.phone_number : ""}
                   </h1>
