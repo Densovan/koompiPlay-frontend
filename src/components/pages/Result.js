@@ -2,6 +2,7 @@ import React from "react";
 import { Helmet } from "react-helmet";
 import { RiMedalLine } from "react-icons/ri";
 import { Link } from "react-router-dom";
+import swal from "sweetalert";
 
 const TITLE = "Result | Quiz app";
 
@@ -35,6 +36,7 @@ class Result extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
+    var accessTokenObj = localStorage.getItem("token");
     // const newResult = {
     //   score: this.state.score,
     // };
@@ -43,13 +45,24 @@ class Result extends React.Component {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        token: accessTokenObj,
       },
       body: JSON.stringify({
-        score: this.state.correctAnsers,
+        score: this.state.correctAnswers,
       }),
-    });
+    }).then((res) => res.text());
+    // .then(data);
   }
   render() {
+    const submitAlert = () => {
+      swal({
+        title: "Thank you so much!",
+        icon: "success",
+        button: "Ok",
+        timer: 3000,
+      });
+    };
+
     const { state } = this.props.location;
     let stats, remark;
     const userScore = this.state.score;
@@ -110,13 +123,16 @@ class Result extends React.Component {
             </div>
             <section>
               <form onSubmit={this.handleSubmit}>
-                <button
-                  type="submit"
-                  className="w-32 mr-2 bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded"
-                >
-                  {" "}
-                  Submit
-                </button>
+                <Link to="/userinfo">
+                  <button
+                    onClick={submitAlert}
+                    type="submit"
+                    className="w-32 mr-2 bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded"
+                  >
+                    {" "}
+                    Submit
+                  </button>
+                </Link>
               </form>
             </section>
           </form>

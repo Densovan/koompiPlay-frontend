@@ -92,10 +92,11 @@ class Play extends React.Component {
   };
 
   correctAnswer = () => {
-    M.toast({
-      html: "Correct Answer!",
-      classes: "toast-valid",
-    });
+    // M.toast({
+    //   html: "Correct Answer!",
+    //   classes: "toast-valid",
+    //   displayLength: 300,
+    // });
     this.setState(
       (prevState) => ({
         score: prevState.score + 1,
@@ -120,10 +121,11 @@ class Play extends React.Component {
 
   wrongAnswer = () => {
     // navigator.vibrate(1000);
-    M.toast({
-      html: "Wrong Answer!",
-      classes: "toast-invalid",
-    });
+    // M.toast({
+    //   html: "Wrong Answer!",
+    //   classes: "toast-invalid",
+    //   displayLength: 300,
+    // });
     this.setState(
       (prevState) => ({
         wrongAnswers: prevState.wrongAnswers + 1,
@@ -235,8 +237,8 @@ class Play extends React.Component {
       score: state.score,
       numberOfQuestions: state.numberOfQuestions,
       numberOfAnsweredQuestions: state.correctAnswers + state.wrongAnswers,
-      correctAnswers: state.correctAnswers,
-      wrongAnswers: state.wrongAnswers,
+      // correctAnswers: state.correctAnswers,
+      // wrongAnswers: state.wrongAnswers,
       hintsUsed: 2 - state.hints,
     };
     setTimeout(() => {
@@ -299,40 +301,43 @@ class Play extends React.Component {
             <h5>{currentQuestion.question}</h5>
           </div>
 
-          <div className="question container text-xl flex-auto">
-            <button
-              type="button"
-              onClick={this.handleOptionClick}
-              className=" option bg-teal-400 w-2/4 text-white font-bold py-3 px-4 rounded-full my-12 "
-            >
-              {currentQuestion.optionA}
-            </button>
-            <button
-              type="button"
-              onClick={this.handleOptionClick}
-              className=" option bg-teal-400 w-2/4 text-white font-bold py-3 px-4 rounded-full"
-            >
-              {currentQuestion.optionB}
-            </button>
-
-            <button
-              type="button"
-              onClick={this.handleOptionClick}
-              className="option bg-teal-400 w-2/4 text-white font-bold py-3 px-4 rounded-full"
-            >
-              {currentQuestion.optionC}
-            </button>
-            <button
-              type="button"
-              onClick={this.handleOptionClick}
-              className="option bg-teal-400 w-2/4 text-white font-bold py-3 px-4 rounded-full"
-            >
-              {currentQuestion.optionD}
-            </button>
+          <div className="mx-auto ">
+            <div className="sm:flex  ">
+              <button
+                type="button"
+                onClick={this.handleOptionClick}
+                className="blok mt-3 option bg-teal-400 ml-10 sm:ml-0 w-2/4 sm:w-2/4 lg:w-2/4 xs:w-2/4 text-white font-bold py-3 px-4 rounded-md "
+              >
+                {currentQuestion.optionA}
+              </button>
+              <button
+                type="button"
+                onClick={this.handleOptionClick}
+                className="sm:ml-6 mt-3 block option bg-teal-400 ml-10 sm:ml-0 w-2/4 sm:w-2/4  text-white font-bold py-3 px-4 rounded-md"
+              >
+                {currentQuestion.optionB}
+              </button>
+            </div>
+            <div className="sm:flex mt-3">
+              <button
+                type="button"
+                onClick={this.handleOptionClick}
+                className="block mt-3 option bg-teal-400 ml-10 sm:ml-0 w-2/4 sm:w-2/4 text-white font-bold py-3 px-4 rounded-md"
+              >
+                {currentQuestion.optionC}
+              </button>
+              <button
+                type="button"
+                onClick={this.handleOptionClick}
+                className="mt-3 sm:ml-6 block option bg-teal-400 ml-10 sm:ml-0 w-2/4 sm:w-2/4 text-white font-bold py-3 px-4 rounded-md"
+              >
+                {currentQuestion.optionD}
+              </button>
+            </div>
           </div>
           <button
             type="button"
-            className=" bg-red-600 hover:bg-red-800 rounded"
+            className="mt-10 bg-red-600 hover:bg-red-800 rounded-md"
           >
             <button
               type="button"

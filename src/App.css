@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@600&display=swap");
 .App {
   text-align: center;
 }
@@ -51,7 +52,7 @@
   font-size: 80px;
   font-family: "Quicksand", sans-serif;
 }
-@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@600&display=swap");
+
 #home {
   background-image: url("./assets/img/background3.jpeg");
   background-size: cover;

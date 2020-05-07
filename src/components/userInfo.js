@@ -108,19 +108,20 @@ function UserInfo() {
           <div className="overflow-hidden bg-white shadow-md rounded  ">
             <form>
               <img src="/img/cover.jpg" />
-              <div className="px-3 ">
+              <div className="px-6 sm:px-3 ">
                 <img
-                  className="overflow-hidden -mt-16  h-20 w-20 md:h-32 md:w-32 rounded-full mx-auto md:mx-0 "
-                  src="/img/01-shutterstock_476340928-Irina-Bg.jpg"
+                  className="overflow-hidden -mt-12 sm:-mt-16  h-20 w-20 md:h-32 md:w-32 rounded-full  md:mx-0 "
+                  // src="/img/01-shutterstock_476340928-Irina-Bg.jpg"
+                  src={profile ? profile.user_profile : ""}
                 />
-                <h1 className="mt-2 ml-6 text-blue-800 text-xl font-medium">
+                <h1 className="mt-2 ml-1 sm:ml-6 text-blue-800 text-xl font-medium">
                   {profile ? profile.user_name : ""}
                 </h1>
-                <div className="flex justify-end mb-2 -mt-20 mr-2">
+                <div className="flex justify-end mb-2 -mt-16 sm:-mt-20 mr-2">
                   <input
                     type="button"
                     value="Edit Profile"
-                    // onClick={popUp}
+                    onClick={popUp}
                     className="bg-no-repeat border-blue-500 border-2 px-3 py-2 bg-blue-400 rounded-full hover:bg-blue-200 text-white cursor-pointer"
                   />
 

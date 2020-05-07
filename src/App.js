@@ -18,10 +18,10 @@ function App() {
     <React.Fragment>
       <Router>
         <Switch>
-          <PrivateRoute exact path="/userinfo" component={UserInfo} />
           <Route exact path="/register" component={Register} />
           <Route exact path="/login" component={Login} />
           <Route exact path="/logout" component={Logout} />
+          <PrivateRoute exact path="/userinfo" component={UserInfo} />
           <PrivateRoute exact path="/start" component={Start} />
           <PrivateRoute exact path="/quiz" component={Play} />
           <PrivateRoute exact path="/result" component={Result} />
