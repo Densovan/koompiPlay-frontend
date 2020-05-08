@@ -8,7 +8,8 @@ import Navbar from "../layouts/Navbar";
 
 var accessTokenObj = localStorage.getItem("token");
 
-// getUser();
+const getUser = () => [{ user_name: "", phone_number: "", user_email: " " }];
+
 function UserInfo() {
   const [profile, setProfile] = useState(null);
   const [file, setFile] = useState("");
@@ -39,7 +40,13 @@ function UserInfo() {
   };
 
   const onChange = (e) => {
-    setProfile({ ...profile, [e.target.name]: e.target.value });
+    // setProfile({ ...profile, [e.target.name]: e.target.value });
+    const target = e.target;
+    const value = target.value;
+    const name = target.value;
+    setProfile({
+      [name]: value,
+    });
     // console.log(profile);
   };
   const [modal, setModal] = useState(false);
@@ -70,9 +77,37 @@ function UserInfo() {
     // phone: "086280018",
     // });
   };
+
+  // const getProfile = () => {
+  //   // axios.get("http://localhost:8000/userData2").then((response) => {
+  //   //   console.log(response.data);
+  //   // });
+  //   fetch("http://localhost:8000/userData2", {
+  //     method: "GET",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //       Host: "localhost:8000",
+  //       token: accessTokenObj,
+  //     },
+  //     body: JSON.stringify({
+  //       user_name: data.Username,
+  //       user_gender: data.gender,
+  //       user_email: data.Email,
+  //       user_password: data.Password,
+  //       phone_number: data.Phone,
+  //     }),
+  //   })
+  //     .then((res) => res.text())
+  //     .then((data) => {
+  //       // alert(data);
+  //       console.log(data);
+  //     });
+  // };
   useEffect(() => {
+    // getProfile();
     console.log(profile);
   });
+
   const [
     { data, loading, error },
     //  refetch
@@ -81,12 +116,11 @@ function UserInfo() {
     url: "http://localhost:8000/userData2",
     headers: {
       "Content-Type": "application/json",
-      // Host: "localhost:8000",
       token: accessTokenObj,
     },
   });
 
-  // if (loading) return <p>Loading...</p>;
+  if (loading) return <p>Loading...</p>;
   if (error) return <p>Error!</p>;
   if (data) {
     if (profile === null) {
@@ -148,7 +182,7 @@ function UserInfo() {
                     ref={register({ required: true, minLength: 5 })}
                     name="name"
                     type="text"
-                    // onChange={onChange}
+                    onChange={onChange}
                   />
                   <label className="text-white">Name</label>
                   <input
