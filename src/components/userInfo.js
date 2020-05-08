@@ -103,10 +103,10 @@ function UserInfo() {
   //       console.log(data);
   //     });
   // };
-  useEffect(() => {
-    // getProfile();
-    console.log(profile);
-  });
+  // useEffect(() => {
+  //   // getProfile();
+  //   console.log(profile);
+  // });
 
   const [
     { data, loading, error },

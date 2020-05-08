@@ -34,13 +34,14 @@ class Result extends React.Component {
     }
   }
 
-  handleSubmit(e) {
+  handleSubmit = (e) => {
     e.preventDefault();
     var accessTokenObj = localStorage.getItem("token");
     // const newResult = {
     //   score: this.state.score,
     // };
-    // console.log(newResult);
+    // console.log(accessTokenObj);
+    console.log("heo");
     fetch("http://localhost:8000/play_info", {
       method: "POST",
       headers: {
@@ -52,7 +53,7 @@ class Result extends React.Component {
       }),
     }).then((res) => res.text());
     // .then(data);
-  }
+  };
   render() {
     const submitAlert = () => {
       swal({
@@ -136,6 +137,19 @@ class Result extends React.Component {
               </form>
             </section>
           </form>
+          {/* <form onSubmit={this.handleSubmit}>
+            <div className="mb-6">
+              <label className="block text-gray-700 text-sm font-bold  mb-2">
+                Password
+              </label>
+              <input
+              onChange={}
+                className=" appearance-none border  rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                name="Password"
+                type="button"
+              />
+            </div>
+          </form> */}
         </React.Fragment>
       );
     } else {

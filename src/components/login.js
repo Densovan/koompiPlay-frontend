@@ -81,7 +81,7 @@ const Login = () => {
               <p className="text-red-500 text-xs italic">Password required</p>
             )}
           </div>
-          <div class="flex items-center justify-between">
+          <div className="flex items-center justify-between">
             <button
               type="submit"
               className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
@@ -96,9 +96,9 @@ const Login = () => {
             </a>
           </div>
           <p>or</p>
-          <a className="text-blue-500">
+          <span className="text-blue-500">
             <Link to="/register">register now</Link>
-          </a>
+          </span>
         </form>
       </div>
     </div>
