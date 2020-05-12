@@ -1,14 +1,14 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
-import axios from "axios";
+// import axios from "axios";
 import jwt from "jsonwebtoken";
 
 const Login = () => {
   const { register, handleSubmit, errors } = useForm();
 
   const onSubmit = (data) => {
-    fetch("http://localhost:8000/test_login", {
+    fetch("http://52.221.199.235:9000/test_login", {
       method: "POST",
       // headers: {
       //   Accept: "application/json, text/plain, */*",
@@ -28,7 +28,6 @@ const Login = () => {
         console.log(decodeToken);
         if (decodeToken) {
           window.location.replace("/userinfo");
-          // fetch("http://localhost:")
         } else {
           console.log(data);
           alert(data);
@@ -50,10 +49,7 @@ const Login = () => {
           <h1 className="text-gray-900 font-medium flex text-3xl  items-center justify-center mb-10">
             Login
           </h1>
-          <div
-            className={errors.lastName ? "field error" : "field"}
-            className="mb-4"
-          >
+          <div className="mb-4">
             <label className="block text-gray-700 text-sm font-bold mb-2">
               Username
             </label>
@@ -88,12 +84,12 @@ const Login = () => {
             >
               Sign In
             </button>
-            <a
+            <span
               className="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800"
               href="#"
             >
               Forgot Password?
-            </a>
+            </span>
           </div>
           <p>or</p>
           <span className="text-blue-500">

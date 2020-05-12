@@ -2,7 +2,8 @@ import React from "react";
 import { Helmet } from "react-helmet";
 import { RiMedalLine } from "react-icons/ri";
 import { Link } from "react-router-dom";
-import swal from "sweetalert";
+import axios from "axios";
+// import swal from "sweetalert";
 
 const TITLE = "Result | Quiz app";
 
@@ -18,6 +19,7 @@ class Result extends React.Component {
       hintsUsed: 0,
     };
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
 
   componentDidMount() {
@@ -34,15 +36,21 @@ class Result extends React.Component {
     }
   }
 
+  handleChange = (e) => {
+    console.log("hello");
+    this.setState({ ...this.state, [e.target.name]: e.target.value });
+  };
+
   handleSubmit = (e) => {
     e.preventDefault();
+    console.log("hello world");
     var accessTokenObj = localStorage.getItem("token");
-    // const newResult = {
-    //   score: this.state.score,
-    // };
     // console.log(accessTokenObj);
-    console.log("heo");
-    fetch("http://localhost:8000/play_info", {
+    const newResult = {
+      score: this.state.score,
+    };
+    console.log(newResult);
+    fetch("http://52.221.199.235:9000/play_info", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -51,18 +59,24 @@ class Result extends React.Component {
       body: JSON.stringify({
         score: this.state.correctAnswers,
       }),
-    }).then((res) => res.text());
-    // .then(data);
+    });
+    // axios({
+    //   method: "post",
+    //   url: "http://52.221.199.235:9000/play_info",
+    //   data: JSON.stringify({
+    //     score: newResult,
+    //   }),
+    // }).then((res) => res.json());
   };
   render() {
-    const submitAlert = () => {
-      swal({
-        title: "Thank you so much!",
-        icon: "success",
-        button: "Ok",
-        timer: 3000,
-      });
-    };
+    // const submitAlert = () => {
+    //   swal({
+    //     title: "Thank you so much!",
+    //     icon: "success",
+    //     button: "Ok",
+    //     timer: 3000,
+    //   });
+    // };
 
     const { state } = this.props.location;
     let stats, remark;
@@ -92,64 +106,57 @@ class Result extends React.Component {
             Quiz has ended
           </h2>
           <form
-            // onSubmit={this.handleSubmit}
+            onSubmit={this.handleSubmit}
             className="bg-indigo-200 container shadow-xl rounded px-8 pt-6 pb-8 mb-4 mx-auto mt-12 h-full"
           >
             <div className="container text-center">
               <h3 className=" container ">{remark}</h3>
 
-              <h4 className="text-pink-900">
+              <h4 onChange={this.handleChange} className="text-pink-900">
                 Your score is: {this.state.score.toFixed(0)}&#37;
               </h4>
             </div>
             <div className="container p-12">
-              <span>
+              <span onChange={this.handleChange}>
                 Total of the number questions: {this.state.numberOfQuestions}
               </span>
               <br />
               <br />
-              <span>
+              <span onChange={this.handleChange}>
                 Number of attempted questions:{" "}
                 {this.state.numberOfAnsweredQuestions}
               </span>
               <br />
               <br />
-              <span>Number of correctAnswers: {this.state.correctAnswers}</span>
+              <span onChange={this.handleChange}>
+                Number of correctAnswers: {this.state.correctAnswers}
+              </span>
               <br />
               <br />
-              <span>Number of incorrectAnswers: {this.state.wrongAnswers}</span>
+              <span onChange={this.handleChange}>
+                Number of incorrectAnswers: {this.state.wrongAnswers}
+              </span>
               <br />
               <br />
-              <span>Hints used: {this.state.hintsUsed}</span>
+              <span onChange={this.handleChange}>
+                Hints used: {this.state.hintsUsed}
+              </span>
             </div>
-            <section>
-              <form onSubmit={this.handleSubmit}>
-                <Link to="/userinfo">
-                  <button
-                    onClick={submitAlert}
-                    type="submit"
-                    className="w-32 mr-2 bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded"
-                  >
-                    {" "}
-                    Submit
-                  </button>
-                </Link>
-              </form>
-            </section>
-          </form>
-          {/* <form onSubmit={this.handleSubmit}>
-            <div className="mb-6">
-              <label className="block text-gray-700 text-sm font-bold  mb-2">
-                Password
-              </label>
+            {/* <Link to="/userinfo">
               <input
-              onChange={}
-                className=" appearance-none border  rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                name="Password"
-                type="button"
+                // onClick={submitAlert}
+                type="submit"
+                value="submit"
+                className="w-32 mr-2 bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded cursor-pointer"
               />
-            </div>
-          </form> */}
+            </Link> */}
+
+            <input
+              className="w-32 mr-2 bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded cursor-pointer"
+              type="submit"
+              value="submit"
+            />
+          </form>
         </React.Fragment>
       );
     } else {

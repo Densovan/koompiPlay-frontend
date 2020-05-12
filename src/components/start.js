@@ -1,21 +1,26 @@
 import React from "react";
 import { Helmet } from "react-helmet";
 import { Link } from "react-router-dom";
+import Navbar from "../layouts/Navbar";
 
 const TITLE = "Koompi play | Quiz";
 
 const Start = () => (
   <React.Fragment>
+    <Navbar />
     <Helmet>
       <title>{TITLE}</title>
     </Helmet>
     <div id="home">
-      <section id="section">
+      <section style={{ marginTop: "90px" }} id="section">
         <h1 className=" header-text text-center text-white">Quiz App</h1>
         <ul>
           <li id="button">
             <Link to="/quiz">
-              <button id="play-button" className="bg-teal-400 w-full text-white font-bold py-2 px-4 mt-48 h-12 rounded-full">
+              <button
+                id="play-button"
+                className="bg-teal-400 w-full text-white font-bold py-2 px-4 mt-48 h-12 rounded-full"
+              >
                 Play{" "}
               </button>
             </Link>

@@ -7,11 +7,15 @@ const Navbar = () => {
     setOpne(!open);
   };
   return (
-    <div>
+    <div className="fixed absolute w-full">
       <header className="sm:items-center bg-gray-900 sm:flex sm:items-center sm:justify-between">
         <div className="flex justify-between bg-gray-900 px-4 py-3">
           <div>
-            <img className="h-8 w-auto" src="/img/Koompi-White.png" />
+            <img
+              className="h-8 w-auto"
+              src="/img/Koompi-White.png"
+              alt="logo"
+            />
           </div>
           <div className="flex">
             <button
@@ -49,34 +53,6 @@ const Navbar = () => {
                 Logout
               </Link>
             </div>
-            {/* <div className="px-5 py-5 sm:py-0 sm:px-0 sm:py-0 sm:ml-4 ">
-              <div className="flex items-center">
-                <img
-                  className="sm:h-8 sm:w-8 h-10 w-10 object-cover rounded-full border-2 border-gray-600"
-                  src="/image/photo_2019-08-04_14-04-12.jpg"
-                ></img>
-                <span className="sm:hidden ml-2 font-semibold text-gray-200">
-                  Sovan Den
-                </span>
-              </div>
-              <div className="mt-5 sm:hidden">
-                <a className=" block text-gray-400 hover:text-white" href="#">
-                  Account setting
-                </a>
-                <a
-                  className="mt-3 block text-gray-400 hover:text-white"
-                  href="#"
-                >
-                  Support
-                </a>
-                <a
-                  className="mt-3 block text-gray-400 hover:text-white"
-                  href="#"
-                >
-                  Sign out
-                </a>
-              </div>
-            </div> */}
           </nav>
         </div>
       </header>

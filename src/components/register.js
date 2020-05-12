@@ -1,17 +1,17 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
-import axios from "axios";
+// import axios from "axios";
 
 const Register = () => {
   const { register, handleSubmit, errors } = useForm();
   const onSubmit = (data) => {
     console.log(data);
-    fetch("http://localhost:8000/register", {
+    fetch("http://52.221.199.235:9000/register", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Host: "localhost:8000",
+        // Host: "localhost:8000",
       },
 
       body: JSON.stringify({
@@ -26,26 +26,6 @@ const Register = () => {
       .then((data) => {
         alert(data);
       });
-    // .catch((err) => {
-    //   alert(err);
-    //   console.log(err.res.data);
-    // });
-    //   const newUser = {
-    //     user_name: data.Username,
-    //     user_gender: data.gender,
-    //     user_email: data.Email,
-    //     user_password: data.Password,
-    //     phone_number: data.Phone,
-    //   };
-    //   var config = {
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //     },
-    //   };
-    //   axios
-    //     .post("http://localhost:8000/register", newUser, config)
-    //     .then((res) => console.log(res.data))
-    //     .catch((err) => console.log(err.response.data));
   };
   return (
     <div>
@@ -73,7 +53,7 @@ const Register = () => {
               )}
             </div>
             <div
-              className={errors.lastName ? "field error" : "field"}
+              // className={errors.lastName ? "field error" : "field"}
               className="mb-4"
             >
               <label className="block text-gray-700 text-sm font-bold mb-2">
@@ -121,7 +101,7 @@ const Register = () => {
               )}
             </div>
             <div
-              className={errors.lastName ? "field error" : "field"}
+              // className={errors.lastName ? "field error" : "field"}
               className="mb-4"
             >
               <label className="block text-gray-700 text-sm font-bold mb-2">
@@ -160,9 +140,9 @@ const Register = () => {
               </button>
               <div className="flex">
                 <p>Have an account?</p>
-                <a className="text-blue-500 pl-2">
+                <span className="text-blue-500 pl-2">
                   <Link to="/login">Login</Link>
-                </a>
+                </span>
               </div>
             </div>
           </form>

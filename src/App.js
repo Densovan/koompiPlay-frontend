@@ -9,27 +9,24 @@ import Start from "./components/start";
 import Play from "./components/pages/Play";
 import Result from "./components/pages/Result";
 import Logout from "./layouts/Logout";
-// import QuizState from "./Context/QuizState";
-// import QuizGame from "./components/pages/QuizGame";
+import profile from "./components/Profile";
 
 function App() {
   return (
-    // <QuizState>
     <React.Fragment>
       <Router>
         <Switch>
           <Route exact path="/register" component={Register} />
           <Route exact path="/login" component={Login} />
           <Route exact path="/logout" component={Logout} />
+          <Route exact path="/profile" component={profile} />
           <PrivateRoute exact path="/userinfo" component={UserInfo} />
           <PrivateRoute exact path="/start" component={Start} />
           <PrivateRoute exact path="/quiz" component={Play} />
           <PrivateRoute exact path="/result" component={Result} />
-          {/* <Redirect to="/" component={Start} /> */}
         </Switch>
       </Router>
     </React.Fragment>
-    // </QuizState>
   );
 }
 
