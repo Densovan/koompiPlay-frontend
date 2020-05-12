@@ -3,7 +3,7 @@ import { Helmet } from "react-helmet";
 import { RiMedalLine } from "react-icons/ri";
 import { Link } from "react-router-dom";
 import axios from "axios";
-// import swal from "sweetalert";
+import swal from "sweetalert";
 
 const TITLE = "Result | Quiz app";
 
@@ -69,14 +69,14 @@ class Result extends React.Component {
     // }).then((res) => res.json());
   };
   render() {
-    // const submitAlert = () => {
-    //   swal({
-    //     title: "Thank you so much!",
-    //     icon: "success",
-    //     button: "Ok",
-    //     timer: 3000,
-    //   });
-    // };
+    const submitAlert = () => {
+      swal({
+        title: "Thank you so much!",
+        icon: "success",
+        button: "Ok",
+        timer: 3000,
+      });
+    };
 
     const { state } = this.props.location;
     let stats, remark;
@@ -150,12 +150,14 @@ class Result extends React.Component {
                 className="w-32 mr-2 bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded cursor-pointer"
               />
             </Link> */}
-
-            <input
-              className="w-32 mr-2 bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded cursor-pointer"
-              type="submit"
-              value="submit"
-            />
+            <Link to="/userinfo">
+              <input
+                onClick={submitAlert}
+                className="w-32 mr-2 bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded cursor-pointer"
+                type="submit"
+                value="submit"
+              />
+            </Link>
           </form>
         </React.Fragment>
       );

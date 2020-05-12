@@ -300,40 +300,40 @@
 //             <h5>{currentQuestion.question}</h5>
 //           </div>
 
-// <div className="mx-auto ">
-//   <div className="sm:flex  ">
-//     <button
-//       type="button"
-//       onClick={this.handleOptionClick}
-//       className="blok mt-3 option bg-teal-400 ml-10 sm:ml-0 w-2/4 sm:w-2/4 lg:w-2/4 xs:w-2/4 text-white font-bold py-3 px-4 rounded-md "
-//     >
-//       {currentQuestion.optionA}
-//     </button>
-//     <button
-//       type="button"
-//       onClick={this.handleOptionClick}
-//       className="sm:ml-6 mt-3 block option bg-teal-400 ml-10 sm:ml-0 w-2/4 sm:w-2/4  text-white font-bold py-3 px-4 rounded-md"
-//     >
-//       {currentQuestion.optionB}
-//     </button>
-//   </div>
-//   <div className="sm:flex mt-3">
-//     <button
-//       type="button"
-//       onClick={this.handleOptionClick}
-//       className="block mt-3 option bg-teal-400 ml-10 sm:ml-0 w-2/4 sm:w-2/4 text-white font-bold py-3 px-4 rounded-md"
-//     >
-//       {currentQuestion.optionC}
-//     </button>
-//     <button
-//       type="button"
-//       onClick={this.handleOptionClick}
-//       className="mt-3 sm:ml-6 block option bg-teal-400 ml-10 sm:ml-0 w-2/4 sm:w-2/4 text-white font-bold py-3 px-4 rounded-md"
-//     >
-//       {currentQuestion.optionD}
-//     </button>
-//   </div>
-// </div>
+//           <div className="mx-auto ">
+//             <div className="sm:flex  ">
+//               <button
+//                 type="button"
+//                 onClick={this.handleOptionClick}
+//                 className="blok mt-3 option bg-teal-400 ml-10 sm:ml-0 w-2/4 sm:w-2/4 lg:w-2/4 xs:w-2/4 text-white font-bold py-3 px-4 rounded-md "
+//               >
+//                 {currentQuestion.optionA}
+//               </button>
+//               <button
+//                 type="button"
+//                 onClick={this.handleOptionClick}
+//                 className="sm:ml-6 mt-3 block option bg-teal-400 ml-10 sm:ml-0 w-2/4 sm:w-2/4  text-white font-bold py-3 px-4 rounded-md"
+//               >
+//                 {currentQuestion.optionB}
+//               </button>
+//             </div>
+//             <div className="sm:flex mt-3">
+//               <button
+//                 type="button"
+//                 onClick={this.handleOptionClick}
+//                 className="block mt-3 option bg-teal-400 ml-10 sm:ml-0 w-2/4 sm:w-2/4 text-white font-bold py-3 px-4 rounded-md"
+//               >
+//                 {currentQuestion.optionC}
+//               </button>
+//               <button
+//                 type="button"
+//                 onClick={this.handleOptionClick}
+//                 className="mt-3 sm:ml-6 block option bg-teal-400 ml-10 sm:ml-0 w-2/4 sm:w-2/4 text-white font-bold py-3 px-4 rounded-md"
+//               >
+//                 {currentQuestion.optionD}
+//               </button>
+//             </div>
+//           </div>
 
 //           <button
 //             type="button"
@@ -681,19 +681,19 @@ class Play extends React.Component {
               {currentQuestion.optionD}
             </button>
           </div> */}
-          <div className="mx-auto ">
+          <div className="mx-auto justify-center">
             <div className="sm:flex  ">
               <button
                 type="button"
                 onClick={this.handleOptionClick}
-                className="blok mt-3 option bg-teal-400 ml-10 sm:ml-0 w-2/4 sm:w-2/4 lg:w-2/4 xs:w-2/4 text-white font-bold py-3 px-4 rounded-md "
+                className="blok mt-3 option bg-teal-400 ml-10 sm:ml-0 w-3/4 sm:w-2/4 lg:w-2/4 xs:w-2/4 text-white font-bold py-3 px-4 rounded-md "
               >
                 {currentQuestion.optionA}
               </button>
               <button
                 type="button"
                 onClick={this.handleOptionClick}
-                className="sm:ml-6 mt-3 block option bg-teal-400 ml-10 sm:ml-0 w-2/4 sm:w-2/4  text-white font-bold py-3 px-4 rounded-md"
+                className="sm:ml-6 mt-3 block option bg-teal-400 ml-10 sm:ml-0 w-3/4 sm:w-2/4  text-white font-bold py-3 px-4 rounded-md"
               >
                 {currentQuestion.optionB}
               </button>
@@ -702,14 +702,14 @@ class Play extends React.Component {
               <button
                 type="button"
                 onClick={this.handleOptionClick}
-                className="block mt-3 option bg-teal-400 ml-10 sm:ml-0 w-2/4 sm:w-2/4 text-white font-bold py-3 px-4 rounded-md"
+                className="block mt-3 option bg-teal-400 ml-10 sm:ml-0 w-3/4 sm:w-2/4 text-white font-bold py-3 px-4 rounded-md"
               >
                 {currentQuestion.optionC}
               </button>
               <button
                 type="button"
                 onClick={this.handleOptionClick}
-                className="mt-3 sm:ml-6 block option bg-teal-400 ml-10 sm:ml-0 w-2/4 sm:w-2/4 text-white font-bold py-3 px-4 rounded-md"
+                className="mt-3 sm:ml-6 block option bg-teal-400 ml-10 sm:ml-0 w-3/4 sm:w-2/4 text-white font-bold py-3 px-4 rounded-md"
               >
                 {currentQuestion.optionD}
               </button>
