@@ -27,7 +27,7 @@ const Login = () => {
         const decodeToken = jwt.decode(data);
         console.log(decodeToken);
         if (decodeToken) {
-          window.location.replace("/userinfo");
+          window.location.replace("/");
         } else {
           console.log(data);
           alert(data);
