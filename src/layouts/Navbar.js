@@ -11,11 +11,13 @@ const Navbar = () => {
       <header className="sm:items-center bg-gray-900 sm:flex sm:items-center sm:justify-between">
         <div className="flex justify-between bg-gray-900 px-4 py-3">
           <div>
-            <img
-              className="h-8 w-auto"
-              src="/img/Koompi-White.png"
-              alt="logo"
-            />
+            <Link to="userinfo">
+              <img
+                className="h-8 w-auto"
+                src="/img/Koompi-White.png"
+                alt="logo"
+              />
+            </Link>
           </div>
           <div className="flex">
             <button

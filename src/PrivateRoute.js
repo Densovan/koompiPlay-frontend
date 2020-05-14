@@ -1,11 +1,11 @@
 import React from "react";
 import { Route, Redirect } from "react-router-dom";
 
-let Authentication = localStorage.getItem("token");
+let token = localStorage.getItem("token");
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
   const isLogin = () => {
-    if (Authentication) {
+    if (token) {
       return true;
     } else {
       return false;

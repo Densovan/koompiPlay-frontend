@@ -9,17 +9,25 @@ import Start from "./components/start";
 import Play from "./components/pages/Play";
 import Result from "./components/pages/Result";
 import Logout from "./layouts/Logout";
-import profile from "./components/Profile";
+import Profile from "./components/Profile";
+import PublicRoute from "./PublicRoute";
 
 function App() {
   return (
     <React.Fragment>
       <Router>
         <Switch>
-          <Route exact path="/register" component={Register} />
-          <Route exact path="/login" component={Login} />
-          <Route exact path="/logout" component={Logout} />
-          <PrivateRoute exact path="/" component={UserInfo} />
+          <PublicRoute exact path="/register" component={Register} />
+          {/* <Route
+            restricted={true}
+            exact
+            path="/login"
+            component={Login}
+          /> */}
+          <Route exact path="/login" restricted={true} component={Login} />
+          <PublicRoute exact path="/logout" component={Logout} />
+          <PublicRoute exact path="/profile" component={Profile} />
+          <PrivateRoute exact path="/userinfo" component={UserInfo} />
           <PrivateRoute exact path="/start" component={Start} />
           <PrivateRoute exact path="/quiz" component={Play} />
           <PrivateRoute exact path="/result" component={Result} />

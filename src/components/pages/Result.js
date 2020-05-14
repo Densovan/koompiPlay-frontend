@@ -150,12 +150,19 @@ class Result extends React.Component {
                 className="w-32 mr-2 bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded cursor-pointer"
               />
             </Link> */}
-            <Link to="/">
+
+            <input
+              onClick={submitAlert}
+              className="w-32 mr-2 bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded cursor-pointer"
+              type="submit"
+              value="Submit to win"
+            />
+            <Link to="/userinfo">
               <input
-                onClick={submitAlert}
+                // onClick={submitAlert}
                 className="w-32 mr-2 bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded cursor-pointer"
                 type="submit"
-                value="submit"
+                value="Home"
               />
             </Link>
           </form>

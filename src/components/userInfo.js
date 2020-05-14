@@ -64,6 +64,7 @@ function UserInfo() {
   if (loading) return <p>Loading...</p>;
   if (error) return window.location.replace("/login");
   if (data) {
+    // console.log(data);
     if (profile === null) {
       setProfile({ ...data });
     }

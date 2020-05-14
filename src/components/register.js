@@ -1,6 +1,7 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
+import ParticlesBg from "particles-bg";
 // import axios from "axios";
 
 const Register = () => {
@@ -24,14 +25,22 @@ const Register = () => {
     })
       .then((res) => res.text())
       .then((data) => {
+        if (data) {
+          window.location.replace("/login");
+        } else {
+          alert("err");
+        }
+        // window.location.replace("/login");
         alert(data);
       });
   };
   return (
     <div>
+      <ParticlesBg type="ball" bg={true} />
       <div className="flex  items-center justify-center h-screen ">
         <div className="w-full max-w-md">
           <form
+            style={{ backgroundColor: "rgb(250, 255, 255, 0.625)" }}
             className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
             onSubmit={handleSubmit(onSubmit)}
           >
@@ -109,7 +118,7 @@ const Register = () => {
               </label>
               <input
                 className=" appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                ref={register({ required: true, minLength: 5 })}
+                ref={register({ required: true, minLength: 7 })}
                 name="Phone"
                 type="number"
               />
@@ -128,10 +137,12 @@ const Register = () => {
                 type="password"
               />
               {errors.Password && (
-                <p className="text-red-500 text-xs italic">Password required</p>
+                <p className="text-red-500 text-xs italic">
+                  Password need more 8 character
+                </p>
               )}
             </div>
-            <div class="flex items-center justify-between">
+            {/* <div class="flex items-center justify-between">
               <button
                 type="submit"
                 className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
@@ -144,7 +155,28 @@ const Register = () => {
                   <Link to="/login">Login</Link>
                 </span>
               </div>
-            </div>
+            </div> */}
+            <button
+              type="submit"
+              className="mb-4 w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+            >
+              Sign Up
+            </button>
+            <p className="text-center text-gray-600 mb-4">
+              Hava an account yet?
+            </p>
+            {/* <span className="text-blue-500">
+            <Link to="/register">register now</Link>
+          </span> */}
+            <Link to="/login">
+              <button
+                type="submit"
+                className="mb-6 w-full border text-blue-700 hover:bg-gray-300 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+              >
+                Sign In
+              </button>
+            </Link>
+            <p className="text-center text-gray-600 ">Terms and conditions</p>
           </form>
         </div>
       </div>
