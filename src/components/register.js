@@ -8,7 +8,7 @@ const Register = () => {
   const { register, handleSubmit, errors } = useForm();
   const onSubmit = (data) => {
     console.log(data);
-    fetch("http://52.221.199.235:9000/register", {
+    fetch("http://localhost:8000/register", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -40,8 +40,8 @@ const Register = () => {
       <div className="flex  items-center justify-center h-screen ">
         <div className="w-full max-w-md">
           <form
-            style={{ backgroundColor: "rgb(250, 255, 255, 0.625)" }}
-            className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
+            // style={{ backgroundColor: "rgb(250, 255, 255, 0.625)" }}
+            className="blur bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
             onSubmit={handleSubmit(onSubmit)}
           >
             <h1 className="text-gray-900 font-medium flex text-3xl  items-center justify-center mb-10">
@@ -163,7 +163,7 @@ const Register = () => {
               Sign Up
             </button>
             <p className="text-center text-gray-600 mb-4">
-              Hava an account yet?
+              Have an account yet?
             </p>
             {/* <span className="text-blue-500">
             <Link to="/register">register now</Link>

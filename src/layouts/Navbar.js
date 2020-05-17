@@ -7,7 +7,7 @@ const Navbar = () => {
     setOpne(!open);
   };
   return (
-    <div className="fixed absolute w-full">
+    <div className="fixed absolute w-full relative">
       <header className="sm:items-center bg-gray-900 sm:flex sm:items-center sm:justify-between">
         <div className="flex justify-between bg-gray-900 px-4 py-3">
           <div>
@@ -40,12 +40,26 @@ const Navbar = () => {
         <div className={open ? "block sm:hidden" : "hidden sm:block"}>
           <nav className="sm:flex sm:items-center sm:px-4 ">
             <div className="px-2 pt-2 pb-5 border-b border-gray-800 sm:flex sm:border-b-0 sm:py-0">
+              {/* <Link
+                to="/profile"
+                className="sm:px-2 sm:text-sm  block px-3 py-1 rounded font-semibold text-white hover:bg-gray-800"
+                href="#"
+              >
+                Profile
+              </Link> */}
               <Link
                 to="/start"
                 className="sm:px-2 sm:text-sm  block px-3 py-1 rounded font-semibold text-white hover:bg-gray-800"
                 href="#"
               >
                 Play
+              </Link>
+              <Link
+                to="/profile"
+                className="sm:px-2 mt-3 sm:text-sm sm:mt-0 block px-3 py-1 rounded font-semibold text-white hover:bg-gray-800"
+                href="#"
+              >
+                Profile
               </Link>
               <Link
                 to="/logout"

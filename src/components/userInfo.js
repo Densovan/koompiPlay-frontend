@@ -54,7 +54,7 @@ function UserInfo() {
     //  refetch
   ] = useAxios({
     method: "get",
-    url: "http://52.221.199.235:9000/userData2",
+    url: "http://localhost:8000/userData",
     headers: {
       "Content-Type": "application/json",
       token: accessTokenObj,

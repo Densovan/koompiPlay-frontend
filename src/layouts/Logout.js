@@ -1,5 +1,5 @@
 const Logout = () => {
-  localStorage.clear("token");
+  localStorage.removeItem("token");
   window.location.replace("/login");
 };
 
