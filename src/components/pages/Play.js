@@ -1,12 +1,10 @@
-
 import React from "react";
 import { Helmet } from "react-helmet";
 import { RiCoinsLine } from "react-icons/ri";
 import { MdAlarm, MdLiveHelp } from "react-icons/md";
 // import M from "materialize-css";
 import swal from "@sweetalert/with-react";
-import ParticlesBg from "particles-bg"
-
+import ParticlesBg from "particles-bg";
 
 import questions from "../data/questions.json";
 import isEmpty from "../../utilis/is-empty";
@@ -194,7 +192,6 @@ class Play extends React.Component {
     }
   };
 
-
   startTimer = () => {
     const countDownTime = Date.now() + 600600;
     this.interval = setInterval(() => {
@@ -249,12 +246,12 @@ class Play extends React.Component {
     swal({
       title: "Good job!",
       text: "Your game has ended!",
-      icon:  "success",
+      icon: "success",
       closeOnClickOutside: false,
       // buttons:{
       //   confirm: "Submit to win",
       // },
-      });
+    });
   };
 
   render() {
@@ -270,7 +267,7 @@ class Play extends React.Component {
             icon: "success",
             timer: "3000",
           }).then(() => {
-            this.props.history.push("/userinfo");
+            this.props.history.push("/profile");
           });
         }
       });
@@ -289,9 +286,12 @@ class Play extends React.Component {
         <Helmet>
           <title>{TITLE}</title>
         </Helmet>
-        <ParticlesBg type="fountain" bg={true}/>
+        <ParticlesBg type="fountain" bg={true} />
         <h4 className="mt-12 text-center text-6xl">Quiz Time</h4>
-        <form id="backgrond" className=" bg-gray-200 container shadow-xl rounded px-8 pt-6 pb-8 mb-4 mx-auto mt-12 h-full">
+        <form
+          id="backgrond"
+          className=" bg-gray-200 container shadow-xl rounded px-8 pt-6 pb-8 mb-4 mx-auto mt-12 h-full"
+        >
           <div className="lifeline fill-current text-xl p-8 flex justify-between">
             <div className="transition duration-200 ease-in-out transform hover:-translate-y-1 text-gray-400">
               <RiCoinsLine />
@@ -300,7 +300,10 @@ class Play extends React.Component {
             <div className="transition duration-200 ease-in-out transform hover:-translate-y-1 text-red-600">
               <MdAlarm /> {time.minutes}:{time.seconds}
             </div>
-            <div onClick={this.handleHints} className="transition duration-200 ease-in-out transform hover:-translate-y-1 text-blue-300 ">
+            <div
+              onClick={this.handleHints}
+              className="transition duration-200 ease-in-out transform hover:-translate-y-1 text-blue-300 "
+            >
               <MdLiveHelp />
               {hints}
             </div>

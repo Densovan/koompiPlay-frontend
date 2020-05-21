@@ -48,13 +48,13 @@ const Login = () => {
           setSucessMessage("Successfull");
           setTimeout(() => {
             setSucessMessage();
-          }, 5000);
+          }, 3000);
           window.location.replace("/profile");
         } else {
           setMessage("login failed");
           setTimeout(() => {
             setMessage();
-          }, 5000);
+          }, 3000);
         }
         // if (!data) {
         //   console.log(data);
@@ -178,7 +178,7 @@ const Login = () => {
                 onFailure={responseGoogle}
                 cookiePolicy={"single_host_origin"}
               /> */}
-              ,
+              {/* , */}
             </center>
 
             <p className="text-center text-gray-600 mb-4">
