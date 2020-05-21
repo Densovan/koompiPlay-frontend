@@ -1,15 +1,7 @@
-/* @import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@600&display=swap"); */
 @import url("https://fonts.googleapis.com/css2?family=PT+Sans&display=swap");
 
 body {
   font-family: "PT Sans", sans-serif;
-  /* background: #74ebd5; 
-  background: -webkit-linear-gradient(
-    to right,
-    #acb6e5,
-    #74ebd5
-  ); 
-  background: linear-gradient(to right, #acb6e5, #74ebd5); */
 }
 .App {
   text-align: center;
@@ -50,7 +42,7 @@ body {
   }
 }
 
-.toast-invalid {
+/* .toast-invalid {
   background-color: rgb(248, 72, 41);
   border-radius: 30px;
   font-weight: 600;
@@ -59,16 +51,13 @@ body {
   background-color: rgb(113, 41, 248);
   border-radius: 30px;
   font-weight: 600;
-}
-.header-text {
+} */
+.app {
   font-size: 80px;
   font-family: "Quicksand", sans-serif;
 }
 
 #home {
-  background-image: url("./assets/img/background3.jpeg");
-  background-size: cover;
-  background-position: center;
   display: flex;
   justify-content: space-around;
   height: 100vh;
@@ -76,11 +65,31 @@ body {
 }
 .cover-photo {
   filter: blur(2px);
-  /* -webkit-filter: blur(8px); */
 }
 .blur {
   background-color: rgb(255, 255, 255, 0.7);
   backdrop-filter: blur(40px);
+}
+
+/* -----play--------- */
+
+#backgrond {
+  background-image: url("./assets/img/phone1.jpg");
+  background-size: cover;
+  position: center;
+  width: auto;
+  height: auto;
+}
+
+/* ----------result------- */
+
+#form-background {
+  background-image: url("./assets/img/phone3.jpg");
+  filter: brightness(120%);
+  background-size: cover;
+  position: center;
+  width: auto;
+  height: auto;
 }
 .imageupload {
   margin: 1rem 0;

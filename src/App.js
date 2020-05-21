@@ -33,6 +33,12 @@ function App() {
           <PrivateRoute exact path="/start" component={Start} />
           <PrivateRoute exact path="/quiz" component={Play} />
           <PrivateRoute exact path="/result" component={Result} />
+{/* 
+          <PublicRoute exact path="/start" component={Start}/>
+          <Route exact path="/start" component={Start}/>
+          <Route exact path="/quiz" component={Play}/>
+          <Route exact path="/result" component={Result}/> */}
+
         </Switch>
       </Router>
     </React.Fragment>
