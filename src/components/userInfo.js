@@ -126,7 +126,7 @@ function UserInfo() {
                     />
                   </form>
                 </div> */}
-                {/* <div
+                <div
                   className={
                     modal
                       ? "block fixed z-50 -mt-64 w-auto ml-auto mr-auto left-auto  sm:w-2/5 bg-gray-900  rounded-lg p-6"
@@ -184,7 +184,7 @@ function UserInfo() {
                     onClick={onClose}
                     className="mr-2 mt-5 cursor-pointer bg-red-700 hover:bg-red-600 text-white bg-no-repeat font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                   />
-                </div> */}
+                </div>
               </div>
               <div className="ml-6 mt-12 ">
                 <div className=" px-3 mb-3 ">
