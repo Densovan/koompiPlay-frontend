@@ -2,8 +2,12 @@ import React from "react";
 import { Helmet } from "react-helmet";
 import { RiMedalLine } from "react-icons/ri";
 import { Link } from "react-router-dom";
-import axios from "axios";
+// import axios from "axios";
 import swal from "sweetalert";
+import { Progress } from 'react-sweet-progress';
+import "react-sweet-progress/lib/style.css";
+import ParticlesBg from "particles-bg"
+
 
 const TITLE = "Result | Quiz app";
 
@@ -97,50 +101,86 @@ class Result extends React.Component {
     if (state !== undefined) {
       stats = (
         <React.Fragment>
-          <div className="m-auto flex justify-center p-0 mt-10">
+          <div className="m-auto flex justify-center p-0 mt-6">
             <span className="icon text-indigo-800 text-6xl">
               <RiMedalLine />
             </span>
           </div>
-          <h2 id="result-header" className=" text-indigo-800 text-center">
+          <h2 id="result-header" className=" text-indigo-800 text-4xl text-center">
             Quiz has ended
-          </h2>
-          <form
+          </h2> 
+          <form id="form-background"
             onSubmit={this.handleSubmit}
-            className="bg-indigo-200 container shadow-xl rounded px-8 pt-6 pb-8 mb-4 mx-auto mt-12 h-full"
+            className="container shadow-xl rounded px-8 pt-4 pb-8 mx-auto mt-1 h-full"
           >
-            <div className="container text-center">
-              <h3 className=" container ">{remark}</h3>
-
-              <h4 onChange={this.handleChange} className="text-pink-900">
-                Your score is: {this.state.score.toFixed(0)}&#37;
-              </h4>
+            <div className="container text-center ">
+              <h3 className=" container text-3xl text-gray-100 font-bold">{remark}</h3>
+            <Progress type="circle" percent={this.state.score.toFixed(0)} strokeWidth={8}
+               theme={
+                {
+                  error: {
+                    symbol: this.state.score.toFixed(0) + '%',
+                    trailColor: 'pink',
+                    color: 'red'
+                  },
+                  active: {
+                    symbol: this.state.score.toFixed(0) + '%',
+                    trailColor: '	#E0FFFF',
+                    color: '#0F1EF0'
+                  }
+                }
+              }
+              
+            />            
             </div>
-            <div className="container p-12">
+            <div className="container p-4 text-black text-xl font-bold">
               <span onChange={this.handleChange}>
                 Total of the number questions: {this.state.numberOfQuestions}
               </span>
+
+              <Progress
+                width={70}
+                percent={100}
+                status="active"
+              />
+
               <br />
               <br />
               <span onChange={this.handleChange}>
                 Number of attempted questions:{" "}
                 {this.state.numberOfAnsweredQuestions}
               </span>
+              <Progress
+                percent={100}
+                status="active"
+              />
               <br />
               <br />
               <span onChange={this.handleChange}>
                 Number of correctAnswers: {this.state.correctAnswers}
               </span>
+              <Progress
+                percent={this.state.correctAnswers * 6}
+                status="active"
+              />
               <br />
               <br />
               <span onChange={this.handleChange}>
                 Number of incorrectAnswers: {this.state.wrongAnswers}
               </span>
+              <Progress
+                percent={10 + this.state.wrongAnswers * 6}
+                status="active"
+              />
               <br />
               <br />
               <span onChange={this.handleChange}>
                 Hints used: {this.state.hintsUsed}
               </span>
+              <Progress
+                percent={this.state.hintsUsed * 50}
+                status="success"
+              />
             </div>
             {/* <Link to="/userinfo">
               <input
@@ -155,11 +195,11 @@ class Result extends React.Component {
               onClick={submitAlert}
               className="w-32 mr-2 bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded cursor-pointer"
               type="submit"
-              value="Submit to win"
+              value="Win"
             />
             <Link to="/userinfo">
               <input
-                // onClick={submitAlert}
+                onClick={submitAlert}
                 className="w-32 mr-2 bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded cursor-pointer"
                 type="submit"
                 value="Home"
@@ -169,7 +209,9 @@ class Result extends React.Component {
         </React.Fragment>
       );
     } else {
-      stats = <h1>No stats available please take a quiz!</h1>;
+      stats =<form className="container text-center text-6xl shadow-xl rounded px-8 pt-4 pb-8 mx-auto my-auto h-full"> 
+        <h1>No stats available please take a quiz!</h1>
+      </form>
     }
 
     return (
@@ -177,6 +219,7 @@ class Result extends React.Component {
         <Helmet>
           <title>{TITLE}</title>
         </Helmet>
+        <ParticlesBg type="color" bg={true} />
         {stats}
       </React.Fragment>
     );
