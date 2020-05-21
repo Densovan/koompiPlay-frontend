@@ -21,7 +21,7 @@ const Message = ({ msg }) => {
     // </span>
     //   </div>
     // </div>
-    <div className="fixed z-1 pt-10 sm:pt-12 left-0 top-0 w-full h-full ">
+    <div className="fixed z-50 pt-10 sm:pt-12 left-0 top-0 w-full h-full ">
       <div className="m-auto p-12 w-9/12 sm:w-4/12 text-center bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative">
         {msg}
         <span className="absolute top-0 bottom-0 right-0 px-4 py-3">

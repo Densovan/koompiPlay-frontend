@@ -5,6 +5,8 @@ import { Link } from "react-router-dom";
 import ParticlesBg from "particles-bg";
 import jwt from "jsonwebtoken";
 import three_dots from "../assets/bars.svg";
+import FacebookLogin from "react-facebook-login";
+import GoogleLogin from "react-google-login";
 import Message from "../components/Message/Message";
 import Facebook from "../components/SocialLogin/FacbookLogin";
 import successMessage from "../components/Message/SuccessMessage";
@@ -66,6 +68,13 @@ const Login = () => {
         alert(err);
         // console.log(err.res.data);
       });
+  };
+  const responseFacebook = (response) => {
+    console.log(response);
+  };
+
+  const responseGoogle = (response) => {
+    console.log(response);
   };
 
   return (
@@ -150,7 +159,26 @@ const Login = () => {
             </button>
             <p className="text-center text-gray-600 mb-2">Login With</p>
             <center>
-              <Facebook />
+              {/* <Facebook /> */}
+              <FacebookLogin
+                textButton=""
+                cssClass="bg-blue-600 w-8 h-8 rounded-full focus:outline-none"
+                appId="1095052497541475"
+                autoLoad={true}
+                fields="name,email,picture"
+                icon="fa-facebook"
+                // onClick={this.componentClicked}
+                callback={responseFacebook}
+              />
+              {/* <GoogleLogin
+                className="bg-blue-600 w-8 h-8 rounded-full focus:outline-none"
+                clientId="658977310896-knrl3gka66fldh83dao2rhgbblmd4un9.apps.googleusercontent.com"
+                buttonText=""
+                onSuccess={responseGoogle}
+                onFailure={responseGoogle}
+                cookiePolicy={"single_host_origin"}
+              /> */}
+              ,
             </center>
 
             <p className="text-center text-gray-600 mb-4">
