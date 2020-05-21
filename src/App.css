@@ -52,7 +52,7 @@ body {
   border-radius: 30px;
   font-weight: 600;
 } */
-.app{
+.app {
   font-size: 80px;
   font-family: "Quicksand", sans-serif;
 }
@@ -71,11 +71,9 @@ body {
   backdrop-filter: blur(40px);
 }
 
-
-
 /* -----play--------- */
 
-#backgrond{
+#backgrond {
   background-image: url("./assets/img/phone1.jpg");
   background-size: cover;
   position: center;
@@ -83,10 +81,9 @@ body {
   height: auto;
 }
 
-
 /* ----------result------- */
 
-#form-background{
+#form-background {
   background-image: url("./assets/img/phone3.jpg");
   filter: brightness(120%);
   background-size: cover;
@@ -94,3 +91,16 @@ body {
   width: auto;
   height: auto;
 }
+.imageupload {
+  margin: 1rem 0;
+}
+.imageupload label,
+.imageupload input,
+.imageupload textarea {
+  display: block;
+}
+/* .margin-auto {
+  padding-left: 100px;
+  margin-left: auto !important;
+  margin-right: auto !important;
+} */

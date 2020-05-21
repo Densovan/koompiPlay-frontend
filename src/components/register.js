@@ -1,41 +1,67 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import ParticlesBg from "particles-bg";
-// import axios from "axios";
+import SuccessfulMessage from "./Message/SuccessMessage";
+import axios from "axios";
+import three_dots from "../assets/bars.svg";
 
 const Register = () => {
   const { register, handleSubmit, errors } = useForm();
+  const [successMessage, setSucessMessage] = useState("");
+  const [loading, setLoading] = useState(false);
   const onSubmit = (data) => {
-    console.log(data);
-    fetch("http://localhost:8000/register", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        // Host: "localhost:8000",
-      },
+    // console.log(data);
+    // fetch("http://52.221.199.235:9000/register", {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //     // Host: "localhost:8000",
+    //   },
 
-      body: JSON.stringify({
-        user_name: data.Username,
-        user_gender: data.gender,
-        user_email: data.Email,
-        user_password: data.Password,
-        phone_number: data.Phone,
-      }),
-    })
-      .then((res) => res.text())
+    //   body: JSON.stringify({
+    // user_name: data.Username,
+    // user_gender: data.gender,
+    // user_email: data.Email,
+    // user_password: data.Password,
+    // phone_number: data.Phone,
+    //   }),
+    // })
+    //   .then((res) => res.text())
+    //   .then((data) => {
+    //     if (data) {
+    //       window.location.replace("/login");
+    //     } else {
+    //       alert("err");
+    //     }
+    //     // window.location.replace("/login");
+    //     alert(data);
+    //   });
+    const newUser = {
+      user_name: data.Username,
+      user_gender: data.gender,
+      user_email: data.Email,
+      user_password: data.Password,
+      phone_number: data.Phone,
+    };
+    axios
+      .post("http://52.221.199.235:9000/register", newUser)
       .then((data) => {
-        if (data) {
-          window.location.replace("/login");
-        } else {
-          alert("err");
-        }
-        // window.location.replace("/login");
-        alert(data);
-      });
+        setLoading(true);
+        setTimeout(() => {
+          setLoading(false);
+        }, 3000);
+        setSucessMessage(data.data.string);
+        setTimeout(() => {
+          setSucessMessage();
+        }, 5000);
+        window.location.replace("/login");
+      })
+      .catch((err) => console.log(err));
   };
   return (
     <div>
+      {successMessage ? <SuccessfulMessage msg={successMessage} /> : null}
       <ParticlesBg type="ball" bg={true} />
       <div className="flex  items-center justify-center h-screen ">
         <div className="w-full max-w-md">
@@ -160,7 +186,16 @@ const Register = () => {
               type="submit"
               className="mb-4 w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
             >
-              Sign Up
+              {loading ? (
+                <img
+                  className="justify-center mx-auto w-6 h-6"
+                  src={three_dots}
+                  alt="loading image"
+                  // height="8"
+                />
+              ) : (
+                "Sign Up"
+              )}
             </button>
             <p className="text-center text-gray-600 mb-4">
               Have an account yet?
