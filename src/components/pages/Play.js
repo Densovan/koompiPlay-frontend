@@ -267,7 +267,7 @@ class Play extends React.Component {
             icon: "success",
             timer: "3000",
           }).then(() => {
-            this.props.history.push("/profile");
+            this.props.history.push("/");
           });
         }
       });

@@ -49,7 +49,7 @@ const Login = () => {
           setTimeout(() => {
             setSucessMessage();
           }, 3000);
-          window.location.replace("/profile");
+          window.location.replace("/");
         } else {
           setMessage("login failed");
           setTimeout(() => {
