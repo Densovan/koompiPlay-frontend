@@ -72,9 +72,8 @@ const Login = () => {
   const responseFacebook = (response) => {
     console.log(response);
   };
-
-  const responseGoogle = (response) => {
-    console.log(response);
+  const componentClicked = () => {
+    console.log("clicked");
   };
 
   return (
@@ -167,7 +166,12 @@ const Login = () => {
                 fields="name,email,picture"
                 icon="fa-facebook"
                 callback={responseFacebook}
+                onClick={componentClicked}
               />
+              {/* <GoogleLogin
+                clientId=""
+              /> */}
+              {/* <Facebook /> */}
             </center>
 
             <p className="text-center text-gray-600 mb-4">

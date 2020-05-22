@@ -210,7 +210,7 @@ const Profile = () => {
             </div>
             <label className="mb-6 text-black">Name</label>
             <input
-              className="rounded bg-gray-600 focus:outline-none py-1 px-1 block mb-2 w-full sm:w-full"
+              className="rounded bg-gray-400 focus:outline-none py-1 px-1 block mb-2 w-full sm:w-full"
               // type="text"
               // name="name"change profile picture in react js
               value={profile ? profile.user_name : ""}
@@ -224,9 +224,9 @@ const Profile = () => {
                 })
               }
             />
-            <label className="mb-6 text-black">Email</label>
+            <label className="mb-6 text-black">Phone</label>
             <input
-              className="rounded bg-gray-600 focus:outline-none py-1 px-1 block mb-2 w-full sm:w-full"
+              className="rounded bg-gray-400 focus:outline-none py-1 px-1 block mb-2 w-full sm:w-full"
               // type="text"
               // name="name"change profile picture in react js
               value={profile ? profile.phone_number : ""}
@@ -271,8 +271,8 @@ const Profile = () => {
               src={profile ? profile.user_profile : ""}
             />
             <div
-              onClick={popUp}
-              className="cursor-pointer mt-2 flex  text-xl font-bold text-blue-600 text-gray-600"
+              // onClick={popUp}
+              className="mt-2 flex  text-xl font-bold text-blue-600 text-gray-600"
             >
               <span className="ml-2 sm:mx-auto ">
                 {profile ? profile.user_name : ""}
@@ -293,7 +293,7 @@ const Profile = () => {
               </div>
             </div> */}
             <div className=" mt-16">
-              <div className="mb-4 flex -mt-12 sm:justify-center  cursor-pointer hover:bg-gray-200 rounded-md ">
+              <div className="mb-4 flex -mt-12 sm:justify-center  rounded-md ">
                 <svg
                   className="fill-current text-gray-700 svg-icon h-8 w-8 text-justify"
                   viewBox="0 0 20 20"
@@ -304,7 +304,7 @@ const Profile = () => {
                   {profile ? profile.user_email : ""}
                 </span>
               </div>
-              <div className="flex mt-1 sm:justify-center cursor-pointer hover:bg-gray-200 rounded-md ">
+              <div className="flex mt-1 sm:justify-center rounded-md ">
                 <svg
                   className="text-gray-700 fill-current svg-icon h-8 w-8 text-justify"
                   viewBox="0 0 20 20"
@@ -315,6 +315,12 @@ const Profile = () => {
                   {profile ? profile.phone_number : ""}
                 </span>
               </div>
+              <input
+                type="button"
+                value="Edit Profile"
+                onClick={popUp}
+                className="focus:outline-none float-right mt-4 sm:-mt-12 bg-no-repeat border-blue-500 border-2 px-3 py-2 bg-blue-400 rounded-full hover:bg-blue-200 hover:text-gray-600 text-white cursor-pointer"
+              />
             </div>
           </div>
         </div>
