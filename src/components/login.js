@@ -19,7 +19,7 @@ const Login = () => {
   const [loading, setLoading] = useState(false);
 
   const onSubmit = (data) => {
-    fetch(" http://52.221.199.235:9000/login", {
+    fetch(" http://localhost:8000/login", {
       method: "POST",
       // headers: {
       //   Accept: "application/json, text/plain, */*",
@@ -159,7 +159,6 @@ const Login = () => {
             </button>
             <p className="text-center text-gray-600 mb-2">Login With</p>
             <center>
-              {/* <Facebook /> */}
               <FacebookLogin
                 textButton=""
                 cssClass="bg-blue-600 w-8 h-8 rounded-full focus:outline-none"
@@ -167,18 +166,8 @@ const Login = () => {
                 autoLoad={true}
                 fields="name,email,picture"
                 icon="fa-facebook"
-                // onClick={this.componentClicked}
                 callback={responseFacebook}
               />
-              {/* <GoogleLogin
-                className="bg-blue-600 w-8 h-8 rounded-full focus:outline-none"
-                clientId="658977310896-knrl3gka66fldh83dao2rhgbblmd4un9.apps.googleusercontent.com"
-                buttonText=""
-                onSuccess={responseGoogle}
-                onFailure={responseGoogle}
-                cookiePolicy={"single_host_origin"}
-              /> */}
-              {/* , */}
             </center>
 
             <p className="text-center text-gray-600 mb-4">
