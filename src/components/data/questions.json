@@ -18,12 +18,12 @@
     },
 
     {
-        "question": "What did the crocodile swallow in Peter Pan?",
-        "optionA": "A Book",
-        "optionB": "A Computer",
-        "optionC": "A pair of shoes",
-        "optionD": "Alarm Clock",
-        "answer": "Alarm Clock"
+        "question": "First China War was fought between?",
+        "optionA": "China and Britain",
+        "optionB": "China and France",
+        "optionC": "China and Egypt",
+        "optionD": "China and Greek",
+        "answer": "China and Britain"
     },
 
     {
@@ -36,12 +36,12 @@
     },
 
     {
-        "question": "Who lived at 221B, Baker Street, London?",
-        "optionA": "Tony Stark",
-        "optionB": "Morgan Freeman",
-        "optionC": "Sherlock Holmes",
-        "optionD": "Samuel L. Jackson",
-        "answer": "Sherlock Holmes"
+        "question": "Each year World Red Cross and Red Crescent Day is celebrated on?",
+        "optionA": "May 8",
+        "optionB": "May 18",
+        "optionC": "June 8",
+        "optionD": "June 18",
+        "answer": "May 8"
     },
 
     {
@@ -72,12 +72,12 @@
     },
 
     {
-        "question": "What takes place in Hong Kong's Happy Valley?",
-        "optionA": "Chicken Wrestling",
-        "optionB": "Horse racing",
-        "optionC": "Street Racing",
-        "optionD": "Arm Wrestling",
-        "answer": "Horse racing"
+        "question": "India has largest deposits of ____ in the world.",
+        "optionA": "gold",
+        "optionB": "copper",
+        "optionC": "mica",
+        "optionD": "None of the above",
+        "answer": "mica"
     },
 
     {
@@ -126,11 +126,11 @@
     },
 
     {
-        "question": "What are the first three words of the bible?",
-        "optionA": "be with everyone",
-        "optionB": "Again Jesus asked",
-        "optionC": "In the beginning",
-        "optionD": "At that time",
-        "answer": "In the beginning"
+        "question": "Logarithm tables were invented by",
+        "optionA": "John Napier",
+        "optionB": "John Doe",
+        "optionC": "John Harrison",
+        "optionD": "John Douglas",
+        "answer": "John Napier"
     }
 ]

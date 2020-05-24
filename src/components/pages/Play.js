@@ -10,6 +10,9 @@ import ParticlesBg from "particles-bg"
 
 import questions from "../data/questions.json";
 import isEmpty from "../../utilis/is-empty";
+import correctNotification from '../../assets/sound/right-answer2.mp3';
+import wrongNotification from '../../assets/sound/wrong-answer2.mp3';
+import buttonSound from '../../assets/sound/button-sound.mp3';
 
 const TITLE = "Quiz App | Play";
 
@@ -33,6 +36,9 @@ class Play extends React.Component {
       time: {},
     };
     this.interval = null;
+    this.correctSound = React.createRef();
+    this.wrongSound = React.createRef();
+    this.buttonSound = React.createRef();
   }
 
   componentDidMount() {
@@ -86,13 +92,21 @@ class Play extends React.Component {
 
   handleOptionClick = (e) => {
     if (e.target.innerHTML.toLowerCase() === this.state.answer.toLowerCase()) {
-      this.correctTimeout = setTimeout(() => {}, 500);
+      this.correctTimeout = setTimeout(() => {
+        this.correctSound.current.play();
+      }, 200);
       this.correctAnswer();
     } else {
-      this.wrongTimeout = setTimeout(() => {}, 500);
+      this.wrongTimeout = setTimeout(() => {
+        this.wrongSound.current.play();
+      }, 200);
       this.wrongAnswer();
     }
   };
+
+  playButtonSound = () =>{
+    this.buttonSound.current.play();
+  }
 
   correctAnswer = () => {
     // M.toast({
@@ -151,13 +165,13 @@ class Play extends React.Component {
 
   showOptions = () => {
     const options = Array.from(document.querySelectorAll(".option"));
-
     options.forEach((option) => {
       option.style.visibility = "visible";
     });
   };
 
   handleHints = () => {
+    this.playButtonSound();
     if (this.state.hints > 0) {
       const options = Array.from(document.querySelectorAll(".option"));
       let indexOfAnswer;
@@ -259,6 +273,7 @@ class Play extends React.Component {
 
   render() {
     const quitAlert = () => {
+      this.playButtonSound();
       swal({
         title: "Are you sure to close it?",
         icon: "warning",
@@ -266,10 +281,12 @@ class Play extends React.Component {
         dangerMode: true,
       }).then((willClose) => {
         if (willClose) {
+          this.playButtonSound();
           swal("Thank you so much!", {
             icon: "success",
             timer: "3000",
           }).then(() => {
+            this.playButtonSound();
             this.props.history.push("/userinfo");
           });
         }
@@ -289,6 +306,11 @@ class Play extends React.Component {
         <Helmet>
           <title>{TITLE}</title>
         </Helmet>
+        <React.Fragment>
+        <audio ref={this.correctSound} src={correctNotification}></audio>
+        <audio ref={this.wrongSound} src={wrongNotification}></audio>
+        <audio ref={this.buttonSound} src={buttonSound}></audio>
+        </React.Fragment>
         <ParticlesBg type="fountain" bg={true}/>
         <h4 className="mt-12 text-center text-6xl">Quiz Time</h4>
         <form id="backgrond" className=" bg-gray-200 container shadow-xl rounded px-8 pt-6 pb-8 mb-4 mx-auto mt-12 h-full">

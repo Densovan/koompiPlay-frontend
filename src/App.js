@@ -19,12 +19,8 @@ function App() {
       <Router>
         <Switch>
           <PublicRoute exact path="/register" component={Register} />
-          {/* <Route
-            restricted={true}
-            exact
-            path="/login"
-            component={Login}
-          /> */}
+          <Route restricted={true} exact path="/login" component={Login}
+          />
           <Route exact path="/login" restricted={true} component={Login} />
           <PublicRoute exact path="/logout" component={Logout} />
           <PublicRoute exact path="/file" component={FIleupload} />

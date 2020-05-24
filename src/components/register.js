@@ -55,7 +55,7 @@ const Register = () => {
         setTimeout(() => {
           setSucessMessage();
         }, 5000);
-        window.location.replace("/login");
+        window.location.replace("http://52.221.199.235:9000/login");
       })
       .catch((err) => console.log(err));
   };

@@ -49,7 +49,7 @@ const Login = () => {
           setTimeout(() => {
             setSucessMessage();
           }, 5000);
-          window.location.replace("/profile");
+          window.location.replace("http://52.221.199.235:9000/profile");
         } else {
           setMessage("login failed");
           setTimeout(() => {

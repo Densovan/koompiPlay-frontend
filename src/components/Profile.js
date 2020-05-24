@@ -57,7 +57,7 @@ const Profile = () => {
     //  refetch
   ] = useAxios({
     method: "get",
-    url: "http://localhost:8000/userData",
+    url: "http://52.221.199.235:9000/userData",
     headers: {
       "Content-Type": "application/json",
       token: accessTokenObj,
@@ -76,7 +76,7 @@ const Profile = () => {
   const submitName = (e) => {
     e.preventDefault();
     console.log("hello");
-    fetch("http://localhost:8000/updateName", {
+    fetch("http://52.221.199.235:9000/updateName", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -90,7 +90,7 @@ const Profile = () => {
       .then((res) => console.log(res.string));
 
     //phone_Number
-    fetch("http://localhost:8000/updatePhone", {
+    fetch("http://52.221.199.235:9000/updatePhone", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -105,7 +105,7 @@ const Profile = () => {
 
     //Profile picture
 
-    fetch("http://localhost:8000/uploadProfile", {
+    fetch("http://52.221.199.235:9000/uploadProfile", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

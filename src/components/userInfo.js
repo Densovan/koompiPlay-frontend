@@ -54,7 +54,7 @@ function UserInfo() {
     //  refetch
   ] = useAxios({
     method: "get",
-    url: "http://localhost:8000/userData",
+    url: "http://52.221.199.235:9000/userData",
     headers: {
       "Content-Type": "application/json",
       token: accessTokenObj,
@@ -62,7 +62,7 @@ function UserInfo() {
   });
 
   if (loading) return <p>Loading...</p>;
-  if (error) return window.location.replace("/login");
+  if (error) return window.location.replace("http://52.221.199.235:9000/login");
   if (data) {
     // console.log(data);
     if (profile === null) {
