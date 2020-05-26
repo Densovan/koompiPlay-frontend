@@ -81,7 +81,7 @@ class Result extends React.Component {
   render() {
     const submitAlert = () => {
       this.playButtonSound();
-      swal({
+      swal({  
         title: "Thank you so much!",
         icon: "success",
         button: "Ok",
@@ -175,7 +175,7 @@ class Result extends React.Component {
                 Number of incorrectAnswers: {this.state.wrongAnswers}
               </span>
               <Progress
-                percent={10 + this.state.wrongAnswers * 6}
+                percent={this.state.wrongAnswers * 6.66}
                 status="active"
               />
               <br />

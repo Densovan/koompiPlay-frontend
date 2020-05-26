@@ -24,7 +24,7 @@ class Play extends React.Component {
       currentQuestion: {},
       nextQuestion: {},
       previousQuestion: {},
-      answer: "",
+      answer: '',
       numberOfQuestions: 0,
       numberOfAnsweredQuestions: 0,
       currentQuestionIndex: 0,
@@ -89,6 +89,48 @@ class Play extends React.Component {
       );
     }
   };
+
+  handleNextButtonClick = () => {
+    this.playButtonSound();
+    if (this.state.nextQuestion !== undefined) {
+        this.setState(prevState => ({
+            currentQuestionIndex: prevState.currentQuestionIndex + 1
+        }), () => {
+            this.displayQuestions(this.state.state, this.state.currentQuestion, this.state.nextQuestion, this.state.previousQuestion);
+        });
+    }
+};
+
+handlePreviousButtonClick = () => {
+    this.playButtonSound();
+    if (this.state.previousQuestion !== undefined) {
+        this.setState(prevState => ({
+            currentQuestionIndex: prevState.currentQuestionIndex - 1
+        }), () => {
+            this.displayQuestions(this.state.state, this.state.currentQuestion, this.state.nextQuestion, this.state.previousQuestion);
+        });
+    }
+};
+
+
+handleButtonClick = (e) => {
+  switch (e.target.id) {
+      case 'next-button':
+          this.handleNextButtonClick();
+          break;
+
+      case 'previous-button':
+          this.handlePreviousButtonClick();
+          break;
+
+      default:
+          break;
+  }
+  
+};
+
+
+
 
   handleOptionClick = (e) => {
     if (e.target.innerHTML.toLowerCase() === this.state.answer.toLowerCase()) {
@@ -364,17 +406,14 @@ class Play extends React.Component {
               </button>
             </div>
           </div>
-          <button
-            type="button"
-            className=" bg-red-600 hover:bg-red-800 rounded mt-10"
-          >
-            <button
-              type="button"
-              className="w-32 shadow-lg text-white font-bold py-2 px-4 rounded justify-center text-center"
-              onClick={quitAlert}
-            >
-              quit
-            </button>
+          <button id="previous-button" type="button" onClick={this.handleButtonClick} className="bg-yellow-600 hover:bg-yellow-800 rounded mt-10 w-32 shadow-lg text-white font-bold py-2 px-4 rounded justify-center text-center">
+              Prev
+          </button>
+          <button id="next-button" type="button" onClick={this.handleButtonClick} className="bg-indigo-600 hover:bg-indigo-800 rounded mt-10 w-32 shadow-lg text-white font-bold py-2 px-4 rounded justify-center text-center">
+              Next
+          </button>
+          <button type="button" onClick={quitAlert} className="bg-red-600 hover:bg-red-800 rounded mt-10 w-32 shadow-lg text-white font-bold py-2 px-4 rounded justify-center text-center">
+            quit
           </button>
         </form>
       </React.Fragment>
