@@ -26,16 +26,6 @@ const Profile = () => {
   const imageUploader = React.useRef(null);
 
   const handleImageUpload = (e) => {
-    // fetch("http://52.221.199.235:9000/uploadProfile", {
-    //   method: "POST",
-    //   headers: {
-    //     // "Content-Type": "application/json",
-    //     token: accessTokenObj,
-    //   },
-    //   body: JSON.stringify({
-    //     newProfile: profile.user_profile,
-    //   }),
-    // });
     setProfile({
       ...profile,
       user_profile: e.target.value,
@@ -154,7 +144,7 @@ const Profile = () => {
       </div> */}
 
       <div
-        style={{ backgroundColor: "rgba(0,0,0,0.4" }}
+        style={{ backgroundColor: "rgba(0,0,0,0.4)" }}
         className={
           modal
             ? "fixed z-50 pt-64  top-0 left-0  w-full h-full overflow-auto"
@@ -258,14 +248,14 @@ const Profile = () => {
       </div>
 
       <div className="  mx-auto  px-4 py-12  max-w-screen-lg sm:px-2">
-        <div className=" pb-7/5 bg-black rounded-lg max-w-screen-lg w-full">
+        <div className=" pb-7/5 bg-black rounded-lg max-w-screen-lg w-full ">
           <img
             className="  inset-0 sm:h-auto object-cover rounded-lg  "
             src="/img/cover.jpg"
           />
         </div>
-        <div className="px-4 -mt-12 sm:-mt-32  py-4  ">
-          <div className="blur h-64 bg-white rounded-lg px-4 py-3 shadow-lg h-48 sm:h-auto">
+        <div className="px-4 -mt-12 sm:-mt-32  py-4 z-50  ">
+          <div className="blur relative h-64 bg-white rounded-lg px-4 py-3 shadow-lg h-48 sm:h-auto">
             <img
               className=" md:-mt-20  sm:mx-auto h-24 w-24 -mt-16 md:h-32 md:w-32 rounded-full   "
               src={profile ? profile.user_profile : ""}

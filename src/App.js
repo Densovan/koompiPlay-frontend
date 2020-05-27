@@ -33,6 +33,7 @@ function App() {
           <PrivateRoute exact path="/" component={Start} />
           <PrivateRoute exact path="/quiz" component={Play} />
           <PrivateRoute exact path="/result" component={Result} />
+          {/* <PrivateRoute exact path="/file" component={FIleupload} /> */}
           {/* 
           <PublicRoute exact path="/start" component={Start}/>
           <Route exact path="/start" component={Start}/>
