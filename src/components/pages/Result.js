@@ -1,6 +1,6 @@
 import React from "react";
 import { Helmet } from "react-helmet";
-import { RiMedalLine } from "react-icons/ri";
+import IosRibbonOutline from 'react-ionicons/lib/IosRibbonOutline'
 import { Link } from "react-router-dom";
 // import axios from "axios";
 import swal from "sweetalert";
@@ -110,21 +110,28 @@ class Result extends React.Component {
         <React.Fragment>
           <div className="m-auto flex justify-center p-0 mt-6">
             <span className="icon text-indigo-800 text-6xl">
-              <RiMedalLine />
+              <IosRibbonOutline shake={true} fontSize="80px" color="orange"/>
             </span>
           </div>
           <h2
             id="result-header"
             className=" text-indigo-800 text-4xl text-center"
           >
-            Quiz has ended
+            Congratulations
           </h2>
           <form
             id="form-background"
             onSubmit={this.handleSubmit}
-            className="container shadow-xl rounded px-8 pt-4 pb-8 mx-auto mt-1 h-full"
+            className="container shadow-xl rounded mx-auto h-auto w-auto overflow-hidden"
           >
-            <div className="container text-center ">
+            <div className="h-0">
+              <svg id="wave" viewBox="0 0 500 500" 
+                preserveAspectRatio="xMinYMin meet">                 
+                 <path fill="#00cba9" fill-opacity="1" d="M0,256L21.8,229.3C43.6,203,87,149,131,160C174.5,171,218,245,262,250.7C305.5,256,349,192,393,181.3C436.4,171,480,213,524,213.3C567.3,213,611,171,655,138.7C698.2,107,742,85,785,90.7C829.1,96,873,128,916,122.7C960,117,1004,75,1047,58.7C1090.9,43,1135,53,1178,74.7C1221.8,96,1265,128,1309,170.7C1352.7,213,1396,267,1418,293.3L1440,320L1440,0L1418.2,0C1396.4,0,1353,0,1309,0C1265.5,0,1222,0,1178,0C1134.5,0,1091,0,1047,0C1003.6,0,960,0,916,0C872.7,0,829,0,785,0C741.8,0,698,0,655,0C610.9,0,567,0,524,0C480,0,436,0,393,0C349.1,0,305,0,262,0C218.2,0,175,0,131,0C87.3,0,44,0,22,0L0,0Z">
+                </path> 
+              </svg> 
+            </div>
+            <div className="container text-center">
               <h3 className=" container text-3xl text-gray-100 font-bold">
                 {remark}
               </h3>
@@ -146,7 +153,7 @@ class Result extends React.Component {
                 }}
               />
             </div>
-            <div className="container p-4 text-black text-xl font-bold">
+            <div className="container p-4 text-black text-xl font-bold px-16">
               <span onChange={this.handleChange}>
                 Total of the number questions: {this.state.numberOfQuestions}
               </span>
@@ -193,7 +200,7 @@ class Result extends React.Component {
                 className="w-32 mr-2 bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded cursor-pointer"
               />
             </Link> */}
-
+              <div className="px-12 py-6">
             <input
               onClick={submitAlert}
               className="w-32 mr-2 bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded cursor-pointer"
@@ -208,6 +215,7 @@ class Result extends React.Component {
                 value="Home"
               />
             </Link>
+            </div>
           </form>
         </React.Fragment>
       );
@@ -225,7 +233,7 @@ class Result extends React.Component {
         <Helmet>
           <title>{TITLE}</title>
         </Helmet>
-        <ParticlesBg type="color" bg={true} />
+        <ParticlesBg type="custom" bg={true}/>
         {stats}
       </React.Fragment>
     );
