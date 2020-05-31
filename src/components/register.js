@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
-import ParticlesBg from "particles-bg";
+// import ParticlesBg from "particles-bg";
 import SuccessfulMessage from "./Message/SuccessMessage";
 import axios from "axios";
 import three_dots from "../assets/bars.svg";
@@ -62,7 +62,7 @@ const Register = () => {
   return (
     <div>
       {successMessage ? <SuccessfulMessage msg={successMessage} /> : null}
-      <ParticlesBg type="ball" bg={true} />
+      {/* <ParticlesBg type="ball" bg={true} /> */}
       <div className="flex  items-center justify-center h-screen ">
         <div className="w-full max-w-md">
           <form

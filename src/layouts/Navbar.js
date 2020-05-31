@@ -48,7 +48,7 @@ const Navbar = () => {
                 Profile
               </Link> */}
               <Link
-                to="/start"
+                to="/"
                 className="sm:px-2 sm:text-sm  block px-3 py-1 rounded font-semibold text-white hover:bg-gray-800"
                 href="#"
               >

@@ -111,38 +111,6 @@ const Profile = () => {
   return (
     <React.Fragment>
       <Navbar />
-      {/* <div
-        className={
-          modal
-            ? " fixed mx-auto z-50  sm:w-2/5 bg-gray-900  rounded-lg p-6"
-            : "hidden"
-        }
-      >
-        <form onSubmit={submitName}>
-          <label className="mb-6 text-white">Name</label>
-          <input
-            className="rounded py-1 px-1 block mb-2 w-full sm:w-full"
-            // type="text"
-            // name="name"change profile picture in react js
-            value={profile ? profile.user_name : ""}
-            // ref={register({ required: true, minLength: 5 })}
-            name="name"
-            type="text"
-            onChange={(e) =>
-              setProfile({
-                ...profile,
-                user_name: e.target.value,
-              })
-            }
-          />
-          <input
-            type="submit"
-            value="Submit"
-            className="mr-2 mt-5 cursor-pointer bg-blue-700 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-          />
-        </form>
-      </div> */}
-
       <div
         style={{ backgroundColor: "rgba(0,0,0,0.4)" }}
         className={
@@ -151,7 +119,7 @@ const Profile = () => {
             : "hidden"
         }
       >
-        <div className="bg-white mx-auto pb-12 w-4/5 sm:w-3/6 px-6 rounded-md">
+        <div className="bg-white  mx-auto pb-12 w-4/5 sm:w-3/6 px-6 rounded-md">
           <h1 className="py-5">Edit your Profile</h1>
 
           <form onSubmit={submitName}>
@@ -172,14 +140,7 @@ const Profile = () => {
                   display: "none",
                 }}
               />
-              <div
-                // style={{
-                //   height: "60px",
-                //   width: "60px",
-                //   border: "1px dashed black",
-                // }}
-                onClick={() => imageUploader.current.click()}
-              >
+              <div onClick={() => imageUploader.current.click()}>
                 <img
                   className="w-20 h-20  sm:h-20 sm:w-20 rounded-full"
                   src={profile ? profile.user_profile : ""}
@@ -232,7 +193,8 @@ const Profile = () => {
             />
 
             <input
-              onClick={refreshPage}
+              // onClick={refreshPage}
+              onClick={popUp}
               type="submit"
               value="Submit"
               className="mr-2 mt-5 cursor-pointer bg-blue-700 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"

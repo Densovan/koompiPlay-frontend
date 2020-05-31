@@ -142,36 +142,26 @@ const FileUpload = () => {
   const onSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData();
-    formData.append("file", file);
-
+    // formData.append("file", file);
+    console.log(formData[0]);
     try {
       const res = await axios.post(
         "http://localhost:8000/uploadProfile",
         formData,
         {
           headers: {
-            // "Content-Type": "multipart/form-data",
             "Content-Type": "application/x-www-form-urlencoded",
             token: accessTokenObj,
           },
-          onUploadProgress: (progressEvent) => {
-            setUploadPercentage(
-              parseInt(
-                Math.round((progressEvent.loaded * 100) / progressEvent.total)
-              )
-            );
-
-            // Clear percentage
-            setTimeout(() => setUploadPercentage(0), 10000);
-          },
+          // body: {
+          //   image: formData,
+          // },
         }
       );
 
       const { fileName, filePath } = res.data;
 
       setUploadedFile({ fileName, filePath });
-
-      setMessage("File Uploaded");
     } catch (err) {
       if (err.response.status === 500) {
         setMessage("There was a problem with the server");

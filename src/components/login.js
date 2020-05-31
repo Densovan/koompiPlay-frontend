@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { Link, Redirect } from "react-router-dom";
-import ParticlesBg from "particles-bg";
+// import ParticlesBg from "particles-bg";
 import jwt from "jsonwebtoken";
 import three_dots from "../assets/bars.svg";
 import FacebookLogin from "react-facebook-login";
@@ -130,7 +130,7 @@ const Login = () => {
       {message ? <Message msg={message} /> : null}
       {successMessage ? <SuccessMessage msg={successMessage} /> : null}
       <div className="flex  items-center justify-center h-screen ">
-        <ParticlesBg type="ball" bg={true} />
+        {/* <ParticlesBg type="ball" bg={true} /> */}
         <div className="w-full max-w-md">
           <form
             // style={{ backgroundColor: "rgb(250, 255, 255, 0.625)" }}
