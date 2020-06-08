@@ -2,7 +2,7 @@ import React from "react";
 import { Helmet } from "react-helmet";
 import IosRibbonOutline from 'react-ionicons/lib/IosRibbonOutline'
 import { Link } from "react-router-dom";
-// import axios from "axios";
+//  
 import swal from "sweetalert";
 import { Progress } from "react-sweet-progress";
 import "react-sweet-progress/lib/style.css";

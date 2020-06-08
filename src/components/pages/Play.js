@@ -9,19 +9,20 @@ import swal from "@sweetalert/with-react";
 // import ParticlesBg from "particles-bg"
 
 
-import questions from "../data/questions.json";
+// import questions from "../data/questions.json";
 import isEmpty from "../../utilis/is-empty";
 import correctNotification from '../../assets/sound/right-answer2.mp3';
 import wrongNotification from '../../assets/sound/wrong-answer2.mp3';
 import buttonSound from '../../assets/sound/button-sound.mp3';
+import  axios  from 'axios';
 
-const TITLE = "Quiz App | Play";
+const TITLE = "Quiz App | Play";  
 
 class Play extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      questions,
+      questions: [],
       currentQuestion: {},
       nextQuestion: {},
       previousQuestion: {},
@@ -29,7 +30,7 @@ class Play extends React.Component {
       numberOfQuestions: 0,
       numberOfAnsweredQuestions: 0,
       currentQuestionIndex: 0,
-      score: 0,
+      score: 0, 
       correctAnswers: 0,
       wrongAnswers: 0,
       hints: 2,
@@ -39,11 +40,37 @@ class Play extends React.Component {
     this.interval = null;
     this.correctSound = React.createRef();
     this.wrongSound = React.createRef();
-    this.buttonSound = React.createRef();
+    this.buttonSound = React.createRef();    
+    // this.randomQuestion = this.randomQuestion.bind(this);
+    // this.handleClick = this.handleClick.bind(this);
+  }
+
+
+  getQuestion = () =>{
+    axios({
+      method: "GET",
+      url: "http://localhost:8000/question",                
+      headers:{
+        Accept: "application/json, text/plain, */*",
+        "Content-type": "application/json",
+      }      
+     })
+    .then(res => {
+        const questions = res.data;
+        console.log(questions);        
+        this.setState({
+          questions
+        })
+      })
+      .catch(error => {
+          console.log(error);      
+        })
+
   }
 
   componentDidMount() {
-    const {
+    this.getQuestion();
+     const {
       questions,
       currentQuestion,
       nextQuestion,
@@ -57,6 +84,23 @@ class Play extends React.Component {
     );
     this.startTimer();
   }
+
+    // randomQuestion = () =>{
+    //   const randomQ = Math.floor(Math.random() * this.state.questions.length - 1);
+    //   return this.state.questions[randomQ]; 
+    // }
+
+//   handleClick = () =>{
+//     const oneRandomQuestion = this.randomQuestion();
+//     // const oneRandomOption = this.randomAnswer();
+//     this.setState({
+//         question: oneRandomQuestion.question,
+//         optionA: oneRandomQuestion.optionA,
+//         optionB: oneRandomQuestion.optionB,
+//         optionC:oneRandomQuestion.optionC,
+//         optionD: oneRandomQuestion.optionD
+//     })  
+// }
 
   componentWillUnmount() {
     clearInterval(this.interval);
@@ -211,14 +255,13 @@ handleButtonClick = (e) => {
     options.forEach((option) => {
       option.style.visibility = "visible";
     });
-  };
+  };  
 
   handleHints = () => {
     this.playButtonSound();
     if (this.state.hints > 0) {
       const options = Array.from(document.querySelectorAll(".option"));
       let indexOfAnswer;
-
       options.forEach((option, index) => {
         if (
           option.innerHTML.toLowerCase() === this.state.answer.toLowerCase()
@@ -354,7 +397,6 @@ handleButtonClick = (e) => {
         <audio ref={this.wrongSound} src={wrongNotification}></audio>
         <audio ref={this.buttonSound} src={buttonSound}></audio>
         </React.Fragment>
-        {/* <ParticlesBg type="fountain" bg={true}/> */}
         <h4 className="mt-6 text-center text-6xl">Quiz Time</h4>
         <form id="backgrond" className=" bg-gray-200 container shadow-xl rounded-lg pb-8 mb-4 mx-auto h-auto">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
@@ -377,20 +419,17 @@ handleButtonClick = (e) => {
               {hints}
             </div>
           </div>
-          <div className="max-w-4xl mx-auto flex p-8 bg-white rounded-lg shadow-xl h-auto text-2xl">
+          <div className="max-w-4xl mx-auto justify-center flex p-8 bg-white rounded-lg shadow-xl h-auto text-2xl">
             <h5>{currentQuestion.question}</h5>
-          </div>
-          {/* <div className="wave -one"></div>
-          <div className="wave -two"></div> 
-          <div className="wave -three"></div> */}
-          <div className="mx-auto justify-center px-12 mt-6">
+          </div>          
+           <div className="mx-auto justify-center px-12 mt-6">
             <div className="sm:flex">
               <button
                 type="button"
                 onClick={this.handleOptionClick}
                 className=" transition duration-500 ease-in-out transform hover:-translate-y-1 blok mt-3 option bg-teal-400 ml-10 hover:bg-teal-800 sm:ml-0 w-3/4 sm:w-2/4 lg:w-2/4 xs:w-2/4 text-white font-bold py-3 px-4 rounded-full "
               >
-                 {currentQuestion.optionA}
+                {currentQuestion.optionA}
               </button>
               <button
                 type="button"
