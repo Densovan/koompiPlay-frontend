@@ -1,5 +1,5 @@
 export function PostData(type, userData) {
-  let BaseURL = "";
+  let BaseURL = "http://localhost:8000/all_register";
   return new Promise((resolve, reject) => {
     fetch(BaseURL + type, {
       method: "POST",

@@ -6,6 +6,7 @@ import ImageUploader from "react-images-upload";
 
 //Global Token
 var accessTokenObj = localStorage.getItem("token");
+var accessTokenObjs = localStorage.getItem("firebaseui::rememberedAccounts");
 
 const Profile = () => {
   const [profile, setProfile] = useState(null);
@@ -51,6 +52,7 @@ const Profile = () => {
     headers: {
       "Content-Type": "application/json",
       token: accessTokenObj,
+      // token: accessTokenObjs,
     },
   });
 

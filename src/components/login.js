@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { Link, Redirect } from "react-router-dom";
+import firebase from "firebase";
+import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
 // import ParticlesBg from "particles-bg";
 import jwt from "jsonwebtoken";
 import three_dots from "../assets/bars.svg";
@@ -12,6 +14,11 @@ import Facebook from "../components/SocialLogin/FacbookLogin";
 import SuccessMessage from "../components/Message/SuccessMessage";
 import { PostData } from "../components/Services/PostData";
 
+// firebase.initializeApp({
+//   apiKey: "AIzaSyCs-PhYAG1ZEYuF9Hbhinn7Iwh9ZhwrNJ4",
+//   authDomain: "koompiplay-a02eb.firebaseapp.com",
+// });
+
 const Login = () => {
   const { register, handleSubmit, errors } = useForm();
   const [message, setMessage] = useState("");
@@ -20,8 +27,97 @@ const Login = () => {
   const [face, setFace] = useState({
     redirectToReferrer: false,
   });
+  const [state, setState] = useState({
+    isSingedIn: false,
+  });
+  // const uiConfig = {
+  //   signInFlow: "popup",
+  //   autoUpgradeAnonymousUsers: true,
+  //   signInSuccessUrl: "/",
+  //   signInOptions: [
+  //     firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+  //     firebase.auth.FacebookAuthProvider.PROVIDER_ID,
+  //     // firebase.auth.TwitterAuthProvider.PROVIDER_ID,
+  //     // firebase.auth.GithubAuthProvider.PROVIDER_ID,
+  //     // firebase.auth.EmailAuthProvider.PROVIDER_ID,
+  //   ],
+  //   callbacks: {
+  //     signInSuccess: () => false,
+  //     signInSuccess: function (authResult, redirectUrl) {
+  //       return true;
+  //     },
+  //     signInFailure: function (error) {
+  //       if (error.code != "firebaseui/anonymous-upgrade-merge-conflict") {
+  //         return Promise.resolve();
+  //       }
+  //     },
+  //   },
+  // };
+  // useEffect(() => {
+  //   firebase.auth().onAuthStateChanged((user) => {
+  //     setState({ isSingedIn: !!user });
+  //     // window.location.replace("/start");
+  //     console.log("user", user);
+  //     console.log(uiConfig.signInOptions);
+  //     // console.log(user.providerData[0].providerId);
+
+  //     if (user.providerData[0].providerId == "google.com") {
+  //       let user_external_id = user.uid;
+  //       let user_name = user.displayName;
+  //       let user_gender = "default";
+  //       let user_email = user.email;
+  //       let user_profile = user.photoURL;
+  //       let login_type = "google";
+
+  //       fetch("http://localhost:8000/all_register", {
+  //         method: "POST",
+  //         header: {
+  //           "Content-Type": "application/json",
+  //         },
+  //         body: JSON.stringify({
+  //           user_external_id: user_external_id,
+  //           user_name: user_name,
+  //           user_gender: user_gender,
+  //           user_email: user_email,
+  //           user_profile: user_profile,
+  //           login_type: login_type,
+  //         }),
+  //       })
+  //         .then((res) => res.json())
+  //         .then((data) => {
+  //           console.log(data.string);
+  //         });
+  //     } else if (user.providerData[0].providerId == "facebook.com") {
+  //       let user_external_id = user.uid;
+  //       let user_name = user.displayName;
+  //       let user_gender = "default";
+  //       let user_email = user.email;
+  //       let user_profile = user.photoURL;
+  //       let login_type = "facebook";
+
+  //       fetch("http://localhost:8000/all_register", {
+  //         method: "POST",
+  //         header: {
+  //           "Content-Type": "application/json",
+  //         },
+  //         body: JSON.stringify({
+  //           user_external_id: user_external_id,
+  //           user_name: user_name,
+  //           user_gender: user_gender,
+  //           user_email: user_email,
+  //           user_profile: user_profile,
+  //           login_type: login_type,
+  //         }),
+  //       })
+  //         .then((res) => res.json())
+  //         .then((data) => {
+  //           console.log(data.string);
+  //         });
+  //     }
+  //   });
+  // }, []);
   const onSubmit = (data) => {
-    fetch(" http://localhost:8000/login", {
+    fetch(" http://localhost:8000/all_login", {
       method: "POST",
       // headers: {
       //   Accept: "application/json, text/plain, */*",
@@ -29,9 +125,13 @@ const Login = () => {
       // },
 
       body: JSON.stringify({
-        // user_name: data.Username,
+        // user_name: "defualt",
         user_email: data.Email,
         user_password: data.Password,
+        // phone_number: "defualt",
+        // user_profile: "defualt",
+        // user_gender: "defualt",
+        // login_type: data.login_type,
       }),
     })
       // setMessage("File Upload")
@@ -61,7 +161,7 @@ const Login = () => {
         // if (!data) {
         //   console.log(data);
         //   alert(data);
-        // } else {
+        // } else {register
         //   window.location.replace("/start");
         //   console.log(data)
         // }
@@ -97,10 +197,10 @@ const Login = () => {
     if (postData) {
       PostData("singup", postData).then((result) => {
         let responeJson = result;
-        if (responeJson.userData) {
-          sessionStorage.setItem("userData", JSON.stringify(responeJson));
-          setFace({ redirectToReferrer: true });
-        }
+        // if (responeJson.userData) {
+        sessionStorage.setItem("userData", JSON.stringify(responeJson));
+        setFace({ redirectToReferrer: true });
+        // }
       });
     }
   };
@@ -205,6 +305,7 @@ const Login = () => {
                 "Sign In"
               )}
             </button>
+
             <p className="text-center text-gray-600 mb-2">Login With</p>
             <div className="flex justify-center">
               <FacebookLogin
@@ -226,12 +327,6 @@ const Login = () => {
                       onClick={renderProps.onClick}
                       disabled={renderProps.disabled}
                     >
-                      {/* <svg
-                        className="svg-icon w-8 h-8 pl-2"
-                        viewBox="0 0 20 20"
-                      >
-                        <path d="M8.937,10.603c-0.383-0.284-0.741-0.706-0.754-0.837c0-0.223,0-0.326,0.526-0.758c0.684-0.56,1.062-1.297,1.062-2.076c0-0.672-0.188-1.273-0.512-1.71h0.286l1.58-1.196h-4.28c-1.717,0-3.222,1.348-3.222,2.885c0,1.587,1.162,2.794,2.726,2.858c-0.024,0.113-0.037,0.225-0.037,0.334c0,0.229,0.052,0.448,0.157,0.659c-1.938,0.013-3.569,1.309-3.569,2.84c0,1.375,1.571,2.373,3.735,2.373c2.338,0,3.599-1.463,3.599-2.84C10.233,11.99,9.882,11.303,8.937,10.603 M5.443,6.864C5.371,6.291,5.491,5.761,5.766,5.444c0.167-0.192,0.383-0.293,0.623-0.293l0,0h0.028c0.717,0.022,1.405,0.871,1.532,1.89c0.073,0.583-0.052,1.127-0.333,1.451c-0.167,0.192-0.378,0.293-0.64,0.292h0C6.273,8.765,5.571,7.883,5.443,6.864 M6.628,14.786c-1.066,0-1.902-0.687-1.902-1.562c0-0.803,0.978-1.508,2.093-1.508l0,0l0,0h0.029c0.241,0.003,0.474,0.04,0.695,0.109l0.221,0.158c0.567,0.405,0.866,0.634,0.956,1.003c0.022,0.097,0.033,0.194,0.033,0.291C8.752,14.278,8.038,14.786,6.628,14.786 M14.85,4.765h-1.493v2.242h-2.249v1.495h2.249v2.233h1.493V8.502h2.252V7.007H14.85V4.765z"></path>
-                      </svg> */}
                       <img src="https://img.icons8.com/color/34/000000/google-plus--v1.png" />
                     </button>
                   )}
@@ -258,6 +353,24 @@ const Login = () => {
                 Create account
               </button>
             </Link>
+            {/* <div>
+              {state.isSingedIn ? (
+                // window.location.replace("/")
+                // <h1>heke</h1>
+                <button onClick={() => firebase.auth().signOut()}>
+                  Sign out!
+                </button>
+              ) : (
+                <StyledFirebaseAuth
+                  uiConfig={uiConfig}
+                  firebaseAuth={firebase.auth()}
+                />
+              )}
+            </div> */}
+            {/* <StyledFirebaseAuth
+              uiConfig={uiConfig}
+              firebaseAuth={firebase.auth()}
+            /> */}
 
             <p className="text-center text-gray-600 ">Terms and conditions</p>
           </form>

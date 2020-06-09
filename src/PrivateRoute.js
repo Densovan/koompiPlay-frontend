@@ -1,11 +1,15 @@
 import React from "react";
+import * as firebaseui from "firebaseui";
 import { Route, Redirect } from "react-router-dom";
 
 let token = localStorage.getItem("token");
+let remember = localStorage.getItem("firebaseui::rememberedAccounts");
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
   const isLogin = () => {
     if (token) {
+      return true;
+    } else if (remember) {
       return true;
     } else {
       return false;

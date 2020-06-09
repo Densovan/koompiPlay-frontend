@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import firebase from "firebase";
 import { Link } from "react-router-dom";
 
 const Navbar = () => {
@@ -62,6 +63,7 @@ const Navbar = () => {
                 Profile
               </Link>
               <Link
+                onClick={() => firebase.auth().signOut()}
                 to="/logout"
                 className="sm:px-2 mt-3 sm:text-sm sm:mt-0 block px-3 py-1 rounded font-semibold text-white hover:bg-gray-800"
                 href="#"

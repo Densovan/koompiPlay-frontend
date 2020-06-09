@@ -43,9 +43,10 @@ const Register = () => {
       user_email: data.Email,
       user_password: data.Password,
       phone_number: data.Phone,
+      login_type: "local",
     };
     axios
-      .post("http://localhost:8000/register", newUser)
+      .post("http://localhost:8000/all_register", newUser)
       .then((data) => {
         setLoading(true);
         setTimeout(() => {
@@ -183,6 +184,7 @@ const Register = () => {
               </div>
             </div> */}
             <button
+              value="local"
               type="submit"
               className="mb-4 w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
             >
