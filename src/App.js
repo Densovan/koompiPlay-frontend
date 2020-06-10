@@ -18,8 +18,9 @@ function App() {
     <React.Fragment>
       <Router>
         <Switch>
-          <PublicRoute exact path="/register" component={Register} />
-          <Route restricted={true} exact path="/login" component={Login} />
+          {/* <PublicRoute exact path="/register" component={Register} />
+          <Route restricted={true} exact path="/login" component={Login}
+          />
           <Route exact path="/login" restricted={true} component={Login} />
           <PublicRoute exact path="/logout" component={Logout} />
           <PublicRoute exact path="/file" component={FIleupload} />
@@ -27,7 +28,7 @@ function App() {
           <PrivateRoute exact path="/userinfo" component={UserInfo} />
           <PrivateRoute exact path="/start" component={Start} />
           <PrivateRoute exact path="/quiz" component={Play} />
-          <PrivateRoute exact path="/result" component={Result} />
+          <PrivateRoute exact path="/result" component={Result} /> */}
 
           <PublicRoute exact path="/start" component={Start} />
           <Route exact path="/start" component={Start} />
