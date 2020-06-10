@@ -68,7 +68,7 @@ class Play extends React.Component {
     // this.getQuestion();
     axios.get("http://localhost:8000/question").then((res) => {
       const questions = res.data;
-
+      const optionA = res.data;
       this.setState({ questions });
       console.log("ques", questions);
     });
@@ -439,7 +439,7 @@ class Play extends React.Component {
           <div className=" fill-current text-xl pr-8 pl-8 pb-8 flex justify-between">
             <div className="transition duration-200 ease-in-out transform hover:-translate-y-1 text-gray-900 lg:ml-48">
               <IosLinkOutline fontSize="35px" rotate={true} />
-              {currentQuestionIndex} of {numberOfQuestions}
+              {currentQuestionIndex + 1} of {numberOfQuestions}
             </div>
             <div className="transition duration-200 ease-in-out transform hover:-translate-y-1 text-red-600">
               <MdClock fontSize="35px" color="red" beat={true} />
@@ -454,7 +454,7 @@ class Play extends React.Component {
             </div>
           </div>
           <div className="max-w-4xl mx-auto justify-center flex p-8 bg-white rounded-lg shadow-xl h-auto text-2xl">
-            <h5>{currentQuestion.question}</h5>
+            <h5>{this.state.question}</h5>
           </div>
           <div className="mx-auto justify-center px-12 mt-6">
             <div className="sm:flex">
@@ -526,8 +526,8 @@ class Play extends React.Component {
               </div>
             ))}
           </ul> */}
-          <h1>{currentQuestion.optionB}</h1>
         </form>
+        <h1>{currentQuestion.optionC}</h1>
       </React.Fragment>
     );
   }

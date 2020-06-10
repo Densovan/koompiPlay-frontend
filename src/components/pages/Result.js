@@ -173,7 +173,7 @@ class Result extends React.Component {
                 Number of correctAnswers: {this.state.correctAnswers}
               </span>
               <Progress
-                percent={this.state.correctAnswers * 6}
+                percent={this.state.correctAnswers * 20}
                 status="active"
               />
               <br />
@@ -182,7 +182,7 @@ class Result extends React.Component {
                 Number of incorrectAnswers: {this.state.wrongAnswers}
               </span>
               <Progress
-                percent={this.state.wrongAnswers * 6.66}
+                percent={this.state.wrongAnswers * 20}
                 status="active"
               />
               <br />

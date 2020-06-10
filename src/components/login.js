@@ -16,7 +16,7 @@ const Login = () => {
   const { register, handleSubmit, errors } = useForm();
   const [message, setMessage] = useState("");
   const [successMessage, setSucessMessage] = useState("");
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false);    
 
   const onSubmit = (data) => {
     fetch(" http://52.221.199.235:9000/login", {
@@ -77,7 +77,7 @@ const Login = () => {
   };
 
   return (
-    <React.Fragment>
+    <React.Fragment>  
       {message ? <Message msg={message} /> : null}
       {successMessage ? <SuccessMessage msg={successMessage} /> : null}
       <div className="flex  items-center justify-center h-screen ">
