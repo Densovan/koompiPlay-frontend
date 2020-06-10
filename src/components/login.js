@@ -169,14 +169,14 @@ const Login = () => {
                 // onClick={this.componentClicked}
                 callback={responseFacebook}
               />
-              {/* <GoogleLogin
+              <GoogleLogin
                 className="bg-blue-600 w-8 h-8 rounded-full focus:outline-none"
-                clientId="658977310896-knrl3gka66fldh83dao2rhgbblmd4un9.apps.googleusercontent.com"
+                clientId="1001069899717-m5ivlhe573nv3hlkupraml1g385s5kd3.apps.googleusercontent.com"
                 buttonText=""
                 onSuccess={responseGoogle}
                 onFailure={responseGoogle}
                 cookiePolicy={"single_host_origin"}
-              /> */}
+              />
               ,
             </center>
 
