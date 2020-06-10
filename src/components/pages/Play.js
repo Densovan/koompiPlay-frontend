@@ -83,6 +83,7 @@ class Play extends React.Component {
     // );
     this.startTimer();  
     this.getQuestion();
+    this.readyAlert();
   }
 
 
@@ -352,15 +353,17 @@ handleButtonClick = (e) => {
   };
 
  readyAlert = () =>{
-    this.playButtonSound();
+    // this.playButtonSound();
     swal({
-      title: "Are ready?",
+      title: "Are you ready?",
       icon: "info",
       closeOnClickOutside: false,
       button: true,
+    }).then(() =>{
+      this.displayQuestions();
+      swal.close();
     });
   }
-
 
 
   render() {
@@ -405,7 +408,6 @@ handleButtonClick = (e) => {
         </React.Fragment>
         <h4 className="mt-6 text-center text-6xl">Quiz Time</h4>
         <form id="backgrond" className=" bg-gray-200 container shadow-xl rounded-lg pb-8 mb-4 mx-auto h-auto">
-          {this.readyAlert()}
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
            <path fill="#273036" fillOpacity="0.2" d="M0,320L26.7,309.3C53.3,299,107,277,160,245.3C213.3,213,267,171,320,160C373.3,149,427,171,480,181.3C533.3,192,587,192,640,160C693.3,128,747,64,800,53.3C853.3,43,907,85,960,133.3C1013.3,181,1067,235,1120,218.7C1173.3,203,1227,117,1280,101.3C1333.3,85,1387,139,1413,165.3L1440,192L1440,0L1413.3,0C1386.7,0,1333,0,1280,0C1226.7,0,1173,0,1120,0C1066.7,0,1013,0,960,0C906.7,0,853,0,800,0C746.7,0,693,0,640,0C586.7,0,533,0,480,0C426.7,0,373,0,320,0C266.7,0,213,0,160,0C106.7,0,53,0,27,0L0,0Z"></path>
            <path fill="#ffd700" fillOpacity="0.4" d="M0,256L34.3,218.7C68.6,181,137,107,206,69.3C274.3,32,343,32,411,69.3C480,107,549,181,617,224C685.7,267,754,277,823,240C891.4,203,960,117,1029,117.3C1097.1,117,1166,203,1234,229.3C1302.9,256,1371,224,1406,208L1440,192L1440,0L1405.7,0C1371.4,0,1303,0,1234,0C1165.7,0,1097,0,1029,0C960,0,891,0,823,0C754.3,0,686,0,617,0C548.6,0,480,0,411,0C342.9,0,274,0,206,0C137.1,0,69,0,34,0L0,0Z"></path>
