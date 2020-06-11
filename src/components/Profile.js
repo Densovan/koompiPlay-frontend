@@ -11,6 +11,28 @@ var accessTokenObjs = localStorage.getItem("firebaseui::rememberedAccounts");
 const Profile = () => {
   const [profile, setProfile] = useState(null);
   const [modal, setModal] = useState(false);
+  const [image,  setImage] = useState({
+    preview:"", raw: ""
+  })
+  const handleImageChange = (e) => {
+setImage({
+  preview: URL.createObjectURL(e.target.files[0]),
+  raw: e.target.files[0]
+})
+  }
+  // const handleUpload = async e => {
+  //   e.preventDefault();
+  //   const formData = new FormData();
+  //   formData.append("image", image.raw);
+
+  //   await fetch("YOUR_URL", {
+  //     method: "POST",
+  //     headers: {
+  //       "Content-Type": "multipart/form-data"
+  //     },
+  //     body: formData
+  //   });
+  // };
   const popUp = () => {
     setModal(!modal);
   };
@@ -23,25 +45,7 @@ const Profile = () => {
     window.location.reload(false);
   };
 
-  const uploadedImage = React.useRef(null);
-  const imageUploader = React.useRef(null);
 
-  const handleImageUpload = (e) => {
-    setProfile({
-      ...profile,
-      user_profile: e.target.value,
-    });
-    const [file] = e.target.files;
-    if (file) {
-      const reader = new FileReader();
-      const { current } = uploadedImage;
-      current.file = file;
-      reader.onload = (e) => {
-        current.src = e.target.result;
-      };
-      reader.readAsDataURL(file);
-    }
-  };
 
   const [
     { data, loading, error },
@@ -106,25 +110,40 @@ const Profile = () => {
     //Profile picture
 
 
+    // const formData = new FormData();
+    // formData.set("image", profile.user_profile);
+    // console.log("form data value " + formData.get("image"));
+    // // console.log(formData);
+    // fetch("http://52.221.199.235:9000/uploadProfile", {
+    //   method: "POST",
+    //   headers: {
+    //     // "Content-Type": "application/json",
+    //     token: accessTokenObj,
+    //   },
+    //   // body: JSON.stringify({
+    //   //   newProfile: profile.user_profile,
+    //   // }),
+    //   body: {
+    //     image: formData
+    //   }
+    // })
+    //   .then((res) => res.json())
+    //   .then((res) => console.log(res.string));
+
+
+
+
+    e.preventDefault();
     const formData = new FormData();
-    formData.set("image", profile.user_profile);
-    console.log("form data value " + formData.get("image"));
-    // console.log(formData);
-    fetch("http://52.221.199.235:9000/uploadProfile", {
+    formData.append("image", image.raw);
+
+   fetch("YOUR_URL", {
       method: "POST",
       headers: {
-        // "Content-Type": "application/json",
-        token: accessTokenObj,
+        "Content-Type": "multipart/form-data"
       },
-      // body: JSON.stringify({
-      //   newProfile: profile.user_profile,
-      // }),
-      body: {
-        image: formData
-      }
-    })
-      .then((res) => res.json())
-      .then((res) => console.log(res.string));
+      body: formData
+    });
   };
   return (
     <React.Fragment>
@@ -141,42 +160,25 @@ const Profile = () => {
           <h1 className="py-5">Edit your Profile</h1>
 
           <form onSubmit={submitName}>
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                justifyContent: "center",
-              }}
-            >
-              <input
-                type="file"
-                accept="image/*"
-                onChange={handleImageUpload}
-                ref={imageUploader}
-                style={{
-                  display: "none",
-                }}
-              />
-              <div onClick={() => imageUploader.current.click()}>
-                <img
-                  className="w-20 h-20  sm:h-20 sm:w-20 rounded-full"
-                  src={profile ? profile.user_profile : ""}
-                  ref={uploadedImage}
-                  onChange={(e) =>
-                    setProfile({
-                      ...profile,
-                      user_profile: e.target.value,
-                    })
-                  }
-                  // style={{
-                  //   width: "100%",
-                  //   height: "100%",
-                  //   position: "absolute",
-                  // }}
-                />
-              </div>
-            </div>
+<div>
+<label htmlFor="upload-button">
+        {image.preview ? (
+          <img style={{marginTop:"-6px"}} className=" md:-mt-20  sm:mx-auto h-24 w-24 -mt-16 md:h-32 md:w-32 rounded-full   " src={image.preview} alt="dummy" width="300" height="300" />
+        ) : (
+          <>
+            <img style={{marginTop:"-27px"}} className=" md:-mt-20  sm:mx-auto h-24 w-24 -mt-16 md:h-32 md:w-32 rounded-full   " src={profile ? profile.user_profile : ""}/>
+          </>
+        )}
+      </label>
+      <input
+        type="file"
+        id="upload-button"
+        style={{ display: "none" }}
+        onChange={handleImageChange}
+      />
+</div>
+
+            
             <label className="mb-6 text-black">Name</label>
             <input
               className="rounded bg-gray-400 focus:outline-none py-1 px-1 block mb-2 w-full sm:w-full"
