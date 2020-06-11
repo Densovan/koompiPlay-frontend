@@ -8,9 +8,9 @@ let token = localStorage.getItem("token");
 const PrivateRoute = ({ component: Component, ...rest }) => {
   const isLogin = () => {
     if (token) {
-      fetch("http://52.221.199.235:9000/")
-      .then(res=> res.text())
-      .then(data => console.log(data))
+      // fetch("http://52.221.199.235:9000/")
+      // .then(res=> res.text())
+      // .then(data => console.log(data))
       return true;
     } else {
       return false;
