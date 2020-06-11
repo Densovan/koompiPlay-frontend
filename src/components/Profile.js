@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import useAxios from "axios-hooks";
 import Navbar from "../layouts/Navbar";
+import three_dots from "../assets/bars.svg";
 import axios from "axios";
 import ImageUploader from "react-images-upload";
 
@@ -9,7 +10,8 @@ var accessTokenObj = localStorage.getItem("token");
 
 
 const Profile = () => {
-  const [profile, setProfile] = useState("");
+  // const [loading, setLoading] = useState(false);
+  const [profile, setProfile] = useState(null);
   const [modal, setModal] = useState(false);
   const [image,  setImage] = useState({
     preview:"", raw: ""
@@ -35,6 +37,7 @@ setImage({
   // };
   const popUp = () => {
     setModal(!modal);
+    
   };
   const cancel = () => {
     popUp();
@@ -42,7 +45,8 @@ setImage({
   };
 
   const refreshPage = () => {
-    window.location.reload(false);
+    popUp();
+    setTimeout('window.location.reload()', 900)
   };
 
 
@@ -65,7 +69,7 @@ setImage({
   if (data) {
     console.log(data);
     if (profile === null) {
-      setProfile({ ...data });
+      setProfile({...data});
     }
   }
 
@@ -74,38 +78,38 @@ setImage({
     // console.log("hello");
 
     /*update name*/
-    // fetch("http://52.221.199.235:9000/updateName", {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //     token: accessTokenObj,
-    //   },
-    //   body: JSON.stringify({
-    //     newName: profile.user_name,
-    //   }),
-    // })
-    //   .then((res) => res.json())
-    //   .then((data) => {
-    //     let a = data;
-    //   });
+    fetch("http://52.221.199.235:9000/updateName", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        token: accessTokenObj,
+      },
+      body: JSON.stringify({
+        newName: profile.user_name,
+      }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        let a = data;
+      });
 
-    //phone_Number
-    // fetch("http://52.221.199.235:9000/updatePhone", {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //     token: accessTokenObj,
-    //   },
-    //   body: JSON.stringify({
-    //     newPhone: profile.phone_number,
-    //   }),
-    // })
-    //   .then((res) => res.json())
-    //   .then((data) => {
-    //     // console.log(res.string)
-    //     let a = data;
-    //     } 
-    //   );
+    // phone_Number
+    fetch("http://52.221.199.235:9000/updatePhone", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        token: accessTokenObj,
+      },
+      body: JSON.stringify({
+        newPhone: profile.phone_number,
+      }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        // console.log(res.string)
+        let a = data;
+        } 
+      );
 
     //Profile picture
 
@@ -225,7 +229,7 @@ setImage({
 
             <input
               onClick={refreshPage}
-              onClick={popUp}
+              // onClick={popUp}
               type="submit"
               value="Submit"
               className="mr-2 mt-5 cursor-pointer bg-blue-700 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
