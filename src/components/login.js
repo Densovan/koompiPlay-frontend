@@ -117,30 +117,46 @@ const Login = () => {
   //   });
   // }, []);
   const onSubmit = (data) => {
-    fetch(" http://localhost:8000/all_login", {
+    fetch("http://52.221.199.235:9000/all_login", {
       method: "POST",
       // headers: {
       //   Accept: "application/json, text/plain, */*",
       //   "Content-type": "application/json",
       // },
+      // user_external_id: user_external_id,
+      // user_name: user_name,
+      // user_gender: user_gender,
+      // user_email: user_email,
+      // user_profile: user_profile,
+      // login_type: login_type,
 
       body: JSON.stringify({
         // user_name: "defualt",
-        user_email: data.Email,
-        user_password: data.Password,
+        // user_email: data.Email,
+        // user_password: data.Password,
         // phone_number: "defualt",
         // user_profile: "defualt",
         // user_gender: "defualt",
         // login_type: data.login_type,
+
+        user_external_id: "default",
+        user_name: "default",
+        user_gender: "default",
+        user_email: data.Email,
+        user_password: data.Password,
+        user_profile: "default",
+        login_type: "local"
       }),
     })
       // setMessage("File Upload")
       .then((res) => res.json())
       .then((data) => {
-        setLoading(true);
-        setTimeout(() => {
-          setLoading(false);
-        }, 3000);
+        // setLoading(true);
+        // setTimeout(() => {
+        //   setLoading(false);
+        // }, 3000);
+
+        console.log("local login response data: " + data);
         localStorage.setItem("token", data.string);
         console.log("data", data.string);
 
@@ -175,8 +191,47 @@ const Login = () => {
 
   //Signup with google
   const responseGoogle = (response) => {
+    // console.log("response: " + response);
     console.log(response);
-    console.log("google login")
+    // console.log(response.)
+    let user = response.profileObj;
+    // console.log("google login")
+    // let user = response;
+
+    // console.log("user external id: " + user.googleId);
+    // console.log("user name: " + user.name);
+    // console.log("user gender: " + "default");
+    // console.log("user email: " + user.email);
+    // console.log("user profile: " + user.imageUrl);
+    // console.log("login type: " + "google");
+
+    let user_external_id = user.googleId;
+    let user_name = user.name;
+    let user_gender = "default";
+    let user_email = user.email;
+    let user_profile = user.imageUrl;
+    let login_type = "google";
+
+    // fetch("http://localhost:8000/all_login", {
+    fetch("http://52.221.199.235:9000/all_login", {
+      method: "POST",
+      header: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        user_external_id: user_external_id,
+        user_name: user_name,
+        user_gender: user_gender,
+        user_email: user_email,
+        user_profile: user_profile,
+        login_type: login_type,
+      }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        // console.log(data.string);
+        localStorage.setItem("token", data.string);
+      });
     
     // console.log(response.profileObj);
   };
@@ -280,7 +335,8 @@ const Login = () => {
               <FacebookLogin
                 textButton=""
                 cssClass="bg-blue-600 w-8 h-8 rounded-full focus:outline-none"
-                appId="305985790418743"
+                // appId="305985790418743"
+                appId="2703165819793398"
                 // autoLoad={true}
                 fields="name,email,picture"
                 icon="fa-facebook"

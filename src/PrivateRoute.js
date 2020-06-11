@@ -17,17 +17,17 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
     }
   };
   return (
-    // <Route
-    //   {...rest}
-    //   render={(props) =>
-    //     isLogin() ? <Component {...props} /> : <Redirect to="/login" />
-    //   }
-    // />
     <Route
       {...rest}
       render={(props) =>
+        isLogin() ? <Component {...props} /> : <Redirect to="/login" />
+      }
+    />
+    /*{ <Route
+      {...rest}
+      render={(props) =>
         isLogin() ? <h1>Login success</h1>: <Redirect to="/login" />
-      }/>
+    }/> }*/
   );
 };
 

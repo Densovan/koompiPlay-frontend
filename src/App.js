@@ -32,7 +32,7 @@ function App() {
           <PublicRoute exact path="/firebase" component={Authfirebase} />
           <PublicRoute exact path="/file" component={FIleupload} />
           <PublicRoute exact path="/profile" component={Profile} />
-          <PrivateRoute exact path="/userinfo" component={UserInfo} />
+          {/* <PrivateRoute exact path="/userinfo" component={UserInfo} /> */}
           <PrivateRoute exact path="/" component={Start} />
           <PrivateRoute exact path="/quiz" component={Play} />
           <PrivateRoute exact path="/result" component={Result} />

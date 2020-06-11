@@ -48,7 +48,7 @@ const Profile = () => {
     //  refetch
   ] = useAxios({
     method: "get",
-    url: "http://localhost:8000/userData",
+    url: "http://52.221.199.235:9000/userData",
     headers: {
       "Content-Type": "application/json",
       token: accessTokenObj,
@@ -59,7 +59,7 @@ const Profile = () => {
   if (loading) return <p>Loading...</p>;
   if (error) return window.location.replace("/login");
   if (data) {
-    // console.log(data);
+    console.log(data);
     if (profile === null) {
       setProfile({ ...data });
     }
@@ -67,45 +67,61 @@ const Profile = () => {
 
   const submitName = (e) => {
     e.preventDefault();
-    console.log("hello");
-    fetch("http://localhost:8000/updateName", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        token: accessTokenObj,
-      },
-      body: JSON.stringify({
-        newName: profile.user_name,
-      }),
-    })
-      .then((res) => res.json())
-      .then((res) => console.log(res.string));
+    // console.log("hello");
+
+    /*update name*/
+    // fetch("http://52.221.199.235:9000/updateName", {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //     token: accessTokenObj,
+    //   },
+    //   body: JSON.stringify({
+    //     newName: profile.user_name,
+    //   }),
+    // })
+    //   .then((res) => res.json())
+    //   .then((data) => {
+    //     let a = data;
+    //   });
 
     //phone_Number
-    fetch("http://localhost:8000/updatePhone", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        token: accessTokenObj,
-      },
-      body: JSON.stringify({
-        newPhone: profile.phone_number,
-      }),
-    })
-      .then((res) => res.json())
-      .then((res) => console.log(res.string));
+    // fetch("http://52.221.199.235:9000/updatePhone", {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //     token: accessTokenObj,
+    //   },
+    //   body: JSON.stringify({
+    //     newPhone: profile.phone_number,
+    //   }),
+    // })
+    //   .then((res) => res.json())
+    //   .then((data) => {
+    //     // console.log(res.string)
+    //     let a = data;
+    //     } 
+    //   );
 
     //Profile picture
 
-    fetch("http://localhost:8000/uploadProfile", {
+
+    const formData = new FormData();
+    formData.set("image", profile.user_profile);
+    console.log("form data value " + formData.get("image"));
+    // console.log(formData);
+    fetch("http://52.221.199.235:9000/uploadProfile", {
       method: "POST",
       headers: {
-        "Content-Type": "application/json",
+        // "Content-Type": "application/json",
         token: accessTokenObj,
       },
-      body: JSON.stringify({
-        newProfile: profile.user_profile,
-      }),
+      // body: JSON.stringify({
+      //   newProfile: profile.user_profile,
+      // }),
+      body: {
+        image: formData
+      }
     })
       .then((res) => res.json())
       .then((res) => console.log(res.string));

@@ -46,7 +46,7 @@ const Register = () => {
       login_type: "local",
     };
     axios
-      .post("http://localhost:8000/all_register", newUser)
+      .post("http://52.221.199.235:9000/register", newUser)
       .then((data) => {
         setLoading(true);
         setTimeout(() => {

@@ -142,39 +142,79 @@ const FileUpload = () => {
   const onSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData();
-    // formData.append("file", file);
-    console.log(formData[0]);
-    try {
-      const res = await axios.post(
-        "http://localhost:8000/uploadProfile",
-        formData,
-        {
-          headers: {
-            "Content-Type": "application/x-www-form-urlencoded",
-            token: accessTokenObj,
-          },
-          // body: {
-          //   image: formData,
-          // },
-        }
-      );
 
-      const { fileName, filePath } = res.data;
+    console.log([file, setFile][0]);
+    formData.set("image", [file, setFile][0]);
+    
+    fetch('http://localhost:8000/uploadProfile', {
+      method: 'POST',
+      headers: {
+        token: accessTokenObj,
+      },
+      body: formData,
+    })
+    .then((res) => res.text())
+    .then((data) => console.log(data));
+    // console.log([file, setFile][0]);
+    // let value = [file, setFile];
 
-      setUploadedFile({ fileName, filePath });
-    } catch (err) {
-      if (err.response.status === 500) {
-        setMessage("There was a problem with the server");
-      } else {
-        setMessage(err.response.data.msg);
-      }
-    }
+    // let image_file = new URLSearchParams();
+    // image_file.append("image", value[0]);
+    // console.log(ab[0]);
+    // console.log(file);
+    // console.log(setFile);
+    // const formData = new FormData();
+    // formData.append("image", value[0]);
+    // formData.append(e.target.files[0]);
+    // console.log(formData);
+    // try {
+      // const res = await axios.post(
+      //   // "http://52.221.199.235:9000/uploadProfile",
+      //   "http://localhost:8000/uploadProfile",
+      //   formData,
+      //   {
+      //     headers: {
+      //       // "Content-Type": "application/x-www-form-urlencoded",
+      //       token: accessTokenObj,
+      //     },
+      //     body: {
+      //       image: formData,
+      //     },
+      //   }
+      // );
+      // let accessToken = localStorage.getItem("token");
+      // console.log(accessTokenObj);
+
+      // fetch("http://localhost:8000/uploadProfile", {
+      //   method: "POST",
+      //   header: {
+      //     'Content-Type': 'multipart/form-data',
+      //     token: accessTokenObj,
+      //   },
+      //   body: {
+      //     image: "hello"
+      //   }
+      // })
+      // .then((res) => res.text())
+      // .then((data) => console.log(data))
+
+      // const { fileName, filePath } = res.data;
+
+      // setUploadedFile({ fileName, filePath });
+    // } 
+    // catch (err) {
+    //   if (err.response.status === 500) {
+    //     setMessage("There was a problem with the server");
+    //   } else {
+    //     setMessage(err.response.data.msg);
+    //   }
+    // }
   };
 
   return (
     <Fragment>
       {/* {message ? <Message msg={message} /> : null} */}
-      <form onSubmit={onSubmit}>
+      <form onSubmit={onSubmit} id="upload-form">
         <div className="custom-file mb-4">
           <input
             type="file"
