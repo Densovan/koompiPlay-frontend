@@ -26,9 +26,9 @@ function App() {
           <PublicRoute exact path="/file" component={FIleupload} />
           <PublicRoute exact path="/profile" component={Profile} />
           <PrivateRoute exact path="/userinfo" component={UserInfo} />
-          <PrivateRoute exact path="/start" component={Start} />
-          <PrivateRoute exact path="/quiz" component={Play} />
-          <PrivateRoute exact path="/result" component={Result} />
+          <Route exact path="/start" component={Start} />
+          <Route exact path="/quiz" component={Play} />
+          <Route exact path="/result" component={Result} />
         </Switch>
       </Router>
     </React.Fragment>

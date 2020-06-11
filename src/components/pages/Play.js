@@ -44,7 +44,7 @@ class Play extends React.Component {
   getQuestion = async () => {
     axios({
       method: "GET",
-      url: "http://localhost:8000/question",
+      url: "http://52.221.199.235:9000/question",
       body: JSON.stringify({
         questions: this.state.question,
       }),
