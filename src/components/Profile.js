@@ -9,7 +9,7 @@ var accessTokenObj = localStorage.getItem("token");
 
 
 const Profile = () => {
-  const [profile, setProfile] = useState(null);
+  const [profile, setProfile] = useState("");
   const [modal, setModal] = useState(false);
   const [image,  setImage] = useState({
     preview:"", raw: ""
@@ -110,40 +110,51 @@ setImage({
     //Profile picture
 
 
-    // const formData = new FormData();
-    // formData.set("image", profile.user_profile);
+    const formData = new FormData();
+    console.log([image, setImage][0].raw);
+    formData.set("image", [image, setImage][0].raw);
+    // console.log("log" + [profile, setProfile][0]);
+    // formData.set("image", [profile, setProfile][0]);
     // console.log("form data value " + formData.get("image"));
-    // // console.log(formData);
-    // fetch("http://52.221.199.235:9000/uploadProfile", {
+    // console.log(formData.get("image"));
+    // fetch("http://localhost:8000/uploadProfile", {
+    // // fetch("http://52.221.199.235:9000/uploadProfile", {
     //   method: "POST",
     //   headers: {
-    //     // "Content-Type": "application/json",
     //     token: accessTokenObj,
     //   },
-    //   // body: JSON.stringify({
-    //   //   newProfile: profile.user_profile,
-    //   // }),
     //   body: {
     //     image: formData
     //   }
     // })
-    //   .then((res) => res.json())
-    //   .then((res) => console.log(res.string));
+    //   .then((res) => res.text())
+    //   .then((data) => console.log(data));
+
+
+      fetch('http://52.221.199.235:9000/uploadProfile', {
+        method: 'POST',
+        headers: {
+          token: accessTokenObj,
+        },
+        body: formData,
+      })
+      .then((res) => res.text())
+      .then((data) => console.log(data));
 
 
 
 
-    e.preventDefault();
-    const formData = new FormData();
-    formData.append("image", image.raw);
+  //   e.preventDefault();
+  //   const formData = new FormData();
+  //   formData.append("image", image.raw);
 
-   fetch("YOUR_URL", {
-      method: "POST",
-      headers: {
-        "Content-Type": "multipart/form-data"
-      },
-      body: formData
-    });
+  //  fetch("YOUR_URL", {
+  //     method: "POST",
+  //     headers: {
+  //       "Content-Type": "multipart/form-data"
+  //     },
+  //     body: formData
+  //   });
   };
   return (
     <React.Fragment>
@@ -213,7 +224,7 @@ setImage({
             />
 
             <input
-              // onClick={refreshPage}
+              onClick={refreshPage}
               onClick={popUp}
               type="submit"
               value="Submit"
