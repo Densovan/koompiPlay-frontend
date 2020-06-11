@@ -31,13 +31,13 @@ function App() {
           <PublicRoute exact path="/logout" component={Logout} />
           <PublicRoute exact path="/firebase" component={Authfirebase} />
           <PublicRoute exact path="/file" component={FIleupload} />
-          <PublicRoute exact path="/profile" component={Profile} />
+          <PrivateRoute exact path="/profile" component={Profile} />
           {/* <PrivateRoute exact path="/userinfo" component={UserInfo} /> */}
           <PrivateRoute exact path="/" component={Start} />
           <PrivateRoute exact path="/quiz" component={Play} />
           <PrivateRoute exact path="/result" component={Result} />
-          <Route exact path="/pri" component={PrivateRoute}/>
-          <PrivateRoute exact path="/file" component={FIleupload} />
+          {/* <Route exact path="/pri" component={PrivateRoute}/> */}
+          {/* <PrivateRoute exact path="/file" component={FIleupload} /> */}
           {/* 
           <PublicRoute exact path="/start" component={Start}/>
           <Route exact path="/start" component={Start}/>

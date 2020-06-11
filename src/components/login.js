@@ -159,7 +159,6 @@ const Login = () => {
         console.log("local login response data: " + data);
         localStorage.setItem("token", data.string);
         console.log("data", data.string);
-
         const decodeToken = jwt.decode(data.string);
         console.log(decodeToken);
         if (decodeToken) {
@@ -250,7 +249,7 @@ const Login = () => {
   }
 
   return (
-    <React.Fragment>
+    <React.Fragment>  
       {message ? <Message msg={message} /> : null}
       {successMessage ? <SuccessMessage msg={successMessage} /> : null}
       <div className="flex  items-center justify-center h-screen ">
@@ -335,8 +334,9 @@ const Login = () => {
               <FacebookLogin
                 textButton=""
                 cssClass="bg-blue-600 w-8 h-8 rounded-full focus:outline-none"
-                appId="305985790418743"
-                // appId="2703165819793398"
+                // appId="305985790418743"
+                // appId="2703165819793398" //Shing
+                appId="294559125061550"
                 // autoLoad={true}
                 fields="name,email,picture"
                 icon="fa-facebook"
