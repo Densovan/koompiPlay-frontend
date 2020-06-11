@@ -14,10 +14,10 @@ import Facebook from "../components/SocialLogin/FacbookLogin";
 import SuccessMessage from "../components/Message/SuccessMessage";
 import { PostData } from "../components/Services/PostData";
 
-// firebase.initializeApp({
-//   apiKey: "AIzaSyCs-PhYAG1ZEYuF9Hbhinn7Iwh9ZhwrNJ4",
-//   authDomain: "koompiplay-a02eb.firebaseapp.com",
-// });
+firebase.initializeApp({
+  apiKey: "AIzaSyCs-PhYAG1ZEYuF9Hbhinn7Iwh9ZhwrNJ4",
+  authDomain: "koompiplay-a02eb.firebaseapp.com",
+});
 
 const Login = () => {
   const { register, handleSubmit, errors } = useForm();
@@ -27,9 +27,9 @@ const Login = () => {
   const [face, setFace] = useState({
     redirectToReferrer: false,
   });
-  const [state, setState] = useState({
-    isSingedIn: false,
-  });
+  // const [state, setState] = useState({
+  //   isSingedIn: false,
+  // });
   // const uiConfig = {
   //   signInFlow: "popup",
   //   autoUpgradeAnonymousUsers: true,
@@ -171,52 +171,21 @@ const Login = () => {
         // console.log(err.res.data);
       });
   };
-  const signup = (res, type) => {
-    let postData;
-    if (type === "facebook" && res.email) {
-      postData = {
-        name: res.name,
-        provider: type,
-        email: res.email,
-        provider_id: res.id,
-        token: res.accessToken,
-        provider_pic: res.picture.data.url,
-      };
-    }
-    if (type === "google" && res.w3) {
-      postData = {
-        name: res.w3.ig,
-        provider: type,
-        email: res.w3.U3,
-        provider_id: res.El,
-        token: res.Zi.access_token,
-        provider_pic: res.w3.Paa,
-      };
-    }
-
-    if (postData) {
-      PostData("singup", postData).then((result) => {
-        let responeJson = result;
-        // if (responeJson.userData) {
-        sessionStorage.setItem("userData", JSON.stringify(responeJson));
-        setFace({ redirectToReferrer: true });
-        // }
-      });
-    }
-  };
+ 
 
   //Signup with google
   const responseGoogle = (response) => {
     console.log(response);
-    signup(response, "google");
+    console.log("google login")
+    
     // console.log(response.profileObj);
   };
 
   //Signup with Facebook
   const responseFacebook = (response) => {
     console.log(response);
-    console.log("facebook console");
-    signup(response, "facebook");
+    console.log("facebook login");
+   
   };
   const componentClicked = () => {
     console.log("clicked");
@@ -311,7 +280,7 @@ const Login = () => {
               <FacebookLogin
                 textButton=""
                 cssClass="bg-blue-600 w-8 h-8 rounded-full focus:outline-none"
-                appId="1095052497541475"
+                appId="305985790418743"
                 // autoLoad={true}
                 fields="name,email,picture"
                 icon="fa-facebook"

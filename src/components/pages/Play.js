@@ -5,8 +5,8 @@ import { MdAlarm, MdLiveHelp } from "react-icons/md";
 // import M from "materialize-css";
 import swal from "@sweetalert/with-react";
 import ParticlesBg from "particles-bg";
-
-import questions from "../data/questions.json";
+import axios from "axios";
+// import questions from "../data/questions.json";
 import isEmpty from "../../utilis/is-empty";
 
 const TITLE = "Quiz App | Play";
@@ -15,7 +15,7 @@ class Play extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      questions,
+      questions: [],
       currentQuestion: {},
       nextQuestion: {},
       previousQuestion: {},
@@ -34,6 +34,12 @@ class Play extends React.Component {
   }
 
   componentDidMount() {
+    axios.get("http://localhost:8000/question").then((res) => {
+      const questions = res.data;
+      this.setState({ questions });
+      console.log(res.data);
+    });
+
     const {
       questions,
       currentQuestion,
@@ -357,6 +363,11 @@ class Play extends React.Component {
               quit
             </button>
           </button>
+          <h1>{currentQuestion.optionA}</h1>
+          <h1>{currentQuestion.optionB}</h1>
+          <h1>{currentQuestion.optionC}</h1>
+          <h1>{currentQuestion.optionC}</h1>
+          <h1>{this.correctAnswer}</h1>
         </form>
       </React.Fragment>
     );
