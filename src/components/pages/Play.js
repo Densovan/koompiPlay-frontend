@@ -39,8 +39,6 @@ class Play extends React.Component {
     this.correctSound = React.createRef();
     this.wrongSound = React.createRef();
     this.buttonSound = React.createRef();
-    // this.randomQuestion = this.randomQuestion.bind(this);
-    // this.handleClick = this.handleClick.bind(this);
   }
 
   getQuestion = async () => {
@@ -48,7 +46,7 @@ class Play extends React.Component {
       method: "GET",
       url: "http://localhost:8000/question",
       body: JSON.stringify({
-        question: this.state.question,
+        questions: this.state.question,
       }),
       headers: {
         Accept: "application/json, text/plain, */*",
@@ -66,43 +64,16 @@ class Play extends React.Component {
   };
 
   componentDidMount() {
-    //  const {
-    //   questions,
-    //   currentQuestion,
-    //   nextQuestion,
-    //   previousQuestion,
-    // } = this.setState;
-    // this.displayQuestions(
-    //   questions,
-    //   currentQuestion,
-    //   nextQuestion,
-    //   previousQuestion,
-    // );
     this.startTimer();
     this.getQuestion();
     this.readyAlert();
   }
 
-  // randomQuestion = () =>{
-  //   const randomQ = Math.floor(Math.random() * this.state.questions.length - 1);
-  //   return this.state.questions[randomQ];
-  // }
-
-  //   handleClick = () =>{
-  //     const oneRandomQuestion = this.randomQuestion();
-  //     // const oneRandomOption = this.randomAnswer();
-  //     this.setState({
-  //         question: oneRandomQuestion.question,
-  //         optionA: oneRandomQuestion.optionA,
-  //         optionB: oneRandomQuestion.optionB,
-  //         optionC:oneRandomQuestion.optionC,
-  //         optionD: oneRandomQuestion.optionD
-  //     })
-  // }
-
   componentWillUnmount() {
     clearInterval(this.interval);
   }
+
+  // function for displayquestion + option + next and prev
 
   displayQuestions = (
     questions = this.state.questions,
@@ -171,6 +142,8 @@ class Play extends React.Component {
     }
   };
 
+  //  for event button click
+
   handleButtonClick = (e) => {
     switch (e.target.id) {
       case "next-button":
@@ -186,6 +159,8 @@ class Play extends React.Component {
     }
   };
 
+  //  for event click answer options
+
   handleOptionClick = (e) => {
     if (e.target.innerHTML.toLowerCase() === this.state.answer.toLowerCase()) {
       this.correctTimeout = setTimeout(() => {
@@ -200,16 +175,15 @@ class Play extends React.Component {
     }
   };
 
+  // make button sound
+
   playButtonSound = () => {
     this.buttonSound.current.play();
   };
 
+  //  for verify that point is correct or incorrect
+
   correctAnswer = () => {
-    // M.toast({
-    //   html: "Correct Answer!",
-    //   classes: "toast-valid",
-    //   displayLength: 300,
-    // });
     this.setState(
       (prevState) => ({
         score: prevState.score + 1,
@@ -233,11 +207,6 @@ class Play extends React.Component {
   };
 
   wrongAnswer = () => {
-    // M.toast({
-    //   html: "Wrong Answer!",
-    //   classes: "toast-invalid",
-    //   displayLength: 300,
-    // });
     this.setState(
       (prevState) => ({
         wrongAnswers: prevState.wrongAnswers + 1,
@@ -259,12 +228,16 @@ class Play extends React.Component {
     );
   };
 
+  // for show the option
+
   showOptions = () => {
     const options = Array.from(document.querySelectorAll(".option"));
     options.forEach((option) => {
       option.style.visibility = "visible";
     });
   };
+
+  // for event button get help. it's will close some button that it not correct
 
   handleHints = () => {
     this.playButtonSound();
@@ -303,6 +276,8 @@ class Play extends React.Component {
     }
   };
 
+  //  for set time
+
   startTimer = () => {
     const countDownTime = Date.now() + 600600;
     this.interval = setInterval(() => {
@@ -337,6 +312,8 @@ class Play extends React.Component {
     }, 1000);
   };
 
+  // for countdown time
+
   endGame = () => {
     this.endAlert();
     const { state } = this;
@@ -353,6 +330,8 @@ class Play extends React.Component {
     }, 2000);
   };
 
+  // there are alert
+
   endAlert = () => {
     swal({
       title: "Good job!",
@@ -366,13 +345,13 @@ class Play extends React.Component {
   };
 
   readyAlert = () => {
-    // this.playButtonSound();
     swal({
       title: "Are you ready?",
       icon: "info",
       closeOnClickOutside: false,
       button: true,
     }).then(() => {
+      this.playButtonSound();
       this.displayQuestions();
       swal.close();
     });
@@ -407,7 +386,7 @@ class Play extends React.Component {
       numberOfQuestions,
       time,
     } = this.state;
-
+    console.log(this.state.questions);
     return (
       <React.Fragment>
         <Helmet>
@@ -463,7 +442,7 @@ class Play extends React.Component {
             </div>
           </div>
           <div className="max-w-4xl mx-auto justify-center flex p-8 bg-white rounded-lg shadow-xl h-auto text-2xl">
-            <h5>{this.state.question}</h5>
+            <h5>{currentQuestion.question}</h5>
           </div>
           <div className="mx-auto justify-center px-12 mt-6">
             <div className="sm:flex">
@@ -524,19 +503,7 @@ class Play extends React.Component {
               quit
             </button>
           </div>
-          {/* <ul>
-            {this.state.questions.map((question) => (
-              <div>
-                <h1>{question.question}</h1>
-                <li>{question.optionA}</li>
-                <li>{question.optionB}</li>
-                <li>{question.optionC}</li>
-                <li>{question.optionD}</li>
-              </div>
-            ))}
-          </ul> */}
         </form>
-        {/* <h1>{currentQuestion.optionC}</h1> */}
       </React.Fragment>
     );
   }
