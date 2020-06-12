@@ -329,7 +329,7 @@ const Login = () => {
               )}
             </button>
 
-            <p className="text-center text-gray-600 mb-2">Login With</p>
+            {/* <p className="text-center text-gray-600 mb-2">Login With</p>
             <div className="flex justify-center">
               <FacebookLogin
                 textButton=""
@@ -355,7 +355,8 @@ const Login = () => {
                       <img src="https://img.icons8.com/color/34/000000/google-plus--v1.png" />
                     </button>
                   )}
-                  clientId="1001069899717-m5ivlhe573nv3hlkupraml1g385s5kd3.apps.googleusercontent.com"
+                  clientId="729862407120-7hlfp14qje84eloio52m2ngjqetiqbeu.apps.googleusercontent.com" //localhost:5000
+                  // clientId="1001069899717-m5ivlhe573nv3hlkupraml1g385s5kd3.apps.googleusercontent.com" // locallhost:3000
                   // clientId="1001069899717-m5ivlhe573nv3hlkupraml1g385s5kd3.apps.googleusercontent.com"
                   buttonText="Google"
                   onSuccess={responseGoogle}
@@ -363,7 +364,7 @@ const Login = () => {
                   cookiePolicy={"single_host_origin"}
                 ></GoogleLogin>
               </div>
-            </div>
+            </div> */}
 
             <p className="text-center text-gray-600 mb-4">
               Don't hava an account yet?
