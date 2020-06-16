@@ -117,7 +117,7 @@ const Login = () => {
   //   });
   // }, []);
   const onSubmit = (data) => {
-    fetch("http://52.221.199.235:9000/all_login", {
+    fetch("https://backend.rielcoin.com/all_login", {
       method: "POST",
       // headers: {
       //   Accept: "application/json, text/plain, */*",
@@ -145,7 +145,7 @@ const Login = () => {
         user_email: data.Email,
         user_password: data.Password,
         user_profile: "default",
-        login_type: "local"
+        login_type: "local",
       }),
     })
       // setMessage("File Upload")
@@ -168,7 +168,7 @@ const Login = () => {
           }, 3000);
           window.location.replace("/");
         } else {
-          setMessage("login failed");
+          setMessage("Incorrect Email or Password");
           setTimeout(() => {
             setMessage();
           }, 3000);
@@ -186,23 +186,11 @@ const Login = () => {
         // console.log(err.res.data);
       });
   };
- 
 
   //Signup with google
   const responseGoogle = (response) => {
-    // console.log("response: " + response);
-    console.log(response);
-    // console.log(response.)
+    console.log(response.profileObj);
     let user = response.profileObj;
-    // console.log("google login")
-    // let user = response;
-
-    // console.log("user external id: " + user.googleId);
-    // console.log("user name: " + user.name);
-    // console.log("user gender: " + "default");
-    // console.log("user email: " + user.email);
-    // console.log("user profile: " + user.imageUrl);
-    // console.log("login type: " + "google");
 
     let user_external_id = user.googleId;
     let user_name = user.name;
@@ -211,8 +199,53 @@ const Login = () => {
     let user_profile = user.imageUrl;
     let login_type = "google";
 
-    // fetch("http://localhost:8000/all_login", {
-    fetch("http://52.221.199.235:9000/all_login", {
+    fetch("https://backend.rielcoin.com/all_login", {
+      method: "POST",
+      header: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        user_external_id: user_external_id,
+        user_name: user_name,
+        user_gender: user_gender,
+        user_email: user_email,
+        user_profile: user_profile,
+        login_type: login_type,
+      }),
+    })
+      .then((res) => res.json())
+      // .then((data) => {
+      //   localStorage.setItem("token", data.string);
+
+      //   if (localStorage.getItem("token")) {
+      //     setSucessMessage("Successfull");
+      //     window.location.replace("/");
+      //   } else {
+      //     setTimeout(() => {
+      //       setMessage("login failed");
+      //       setSucessMessage();
+      //     }, 3000);
+      //   }
+      // })
+      .catch((err) => {
+        alert(err);
+      });
+  };
+
+  //Signup with Facebook
+  const responseFacebook = (response) => {
+    console.log(response);
+    console.log("facebook login");
+    let user = response;
+
+    let user_external_id = user.userID;
+    let user_name = user.name;
+    let user_gender = "default";
+    let user_email = user.email;
+    let user_profile = user.picture.data.url;
+    let login_type = "facebook";
+
+    fetch("https://backend.rielcoin.com/all_login", {
       method: "POST",
       header: {
         "Content-Type": "application/json",
@@ -228,18 +261,18 @@ const Login = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        // console.log(data.string);
         localStorage.setItem("token", data.string);
-      });
-    
-    // console.log(response.profileObj);
-  };
 
-  //Signup with Facebook
-  const responseFacebook = (response) => {
-    console.log(response);
-    console.log("facebook login");
-   
+        if (localStorage.getItem("token")) {
+          setSucessMessage("Successfull");
+          window.location.replace("/");
+        } else {
+          setTimeout(() => {
+            setMessage("login failed");
+            setSucessMessage();
+          }, 3000);
+        }
+      });
   };
   const componentClicked = () => {
     console.log("clicked");
@@ -249,7 +282,7 @@ const Login = () => {
   }
 
   return (
-    <React.Fragment>  
+    <React.Fragment>
       {message ? <Message msg={message} /> : null}
       {successMessage ? <SuccessMessage msg={successMessage} /> : null}
       <div className="flex  items-center justify-center h-screen ">
@@ -329,14 +362,14 @@ const Login = () => {
               )}
             </button>
 
-            {/* <p className="text-center text-gray-600 mb-2">Login With</p>
+            <p className="text-center text-gray-600 mb-2">Login With</p>
             <div className="flex justify-center">
               <FacebookLogin
                 textButton=""
                 cssClass="bg-blue-600 w-8 h-8 rounded-full focus:outline-none"
-                // appId="305985790418743"
-                // appId="2703165819793398" //Shing
                 appId="294559125061550"
+                // appId="2703165819793398" //Shing
+                // appId="294559125061550"
                 // autoLoad={true}
                 fields="name,email,picture"
                 icon="fa-facebook"
@@ -355,6 +388,7 @@ const Login = () => {
                       <img src="https://img.icons8.com/color/34/000000/google-plus--v1.png" />
                     </button>
                   )}
+                  // clientId="668082845021-siv4a0ecm80jq8ul1jnrrvlcisqa5jmn.apps.googleusercontent.com"
                   clientId="729862407120-7hlfp14qje84eloio52m2ngjqetiqbeu.apps.googleusercontent.com" //localhost:5000
                   // clientId="1001069899717-m5ivlhe573nv3hlkupraml1g385s5kd3.apps.googleusercontent.com" // locallhost:3000
                   // clientId="1001069899717-m5ivlhe573nv3hlkupraml1g385s5kd3.apps.googleusercontent.com"
@@ -364,7 +398,7 @@ const Login = () => {
                   cookiePolicy={"single_host_origin"}
                 ></GoogleLogin>
               </div>
-            </div> */}
+            </div>
 
             <p className="text-center text-gray-600 mb-4">
               Don't hava an account yet?

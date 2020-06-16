@@ -1,27 +1,64 @@
 import React, { useState } from "react";
 import useAxios from "axios-hooks";
 import Navbar from "../layouts/Navbar";
+import Resizer from "react-image-file-resizer";
+
 import three_dots from "../assets/bars.svg";
 import axios from "axios";
 import ImageUploader from "react-images-upload";
+import { render } from "@testing-library/react";
 
 //Global Token
 var accessTokenObj = localStorage.getItem("token");
 
-
 const Profile = () => {
+  const [datas, setDatas] = useState([
+    {
+      Math: "12",
+    },
+    {
+      Math: "12",
+    },
+    {
+      Math: "12",
+    },
+    {
+      Math: "12",
+    },
+  ]);
+  const showMore = () => {
+    // if (datas.length < 3) {
+    //   return
+    // }
+  };
+  const Items = () => {
+    if (datas.length === 0) {
+      return "Loading.....";
+    } else if (datas.length > 3) {
+      return <button>ShowMore</button>;
+    } else {
+      return datas.slice(0, 3).map((data) => <li>{data.Math}</li>);
+    }
+  };
+
   // const [loading, setLoading] = useState(false);
   const [profile, setProfile] = useState(null);
   const [modal, setModal] = useState(false);
-  const [image,  setImage] = useState({
-    preview:"", raw: ""
-  })
+  const [image, setImage] = useState({
+    // preview: "",
+    raw: "",
+  });
   const handleImageChange = (e) => {
-setImage({
-  preview: URL.createObjectURL(e.target.files[0]),
-  raw: e.target.files[0]
-})
-  }
+    if (e.target.files.length) {
+      setImage({
+        preview: URL.createObjectURL(e.target.files[0]),
+        // ...image,
+        // [e.target.name]: e.target.value,
+        raw: e.target.files[0],
+      });
+    }
+  };
+
   // const handleUpload = async e => {
   //   e.preventDefault();
   //   const formData = new FormData();
@@ -37,26 +74,25 @@ setImage({
   // };
   const popUp = () => {
     setModal(!modal);
-    
   };
-  const cancel = () => {
+  const cancel = (e) => {
+    // window.location.reload(false);
+    // setImage({ preview: URL.createObjectURL(e.target.files[0]) });
     popUp();
     setProfile(null);
   };
 
   const refreshPage = () => {
     popUp();
-    setTimeout('window.location.reload()', 900)
+    setTimeout("window.location.reload()", 3000);
   };
-
-
 
   const [
     { data, loading, error },
     //  refetch
   ] = useAxios({
     method: "get",
-    url: "http://52.221.199.235:9000/userData",
+    url: "https://backend.rielcoin.com/userData",
     headers: {
       "Content-Type": "application/json",
       token: accessTokenObj,
@@ -69,7 +105,7 @@ setImage({
   if (data) {
     console.log(data);
     if (profile === null) {
-      setProfile({...data});
+      setProfile({ ...data });
     }
   }
 
@@ -78,7 +114,7 @@ setImage({
     // console.log("hello");
 
     /*update name*/
-    fetch("http://52.221.199.235:9000/updateName", {
+    fetch("https://backend.rielcoin.com/updateName", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -94,7 +130,7 @@ setImage({
       });
 
     // phone_Number
-    fetch("http://52.221.199.235:9000/updatePhone", {
+    fetch("https://backend.rielcoin.com/updatePhone", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -108,11 +144,9 @@ setImage({
       .then((data) => {
         // console.log(res.string)
         let a = data;
-        } 
-      );
+      });
 
     //Profile picture
-
 
     const formData = new FormData();
     console.log([image, setImage][0].raw);
@@ -134,31 +168,27 @@ setImage({
     //   .then((res) => res.text())
     //   .then((data) => console.log(data));
 
-
-      fetch('http://52.221.199.235:9000/uploadProfile', {
-        method: 'POST',
-        headers: {
-          token: accessTokenObj,
-        },
-        body: formData,
-      })
+    fetch("https://backend.rielcoin.com/uploadProfile", {
+      method: "POST",
+      headers: {
+        token: accessTokenObj,
+      },
+      body: formData,
+    })
       .then((res) => res.text())
       .then((data) => console.log(data));
 
+    //   e.preventDefault();
+    //   const formData = new FormData();
+    //   formData.append("image", image.raw);
 
-
-
-  //   e.preventDefault();
-  //   const formData = new FormData();
-  //   formData.append("image", image.raw);
-
-  //  fetch("YOUR_URL", {
-  //     method: "POST",
-  //     headers: {
-  //       "Content-Type": "multipart/form-data"
-  //     },
-  //     body: formData
-  //   });
+    //  fetch("YOUR_URL", {
+    //     method: "POST",
+    //     headers: {
+    //       "Content-Type": "multipart/form-data"
+    //     },
+    //     body: formData
+    //   });
   };
   return (
     <React.Fragment>
@@ -167,7 +197,7 @@ setImage({
         style={{ backgroundColor: "rgba(0,0,0,0.4)" }}
         className={
           modal
-            ? "fixed z-50 pt-64  top-0 left-0  w-full h-full overflow-auto"
+            ? "fixed z-50 sm:pt-64 pt-24  top-0 left-0  w-full h-full overflow-auto"
             : "hidden"
         }
       >
@@ -175,25 +205,41 @@ setImage({
           <h1 className="py-5">Edit your Profile</h1>
 
           <form onSubmit={submitName}>
-<div>
-<label htmlFor="upload-button">
-        {image.preview ? (
-          <img style={{marginTop:"-6px"}} className=" md:-mt-20  sm:mx-auto h-24 w-24 -mt-16 md:h-32 md:w-32 rounded-full   " src={image.preview} alt="dummy" width="300" height="300" />
-        ) : (
-          <>
-            <img style={{marginTop:"-27px"}} className=" md:-mt-20  sm:mx-auto h-24 w-24 -mt-16 md:h-32 md:w-32 rounded-full   " src={profile ? profile.user_profile : ""}/>
-          </>
-        )}
-      </label>
-      <input
-        type="file"
-        id="upload-button"
-        style={{ display: "none" }}
-        onChange={handleImageChange}
-      />
-</div>
+            <div>
+              <label htmlFor="upload-button">
+                {image.preview ? (
+                  <img
+                    style={{ marginTop: "-6px" }}
+                    className=" md:-mt-20  sm:mx-auto h-24 w-24 -mt-16 md:h-32 md:w-32 rounded-full   "
+                    src={image.preview}
+                    // src={profile ? profile.user_profile : ""}
+                    alt="dummy"
+                    width="300"
+                    height="300"
+                  />
+                ) : (
+                  <>
+                    <img
+                      style={{ marginTop: "-27px" }}
+                      className=" md:-mt-20  sm:mx-auto h-24 w-24 -mt-16 md:h-32 md:w-32 rounded-full   "
+                      src={profile ? profile.user_profile : ""}
+                    />
+                  </>
+                )}
+              </label>
+              <input
+                type="file"
+                // accept="image/*"
+                // accept="image/x-png,image/gif,image/jpeg"
+                multiple
+                accept="image/*"
+                id="upload-button"
+                style={{ display: "none" }}
+                onChange={handleImageChange}
+                // onChange={fileChangedHandler}
+              />
+            </div>
 
-            
             <label className="mb-6 text-black">Name</label>
             <input
               className="rounded bg-gray-400 focus:outline-none py-1 px-1 block mb-2 w-full sm:w-full"
@@ -243,7 +289,6 @@ setImage({
           </form>
         </div>
       </div>
-
       <div className="  mx-auto  px-4 py-12  max-w-screen-lg sm:px-2">
         <div className=" pb-7/5 bg-black rounded-lg max-w-screen-lg w-full ">
           <img
@@ -311,6 +356,91 @@ setImage({
             </div>
           </div>
         </div>
+        {/* <div>
+          
+          <div>
+            <div className="grid sm:grid-cols-2 gap-4">
+              
+              <div className="bg-gray-200 rounded-lg px-2 py-2">
+                <center>
+                  <h1 className="mb-2 font-bold text-lg">Your Game</h1>
+                </center>
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="transition duration-500 ease-in-out transform hover:-translate-y-1 max-w-sm bg-white hover:shadow-lg cursor-pointer rounded overflow-hidden">
+                    <img className="w-full" src="/img/quizbackground.png" />
+                    <div className=" py-4">
+                      <div className="font-bold text-xl mb-2 text-center">
+                        <h1>Mathematic</h1>
+                      </div>
+                    </div>
+                    <div className=" px-2 mb-2">
+                      
+                      <Items Math={Math} numberOfitemsShown={3} />
+
+                     
+                    </div>
+                  </div>
+                  <div className="transition duration-500 ease-in-out transform hover:-translate-y-1 max-w-sm bg-white hover:shadow-lg cursor-pointer rounded overflow-hidden">
+                    <img className="w-full" src="/img/quizbackground.png" />
+                    <div className=" py-4">
+                      <div className="font-bold text-xl mb-2 text-center">
+                        <h1>Mathematic</h1>
+                      </div>
+                    </div>
+                    <div className="flex px-2 mb-2">
+                      <span className=" px-2 py-1 inline-block leading-none bg-teal-200 text-teal-800 rounded-full font-semibold uppercase tracking-wide text-xs">
+                        10 Qs
+                      </span>
+                      <span className="ml-2 px-2 py-1 inline-block leading-none bg-teal-200 text-teal-800 rounded-full font-semibold uppercase tracking-wide text-xs">
+                        3.7k play
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                <br></br>
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="transition duration-500 ease-in-out transform hover:-translate-y-1 max-w-sm bg-white hover:shadow-lg cursor-pointer rounded overflow-hidden">
+                    <img className="w-full" src="/img/quizbackground.png" />
+                    <div className=" py-4">
+                      <div className="font-bold text-xl mb-2 text-center">
+                        <h1>Mathematic</h1>
+                      </div>
+                    </div>
+                    <div className="flex px-2 mb-2">
+                      <span className=" px-2 py-1 inline-block leading-none bg-teal-200 text-teal-800 rounded-full font-semibold uppercase tracking-wide text-xs">
+                        10 Qs
+                      </span>
+                      <span className="ml-2 px-2 py-1 inline-block leading-none bg-teal-200 text-teal-800 rounded-full font-semibold uppercase tracking-wide text-xs">
+                        3.7k play
+                      </span>
+                    </div>
+                  </div>
+                  <div className="transition duration-500 ease-in-out transform hover:-translate-y-1 max-w-sm bg-white hover:shadow-lg cursor-pointer rounded overflow-hidden">
+                    <img className="w-full" src="/img/quizbackground.png" />
+                    <div className=" py-4">
+                      <div className="font-bold text-xl mb-2 text-center">
+                        <h1>Mathematic</h1>
+                      </div>
+                    </div>
+                    <div className="flex px-2 mb-2">
+                      <span className=" px-2 py-1 inline-block leading-none bg-teal-200 text-teal-800 rounded-full font-semibold uppercase tracking-wide text-xs">
+                        10 Qs
+                      </span>
+                      <span className="ml-2 px-2 py-1 inline-block leading-none bg-teal-200 text-teal-800 rounded-full font-semibold uppercase tracking-wide text-xs">
+                        3.7k play
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            
+              <div className="bg-gray-200 rounded-lg px-2 py-2">
+                <h1>ZTO</h1>
+                <h1>Coming Soon</h1>
+              </div>
+            </div>
+          </div>
+        </div> */}
       </div>
     </React.Fragment>
   );

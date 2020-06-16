@@ -46,7 +46,7 @@ const Register = () => {
       login_type: "local",
     };
     axios
-      .post("http://52.221.199.235:9000/register", newUser)
+      .post("https://backend.rielcoin.com/register", newUser)
       .then((data) => {
         setLoading(true);
         setTimeout(() => {

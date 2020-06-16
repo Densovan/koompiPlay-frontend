@@ -60,7 +60,7 @@ class Result extends React.Component {
       score: this.state.score,
     };
     console.log(newResult);
-    fetch("http://52.221.199.235:9000/play_info", {
+    fetch("https://backend.rielcoin.com/play_info", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

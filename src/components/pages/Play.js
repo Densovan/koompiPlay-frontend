@@ -44,7 +44,7 @@ class Play extends React.Component {
   getQuestion = async () => {
     axios({
       method: "GET",
-      url: "http://52.221.199.235:9000/question",
+      url: "https://backend.rielcoin.com/question",
       body: JSON.stringify({
         questions: this.state.question,
       }),
@@ -397,7 +397,7 @@ class Play extends React.Component {
           <audio ref={this.wrongSound} src={wrongNotification}></audio>
           <audio ref={this.buttonSound} src={buttonSound}></audio>
         </React.Fragment>
-        <h4 className="mt-6 text-center text-6xl">Quiz Time</h4>
+        {/* <h4 className="mt-6 text-center text-6xl">Quiz Time</h4> */}
         <form
           id="backgrond"
           className=" bg-gray-200 container shadow-xl rounded-lg pb-8 mb-4 mx-auto h-auto"
@@ -449,14 +449,14 @@ class Play extends React.Component {
               <button
                 type="button"
                 onClick={this.handleOptionClick}
-                className=" transition duration-500 ease-in-out transform hover:-translate-y-1 blok mt-3 option bg-teal-400 ml-10 hover:bg-teal-800 sm:ml-0 w-3/4 sm:w-2/4 lg:w-2/4 xs:w-2/4 text-white font-bold py-3 px-4 rounded-full "
+                className="focus:outline-none transition duration-500 ease-in-out transform hover:-translate-y-1 blok mt-3 option bg-teal-400 ml-10  sm:ml-0 w-3/4 sm:w-2/4 lg:w-2/4 xs:w-2/4 text-white font-bold py-3 px-4 rounded-full "
               >
                 {currentQuestion.optionA}
               </button>
               <button
                 type="button"
                 onClick={this.handleOptionClick}
-                className="transition duration-500 ease-in-out transform hover:-translate-y-1 sm:ml-6 mt-3 block option bg-teal-400 hover:bg-teal-800 ml-10 sm:ml-0 w-3/4 sm:w-2/4  text-white font-bold py-3 px-4 rounded-full"
+                className="focus:outline-none transition duration-500 ease-in-out transform hover:-translate-y-1 sm:ml-6 mt-3 block option bg-teal-400 ml-10 sm:ml-0 w-3/4 sm:w-2/4  text-white font-bold py-3 px-4 rounded-full"
               >
                 {currentQuestion.optionB}
               </button>
@@ -465,14 +465,14 @@ class Play extends React.Component {
               <button
                 type="button"
                 onClick={this.handleOptionClick}
-                className="transition duration-500 ease-in-out transform hover:-translate-y-1 block mt-3 option bg-teal-400 hover:bg-teal-800 ml-10 sm:ml-0 w-3/4 sm:w-2/4 text-white font-bold py-3 px-4 rounded-full"
+                className="focus:outline-none transition duration-500 ease-in-out transform hover:-translate-y-1 block mt-3 option bg-teal-400  ml-10 sm:ml-0 w-3/4 sm:w-2/4 text-white font-bold py-3 px-4 rounded-full"
               >
                 {currentQuestion.optionC}
               </button>
               <button
                 type="button"
                 onClick={this.handleOptionClick}
-                className="transition duration-500 ease-in-out transform hover:-translate-y-1 mt-3 sm:ml-6 block option bg-teal-400 hover:bg-teal-800 ml-10 sm:ml-0 w-3/4 sm:w-2/4 text-white font-bold py-3 px-4 rounded-full"
+                className="focus:outline-none transition duration-500 ease-in-out transform hover:-translate-y-1 mt-3 sm:ml-6 block option bg-teal-400  ml-10 sm:ml-0 w-3/4 sm:w-2/4 text-white font-bold py-3 px-4 rounded-full"
               >
                 {currentQuestion.optionD}
               </button>
