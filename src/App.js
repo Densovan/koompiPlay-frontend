@@ -12,7 +12,7 @@ import Logout from "./layouts/Logout";
 import Profile from "./components/Profile";
 import PublicRoute from "./PublicRoute";
 import FIleupload from "./components/FIleupload";
-import Authfirebase from "./components/Authfirebase";
+import PublicResult from "./components/PublicResult";
 
 function App() {
   return (
@@ -29,8 +29,8 @@ function App() {
 
           <Route exact path="/login" restricted={true} component={Login} />
           <PublicRoute exact path="/logout" component={Logout} />
-          <PublicRoute exact path="/firebase" component={Authfirebase} />
           <PublicRoute exact path="/file" component={FIleupload} />
+          <PublicRoute exact path="/public" component={PublicResult} />
           <PrivateRoute exact path="/profile" component={Profile} />
           {/* <PrivateRoute exact path="/userinfo" component={UserInfo} /> */}
           <PrivateRoute exact path="/" component={Start} />

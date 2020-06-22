@@ -169,20 +169,6 @@ const Register = () => {
                 </p>
               )}
             </div>
-            {/* <div class="flex items-center justify-between">
-              <button
-                type="submit"
-                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-              >
-                Sign Up
-              </button>
-              <div className="flex">
-                <p>Have an account?</p>
-                <span className="text-blue-500 pl-2">
-                  <Link to="/login">Login</Link>
-                </span>
-              </div>
-            </div> */}
             <button
               value="local"
               type="submit"
@@ -202,9 +188,7 @@ const Register = () => {
             <p className="text-center text-gray-600 mb-4">
               Have an account yet?
             </p>
-            {/* <span className="text-blue-500">
-            <Link to="/register">register now</Link>
-          </span> */}
+
             <Link to="/login">
               <button
                 type="submit"

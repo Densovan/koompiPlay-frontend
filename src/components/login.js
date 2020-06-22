@@ -27,118 +27,11 @@ const Login = () => {
   const [face, setFace] = useState({
     redirectToReferrer: false,
   });
-  // const [state, setState] = useState({
-  //   isSingedIn: false,
-  // });
-  // const uiConfig = {
-  //   signInFlow: "popup",
-  //   autoUpgradeAnonymousUsers: true,
-  //   signInSuccessUrl: "/",
-  //   signInOptions: [
-  //     firebase.auth.GoogleAuthProvider.PROVIDER_ID,
-  //     firebase.auth.FacebookAuthProvider.PROVIDER_ID,
-  //     // firebase.auth.TwitterAuthProvider.PROVIDER_ID,
-  //     // firebase.auth.GithubAuthProvider.PROVIDER_ID,
-  //     // firebase.auth.EmailAuthProvider.PROVIDER_ID,
-  //   ],
-  //   callbacks: {
-  //     signInSuccess: () => false,
-  //     signInSuccess: function (authResult, redirectUrl) {
-  //       return true;
-  //     },
-  //     signInFailure: function (error) {
-  //       if (error.code != "firebaseui/anonymous-upgrade-merge-conflict") {
-  //         return Promise.resolve();
-  //       }
-  //     },
-  //   },
-  // };
-  // useEffect(() => {
-  //   firebase.auth().onAuthStateChanged((user) => {
-  //     setState({ isSingedIn: !!user });
-  //     // window.location.replace("/start");
-  //     console.log("user", user);
-  //     console.log(uiConfig.signInOptions);
-  //     // console.log(user.providerData[0].providerId);
-
-  //     if (user.providerData[0].providerId == "google.com") {
-  //       let user_external_id = user.uid;
-  //       let user_name = user.displayName;
-  //       let user_gender = "default";
-  //       let user_email = user.email;
-  //       let user_profile = user.photoURL;
-  //       let login_type = "google";
-
-  //       fetch("http://localhost:8000/all_register", {
-  //         method: "POST",
-  //         header: {
-  //           "Content-Type": "application/json",
-  //         },
-  //         body: JSON.stringify({
-  //           user_external_id: user_external_id,
-  //           user_name: user_name,
-  //           user_gender: user_gender,
-  //           user_email: user_email,
-  //           user_profile: user_profile,
-  //           login_type: login_type,
-  //         }),
-  //       })
-  //         .then((res) => res.json())
-  //         .then((data) => {
-  //           console.log(data.string);
-  //         });
-  //     } else if (user.providerData[0].providerId == "facebook.com") {
-  //       let user_external_id = user.uid;
-  //       let user_name = user.displayName;
-  //       let user_gender = "default";
-  //       let user_email = user.email;
-  //       let user_profile = user.photoURL;
-  //       let login_type = "facebook";
-
-  //       fetch("http://localhost:8000/all_register", {
-  //         method: "POST",
-  //         header: {
-  //           "Content-Type": "application/json",
-  //         },
-  //         body: JSON.stringify({
-  //           user_external_id: user_external_id,
-  //           user_name: user_name,
-  //           user_gender: user_gender,
-  //           user_email: user_email,
-  //           user_profile: user_profile,
-  //           login_type: login_type,
-  //         }),
-  //       })
-  //         .then((res) => res.json())
-  //         .then((data) => {
-  //           console.log(data.string);
-  //         });
-  //     }
-  //   });
-  // }, []);
   const onSubmit = (data) => {
     fetch("https://backend.rielcoin.com/all_login", {
       method: "POST",
-      // headers: {
-      //   Accept: "application/json, text/plain, */*",
-      //   "Content-type": "application/json",
-      // },
-      // user_external_id: user_external_id,
-      // user_name: user_name,
-      // user_gender: user_gender,
-      // user_email: user_email,
-      // user_profile: user_profile,
-      // login_type: login_type,
 
       body: JSON.stringify({
-        // user_name: "defualt",
-        // user_email: data.Email,
-        // user_password: data.Password,
-        // phone_number: "defualt",
-        // user_profile: "defualt",
-        // user_gender: "defualt",
-        // login_type: data.login_type,
-
         user_external_id: "default",
         user_name: "default",
         user_gender: "default",
@@ -148,14 +41,8 @@ const Login = () => {
         login_type: "local",
       }),
     })
-      // setMessage("File Upload")
       .then((res) => res.json())
       .then((data) => {
-        // setLoading(true);
-        // setTimeout(() => {
-        //   setLoading(false);
-        // }, 3000);
-
         console.log("local login response data: " + data);
         localStorage.setItem("token", data.string);
         console.log("data", data.string);
@@ -173,17 +60,9 @@ const Login = () => {
             setMessage();
           }, 3000);
         }
-        // if (!data) {
-        //   console.log(data);
-        //   alert(data);
-        // } else {register
-        //   window.location.replace("/start");
-        //   console.log(data)
-        // }
       })
       .catch((err) => {
         alert(err);
-        // console.log(err.res.data);
       });
   };
 
@@ -214,19 +93,6 @@ const Login = () => {
       }),
     })
       .then((res) => res.json())
-      // .then((data) => {
-      //   localStorage.setItem("token", data.string);
-
-      //   if (localStorage.getItem("token")) {
-      //     setSucessMessage("Successfull");
-      //     window.location.replace("/");
-      //   } else {
-      //     setTimeout(() => {
-      //       setMessage("login failed");
-      //       setSucessMessage();
-      //     }, 3000);
-      //   }
-      // })
       .catch((err) => {
         alert(err);
       });
@@ -326,20 +192,6 @@ const Login = () => {
                 <p className="text-red-500 text-xs italic">Password required</p>
               )}
             </div>
-            {/* <div className="flex items-center justify-between">
-            <button
-              type="submit"
-              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-            >
-              Sign In
-            </button>
-            <span
-              className="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800"
-              href="#"
-            >
-              Forgot Password?
-            </span>
-          </div> */}
             <span
               className="mb-4 cursor-pointer inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800"
               href="#"
@@ -403,9 +255,7 @@ const Login = () => {
             <p className="text-center text-gray-600 mb-4">
               Don't hava an account yet?
             </p>
-            {/* <span className="text-blue-500">
-            <Link to="/register">register now</Link>
-          </span> */}
+
             <Link to="/register">
               <button
                 type="submit"
@@ -414,25 +264,6 @@ const Login = () => {
                 Create account
               </button>
             </Link>
-            {/* <div>
-              {state.isSingedIn ? (
-                // window.location.replace("/")
-                // <h1>heke</h1>
-                <button onClick={() => firebase.auth().signOut()}>
-                  Sign out!
-                </button>
-              ) : (
-                <StyledFirebaseAuth
-                  uiConfig={uiConfig}
-                  firebaseAuth={firebase.auth()}
-                />
-              )}
-            </div> */}
-            {/* <StyledFirebaseAuth
-              uiConfig={uiConfig}
-              firebaseAuth={firebase.auth()}
-            /> */}
-
             <p className="text-center text-gray-600 ">Terms and conditions</p>
           </form>
         </div>

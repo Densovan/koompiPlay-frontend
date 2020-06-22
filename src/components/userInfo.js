@@ -1,8 +1,5 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-// import uuid from "uuid/v1";
-// import jwt from "jsonwebtoken";
-// import axios from "axios";
 import useAxios from "axios-hooks";
 import Navbar from "../layouts/Navbar";
 
@@ -101,31 +98,6 @@ function UserInfo() {
               </div>
               {/* Popup */}
               <div>
-                {/* <div className="block fixed z-50 -mt-64 w-auto ml-auto mr-auto left-auto  sm:w-2/5 bg-gray-900  rounded-lg p-6">
-                  <form onSubmit={submitName}>
-                    <label className="mb-6 text-white">Name</label>
-                    <input
-                      className="rounded py-1 px-1 block mb-2 w-full sm:w-full"
-                      // type="text"
-                      // name="name"change profile picture in react js
-                      value={profile ? profile.user_name : ""}
-                      // ref={register({ required: true, minLength: 5 })}
-                      name="name"
-                      type="text"
-                      onChange={(e) =>
-                        setProfile({
-                          ...profile,
-                          user_name: e.target.value,
-                        })
-                      }
-                    />
-                    <input
-                      type="submit"
-                      value="Submit"
-                      className="mr-2 mt-5 cursor-pointer bg-blue-700 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-                    />
-                  </form>
-                </div> */}
                 <div
                   className={
                     modal

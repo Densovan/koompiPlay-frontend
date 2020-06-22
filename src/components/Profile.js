@@ -1,44 +1,23 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import useAxios from "axios-hooks";
 import Navbar from "../layouts/Navbar";
-import Resizer from "react-image-file-resizer";
-
-import three_dots from "../assets/bars.svg";
-import axios from "axios";
-import ImageUploader from "react-images-upload";
-import { render } from "@testing-library/react";
-
+import historyData from "./data/history.json";
 //Global Token
 var accessTokenObj = localStorage.getItem("token");
 
 const Profile = () => {
-  const [datas, setDatas] = useState([
-    {
-      Math: "12",
-    },
-    {
-      Math: "12",
-    },
-    {
-      Math: "12",
-    },
-    {
-      Math: "12",
-    },
-  ]);
+  const [show, setShow] = useState(false);
+  const [history, setHistory] = useState("");
+  const [score, setScore] = useState([{}]);
+
   const showMore = () => {
-    // if (datas.length < 3) {
-    //   return
-    // }
+    // setDatas(datas);
+    setShow(!show);
+    document.body.style.overflow = "hidden";
   };
-  const Items = () => {
-    if (datas.length === 0) {
-      return "Loading.....";
-    } else if (datas.length > 3) {
-      return <button>ShowMore</button>;
-    } else {
-      return datas.slice(0, 3).map((data) => <li>{data.Math}</li>);
-    }
+  const closeShowMore = () => {
+    setShow(!show);
+    document.body.style.overflow = "unset";
   };
 
   // const [loading, setLoading] = useState(false);
@@ -59,19 +38,6 @@ const Profile = () => {
     }
   };
 
-  // const handleUpload = async e => {
-  //   e.preventDefault();
-  //   const formData = new FormData();
-  //   formData.append("image", image.raw);
-
-  //   await fetch("YOUR_URL", {
-  //     method: "POST",
-  //     headers: {
-  //       "Content-Type": "multipart/form-data"
-  //     },
-  //     body: formData
-  //   });
-  // };
   const popUp = () => {
     setModal(!modal);
   };
@@ -151,22 +117,6 @@ const Profile = () => {
     const formData = new FormData();
     console.log([image, setImage][0].raw);
     formData.set("image", [image, setImage][0].raw);
-    // console.log("log" + [profile, setProfile][0]);
-    // formData.set("image", [profile, setProfile][0]);
-    // console.log("form data value " + formData.get("image"));
-    // console.log(formData.get("image"));
-    // fetch("http://localhost:8000/uploadProfile", {
-    // // fetch("http://52.221.199.235:9000/uploadProfile", {
-    //   method: "POST",
-    //   headers: {
-    //     token: accessTokenObj,
-    //   },
-    //   body: {
-    //     image: formData
-    //   }
-    // })
-    //   .then((res) => res.text())
-    //   .then((data) => console.log(data));
 
     fetch("https://backend.rielcoin.com/uploadProfile", {
       method: "POST",
@@ -177,22 +127,59 @@ const Profile = () => {
     })
       .then((res) => res.text())
       .then((data) => console.log(data));
-
-    //   e.preventDefault();
-    //   const formData = new FormData();
-    //   formData.append("image", image.raw);
-
-    //  fetch("YOUR_URL", {
-    //     method: "POST",
-    //     headers: {
-    //       "Content-Type": "multipart/form-data"
-    //     },
-    //     body: formData
-    //   });
   };
   return (
     <React.Fragment>
       <Navbar />
+      {/* Modal all score */}
+      <div
+        style={{ backgroundColor: "rgba(0,0,0,0.4", overflow: "visible" }}
+        className={
+          show
+            ? " fixed z-50 sm:pt-64 pt-24  top-0 left-0  w-full h-full overflow-auto"
+            : "hidden"
+        }
+      >
+        <div className="grid grid-cols-1 mb-2 overflow-hidden bg-white  mx-auto pb-12 w-4/5 sm:w-4/12  px-6 rounded-md">
+          <div className="flex mt-4 justify-end">
+            <svg
+              onClick={closeShowMore}
+              className="text-right svg-icon h-8 w-8 cursor-pointer justify-end"
+              viewBox="0 0 20 20"
+            >
+              <path d="M15.898,4.045c-0.271-0.272-0.713-0.272-0.986,0l-4.71,4.711L5.493,4.045c-0.272-0.272-0.714-0.272-0.986,0s-0.272,0.714,0,0.986l4.709,4.711l-4.71,4.711c-0.272,0.271-0.272,0.713,0,0.986c0.136,0.136,0.314,0.203,0.492,0.203c0.179,0,0.357-0.067,0.493-0.203l4.711-4.711l4.71,4.711c0.137,0.136,0.314,0.203,0.494,0.203c0.178,0,0.355-0.067,0.492-0.203c0.273-0.273,0.273-0.715,0-0.986l-4.711-4.711l4.711-4.711C16.172,4.759,16.172,4.317,15.898,4.045z"></path>
+            </svg>
+          </div>
+          <div>
+            {/* <span className=" px-2 py-1 inline-block leading-none bg-teal-200 text-teal-800 rounded-full font-semibold uppercase tracking-wide text-xs">
+              Score :
+              <b>
+                {history === ""
+                  ? console.log("true")
+                  : history.score.map((res) => <p>{res}</p>)}
+              </b>
+            </span> */}
+            {/* <h1>Score : </h1> */}
+            {history === ""
+              ? console.log("true")
+              : history.score.map((res) => (
+                  // <p className=" px-2 py-1 inline-block leading-none bg-teal-200 text-teal-800 rounded-full font-semibold uppercase tracking-wide text-xs">
+                  //   {res}
+                  // </p>
+                  <div className="grid grid-cols-1">
+                    <p className="mb-2 px-2 py-1 inline-block leading-none bg-teal-200 text-teal-800 rounded-full font-semibold uppercase tracking-wide text-xs">
+                      Score: {res}
+                    </p>
+                  </div>
+                ))}
+          </div>
+        </div>
+      </div>
+
+      {/* <span className=" px-2 py-1 inline-block leading-none bg-teal-200 text-teal-800 rounded-full font-semibold uppercase tracking-wide text-xs">
+          Score :{history.score}
+        </span> */}
+
       <div
         style={{ backgroundColor: "rgba(0,0,0,0.4)" }}
         className={
@@ -229,14 +216,11 @@ const Profile = () => {
               </label>
               <input
                 type="file"
-                // accept="image/*"
-                // accept="image/x-png,image/gif,image/jpeg"
                 multiple
                 accept="image/*"
                 id="upload-button"
                 style={{ display: "none" }}
                 onChange={handleImageChange}
-                // onChange={fileChangedHandler}
               />
             </div>
 
@@ -310,20 +294,6 @@ const Profile = () => {
                 {profile ? profile.user_name : ""}
               </span>
             </div>
-            {/* <div className="text-blue-600 sm:font-medium sm:text-xl flex sm:justify-center mt-2 sm:mt-2">
-              <div>
-                <span>Like</span>
-                <h1>120</h1>
-              </div>
-              <div className="pl-12">
-                <span>Score</span>
-                <h1>120</h1>
-              </div>
-              <div className="pl-10">
-                <span>Game</span>
-                <h1>120</h1>
-              </div>
-            </div> */}
             <div className=" mt-16">
               <div className="mb-4 flex -mt-12 sm:justify-center  rounded-md ">
                 <svg
@@ -356,91 +326,62 @@ const Profile = () => {
             </div>
           </div>
         </div>
-        {/* <div>
-          
+        <div>
+          {/* {datas.map((data) => ( */}
           <div>
             <div className="grid sm:grid-cols-2 gap-4">
-              
+              {/* Game */}
               <div className="bg-gray-200 rounded-lg px-2 py-2">
                 <center>
                   <h1 className="mb-2 font-bold text-lg">Your Game</h1>
                 </center>
-                <div className="grid grid-cols-2 gap-4">
-                  <div className="transition duration-500 ease-in-out transform hover:-translate-y-1 max-w-sm bg-white hover:shadow-lg cursor-pointer rounded overflow-hidden">
-                    <img className="w-full" src="/img/quizbackground.png" />
-                    <div className=" py-4">
-                      <div className="font-bold text-xl mb-2 text-center">
-                        <h1>Mathematic</h1>
+                <div className="grid grid-cols-2 gap-2">
+                  {historyData.map((data) => {
+                    const { img, title, score } = data;
+                    return (
+                      <div className="transition duration-500 ease-in-out transform hover:-translate-y-1 max-w-sm bg-white hover:shadow-lg cursor-pointer rounded overflow-hidden">
+                        <img className="w-full" src={img} />
+                        <div className=" py-4">
+                          <div className="font-bold text-xl mb-2 text-center">
+                            <h1>{title}</h1>
+                          </div>
+                        </div>
+                        <div className=" px-2 mb-2">
+                          <div>
+                            {score.slice(0, 3).map((res) => {
+                              return (
+                                <div className="grid grid-cols-1 mb-2">
+                                  <span className=" px-2 py-1 inline-block leading-none bg-teal-200 text-teal-800 rounded-full font-semibold uppercase tracking-wide text-xs">
+                                    Score : {res}
+                                  </span>
+                                </div>
+                              );
+                            })}
+                          </div>
+                          <button
+                            onClick={() => {
+                              setShow(true);
+                              setHistory(data);
+                              document.body.style.overflow = "hidden";
+                            }}
+                            className="focus:outline-none bg-blue-400 px-2 rounded-full mt-2 hover:bg-blue-200"
+                          >
+                            Show More
+                          </button>
+                        </div>
                       </div>
-                    </div>
-                    <div className=" px-2 mb-2">
-                      
-                      <Items Math={Math} numberOfitemsShown={3} />
-
-                     
-                    </div>
-                  </div>
-                  <div className="transition duration-500 ease-in-out transform hover:-translate-y-1 max-w-sm bg-white hover:shadow-lg cursor-pointer rounded overflow-hidden">
-                    <img className="w-full" src="/img/quizbackground.png" />
-                    <div className=" py-4">
-                      <div className="font-bold text-xl mb-2 text-center">
-                        <h1>Mathematic</h1>
-                      </div>
-                    </div>
-                    <div className="flex px-2 mb-2">
-                      <span className=" px-2 py-1 inline-block leading-none bg-teal-200 text-teal-800 rounded-full font-semibold uppercase tracking-wide text-xs">
-                        10 Qs
-                      </span>
-                      <span className="ml-2 px-2 py-1 inline-block leading-none bg-teal-200 text-teal-800 rounded-full font-semibold uppercase tracking-wide text-xs">
-                        3.7k play
-                      </span>
-                    </div>
-                  </div>
-                </div>
-                <br></br>
-                <div className="grid grid-cols-2 gap-4">
-                  <div className="transition duration-500 ease-in-out transform hover:-translate-y-1 max-w-sm bg-white hover:shadow-lg cursor-pointer rounded overflow-hidden">
-                    <img className="w-full" src="/img/quizbackground.png" />
-                    <div className=" py-4">
-                      <div className="font-bold text-xl mb-2 text-center">
-                        <h1>Mathematic</h1>
-                      </div>
-                    </div>
-                    <div className="flex px-2 mb-2">
-                      <span className=" px-2 py-1 inline-block leading-none bg-teal-200 text-teal-800 rounded-full font-semibold uppercase tracking-wide text-xs">
-                        10 Qs
-                      </span>
-                      <span className="ml-2 px-2 py-1 inline-block leading-none bg-teal-200 text-teal-800 rounded-full font-semibold uppercase tracking-wide text-xs">
-                        3.7k play
-                      </span>
-                    </div>
-                  </div>
-                  <div className="transition duration-500 ease-in-out transform hover:-translate-y-1 max-w-sm bg-white hover:shadow-lg cursor-pointer rounded overflow-hidden">
-                    <img className="w-full" src="/img/quizbackground.png" />
-                    <div className=" py-4">
-                      <div className="font-bold text-xl mb-2 text-center">
-                        <h1>Mathematic</h1>
-                      </div>
-                    </div>
-                    <div className="flex px-2 mb-2">
-                      <span className=" px-2 py-1 inline-block leading-none bg-teal-200 text-teal-800 rounded-full font-semibold uppercase tracking-wide text-xs">
-                        10 Qs
-                      </span>
-                      <span className="ml-2 px-2 py-1 inline-block leading-none bg-teal-200 text-teal-800 rounded-full font-semibold uppercase tracking-wide text-xs">
-                        3.7k play
-                      </span>
-                    </div>
-                  </div>
+                    );
+                  })}
                 </div>
               </div>
-            
+              {/* Zeetomic */}
               <div className="bg-gray-200 rounded-lg px-2 py-2">
                 <h1>ZTO</h1>
                 <h1>Coming Soon</h1>
               </div>
             </div>
           </div>
-        </div> */}
+        </div>
       </div>
     </React.Fragment>
   );
