@@ -1,18 +1,14 @@
 import React, { useState } from "react";
+import historyData from "./data/history.json";
 
 function PublicResult() {
-  const [score, setScore] = useState([53, 23, 30]);
-  score.sort(function (a, b) {
-    return a - b;
-  });
-  console.log(score);
+  const [score, setScore] = useState([]);
+
   return (
-    <div>
-      {/* {score.map((res) => (
-        <div>{res.score}</div>
-      ))} */}
-      {score}
-      {}
+    <div className="grid grid-cols-2 gap-2">
+      {historyData.map((res) => (
+        <div>{res.title}</div>
+      ))}
     </div>
   );
 }

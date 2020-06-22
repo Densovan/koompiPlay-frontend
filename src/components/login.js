@@ -1,23 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { Link, Redirect } from "react-router-dom";
-import firebase from "firebase";
-import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
-// import ParticlesBg from "particles-bg";
 import jwt from "jsonwebtoken";
 import three_dots from "../assets/bars.svg";
 import FacebookLogin from "react-facebook-login";
 import GoogleLogin from "react-google-login";
 import Message from "../components/Message/Message";
-import Facebook from "../components/SocialLogin/FacbookLogin";
 // import successMessage from "../components/Message/SuccessMessage";
 import SuccessMessage from "../components/Message/SuccessMessage";
-import { PostData } from "../components/Services/PostData";
-
-firebase.initializeApp({
-  apiKey: "AIzaSyCs-PhYAG1ZEYuF9Hbhinn7Iwh9ZhwrNJ4",
-  authDomain: "koompiplay-a02eb.firebaseapp.com",
-});
 
 const Login = () => {
   const { register, handleSubmit, errors } = useForm();
@@ -219,10 +209,7 @@ const Login = () => {
               <FacebookLogin
                 textButton=""
                 cssClass="bg-blue-600 w-8 h-8 rounded-full focus:outline-none"
-                appId="294559125061550"
-                // appId="2703165819793398" //Shing
-                // appId="294559125061550"
-                // autoLoad={true}
+                appId=""
                 fields="name,email,picture"
                 icon="fa-facebook"
                 callback={responseFacebook}
@@ -240,10 +227,7 @@ const Login = () => {
                       <img src="https://img.icons8.com/color/34/000000/google-plus--v1.png" />
                     </button>
                   )}
-                  // clientId="668082845021-siv4a0ecm80jq8ul1jnrrvlcisqa5jmn.apps.googleusercontent.com"
-                  clientId="729862407120-7hlfp14qje84eloio52m2ngjqetiqbeu.apps.googleusercontent.com" //localhost:5000
-                  // clientId="1001069899717-m5ivlhe573nv3hlkupraml1g385s5kd3.apps.googleusercontent.com" // locallhost:3000
-                  // clientId="1001069899717-m5ivlhe573nv3hlkupraml1g385s5kd3.apps.googleusercontent.com"
+                  clientId=""
                   buttonText="Google"
                   onSuccess={responseGoogle}
                   onFailure={responseGoogle}
