@@ -2,23 +2,24 @@ import React, { useState, useEffect } from "react";
 import useAxios from "axios-hooks";
 import Navbar from "../layouts/Navbar";
 import historyData from "./data/history.json";
+import axios from "axios";
 //Global Token
 var accessTokenObj = localStorage.getItem("token");
 
 const Profile = () => {
+  //modal all show score
   const [show, setShow] = useState(false);
-  const [history, setHistory] = useState("");
-  const [score, setScore] = useState([{}]);
+  const [historyShow, setHistoryShow] = useState(false);
+  const [sciencShow, setSciencShow] = useState(false);
+  const [GeneralShow, setGeneralShow] = useState(false);
+  // const [history, setHistory] = useState("");
 
-  const showMore = () => {
-    // setDatas(datas);
-    setShow(!show);
-    document.body.style.overflow = "hidden";
-  };
-  const closeShowMore = () => {
-    setShow(!show);
-    document.body.style.overflow = "unset";
-  };
+  // Score
+  const [scoress, setScore] = useState([]);
+  const [calculating, setCalculating] = useState([]);
+  const [history, setHistory] = useState([]);
+  const [scienc, setScienc] = useState([]);
+  const [general, setGeneral] = useState([]);
 
   // const [loading, setLoading] = useState(false);
   const [profile, setProfile] = useState(null);
@@ -27,6 +28,121 @@ const Profile = () => {
     // preview: "",
     raw: "",
   });
+
+  const handleShowHistory = () => {
+    setHistoryShow(true);
+    document.body.style.overflow = "hidden";
+  };
+  const handleShowScienc = () => {
+    setSciencShow(true);
+    document.body.style.overflow = "hidden";
+  };
+  const handleSetGeneral = () => {
+    setGeneralShow(true);
+    document.body.style.overflow = "hidden";
+  };
+  const closeGeneral = () => {
+    setGeneralShow(false);
+  };
+  const closeHistory = () => {
+    setHistoryShow(false);
+    document.body.style.overflow = "unset";
+  };
+  const closeScienc = () => {
+    setSciencShow(false);
+    document.body.style.overflow = "unset";
+  };
+
+  useEffect(() => {
+    axios({
+      method: "GET",
+      url: "https://backend.satisyou.com/last-calculating-result",
+
+      headers: {
+        Accept: "application/json, text/plain, */*",
+        "Content-type": "application/json",
+        token: accessTokenObj,
+      },
+    })
+      // .then((res) => res.json())
+      .then((res) => {
+        // const scoress = res.data;
+        setCalculating(res.data);
+        console.log(res.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+
+  useEffect(() => {
+    axios({
+      method: "GET",
+      url: "https://backend.satisyou.com/last-history-result",
+
+      headers: {
+        Accept: "application/json, text/plain, */*",
+        "Content-type": "application/json",
+        token: accessTokenObj,
+      },
+    })
+      // .then((res) => res.json())
+      .then((res) => {
+        // const scoress = res.data;
+        setHistory(res.data);
+        console.log("history", res.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+  useEffect(() => {
+    axios({
+      method: "GET",
+      url: "https://backend.satisyou.com/last-science-result",
+
+      headers: {
+        Accept: "application/json, text/plain, */*",
+        "Content-type": "application/json",
+        token: accessTokenObj,
+      },
+    })
+      // .then((res) => res.json())
+      .then((res) => {
+        // const scoress = res.data;
+        setScienc(res.data);
+        console.log("scienc", res.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+  useEffect(() => {
+    axios({
+      method: "GET",
+      url: "https://backend.satisyou.com/last-general-result",
+
+      headers: {
+        Accept: "application/json, text/plain, */*",
+        "Content-type": "application/json",
+        token: accessTokenObj,
+      },
+    })
+      // .then((res) => res.json())
+      .then((res) => {
+        // const scoress = res.data;
+        setGeneral(res.data);
+        console.log(res.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+  const closeShowMore = () => {
+    setShow(!show);
+    document.body.style.overflow = "unset";
+  };
+
   const handleImageChange = (e) => {
     if (e.target.files.length) {
       setImage({
@@ -69,7 +185,7 @@ const Profile = () => {
   if (loading) return <p>Loading...</p>;
   if (error) return window.location.replace("/login");
   if (data) {
-    console.log(data);
+    // console.log(data);
     if (profile === null) {
       setProfile({ ...data });
     }
@@ -131,7 +247,7 @@ const Profile = () => {
   return (
     <React.Fragment>
       <Navbar />
-      {/* Modal all score */}
+      {/* Modal Calculating score*/}
       <div
         style={{ backgroundColor: "rgba(0,0,0,0.4", overflow: "visible" }}
         className={
@@ -150,36 +266,130 @@ const Profile = () => {
               <path d="M15.898,4.045c-0.271-0.272-0.713-0.272-0.986,0l-4.71,4.711L5.493,4.045c-0.272-0.272-0.714-0.272-0.986,0s-0.272,0.714,0,0.986l4.709,4.711l-4.71,4.711c-0.272,0.271-0.272,0.713,0,0.986c0.136,0.136,0.314,0.203,0.492,0.203c0.179,0,0.357-0.067,0.493-0.203l4.711-4.711l4.71,4.711c0.137,0.136,0.314,0.203,0.494,0.203c0.178,0,0.355-0.067,0.492-0.203c0.273-0.273,0.273-0.715,0-0.986l-4.711-4.711l4.711-4.711C16.172,4.759,16.172,4.317,15.898,4.045z"></path>
             </svg>
           </div>
-          <div>
-            {/* <span className=" px-2 py-1 inline-block leading-none bg-teal-200 text-teal-800 rounded-full font-semibold uppercase tracking-wide text-xs">
-              Score :
-              <b>
-                {history === ""
-                  ? console.log("true")
-                  : history.score.map((res) => <p>{res}</p>)}
-              </b>
-            </span> */}
-            {/* <h1>Score : </h1> */}
+          {/* <div>
             {history === ""
-              ? console.log("true")
+              ? console.log("ture")
               : history.score.map((res) => (
-                  // <p className=" px-2 py-1 inline-block leading-none bg-teal-200 text-teal-800 rounded-full font-semibold uppercase tracking-wide text-xs">
-                  //   {res}
-                  // </p>
                   <div className="grid grid-cols-1">
                     <p className="mb-2 px-2 py-1 inline-block leading-none bg-teal-200 text-teal-800 rounded-full font-semibold uppercase tracking-wide text-xs">
                       Score: {res}
                     </p>
                   </div>
                 ))}
+          </div> */}
+          <div>
+            {calculating.slice(0, 10).map((res) => {
+              return (
+                <div className="grid grid-cols-1 mb-2">
+                  <span className=" px-2 py-1 inline-block leading-none bg-teal-200 text-teal-800 rounded-full font-semibold uppercase tracking-wide text-xs">
+                    Score : {res.score}
+                  </span>
+                </div>
+              );
+            })}
           </div>
         </div>
       </div>
 
-      {/* <span className=" px-2 py-1 inline-block leading-none bg-teal-200 text-teal-800 rounded-full font-semibold uppercase tracking-wide text-xs">
-          Score :{history.score}
-        </span> */}
+      {/* modal Histroy Score */}
+      <div
+        style={{ backgroundColor: "rgba(0,0,0,0.4", overflow: "visible" }}
+        className={
+          historyShow
+            ? " fixed z-50 sm:pt-64 pt-24  top-0 left-0  w-full h-full overflow-auto"
+            : "hidden"
+        }
+      >
+        <div className="grid grid-cols-1 mb-2 overflow-hidden bg-white  mx-auto pb-12 w-4/5 sm:w-4/12  px-6 rounded-md">
+          <div className="flex mt-4 justify-end">
+            <svg
+              onClick={closeHistory}
+              className="text-right svg-icon h-8 w-8 cursor-pointer justify-end"
+              viewBox="0 0 20 20"
+            >
+              <path d="M15.898,4.045c-0.271-0.272-0.713-0.272-0.986,0l-4.71,4.711L5.493,4.045c-0.272-0.272-0.714-0.272-0.986,0s-0.272,0.714,0,0.986l4.709,4.711l-4.71,4.711c-0.272,0.271-0.272,0.713,0,0.986c0.136,0.136,0.314,0.203,0.492,0.203c0.179,0,0.357-0.067,0.493-0.203l4.711-4.711l4.71,4.711c0.137,0.136,0.314,0.203,0.494,0.203c0.178,0,0.355-0.067,0.492-0.203c0.273-0.273,0.273-0.715,0-0.986l-4.711-4.711l4.711-4.711C16.172,4.759,16.172,4.317,15.898,4.045z"></path>
+            </svg>
+          </div>
+          <div>
+            {history.slice(0, 10).map((res) => {
+              return (
+                <div className="grid grid-cols-1 mb-2">
+                  <span className=" px-2 py-1 inline-block leading-none bg-teal-200 text-teal-800 rounded-full font-semibold uppercase tracking-wide text-xs">
+                    Score : {res.score}
+                  </span>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </div>
 
+      {/* Modal Science score */}
+
+      <div
+        style={{ backgroundColor: "rgba(0,0,0,0.4", overflow: "visible" }}
+        className={
+          sciencShow
+            ? " fixed z-50 sm:pt-64 pt-24  top-0 left-0  w-full h-full overflow-auto"
+            : "hidden"
+        }
+      >
+        <div className="grid grid-cols-1 mb-2 overflow-hidden bg-white  mx-auto pb-12 w-4/5 sm:w-4/12  px-6 rounded-md">
+          <div className="flex mt-4 justify-end">
+            <svg
+              onClick={closeScienc}
+              className="text-right svg-icon h-8 w-8 cursor-pointer justify-end"
+              viewBox="0 0 20 20"
+            >
+              <path d="M15.898,4.045c-0.271-0.272-0.713-0.272-0.986,0l-4.71,4.711L5.493,4.045c-0.272-0.272-0.714-0.272-0.986,0s-0.272,0.714,0,0.986l4.709,4.711l-4.71,4.711c-0.272,0.271-0.272,0.713,0,0.986c0.136,0.136,0.314,0.203,0.492,0.203c0.179,0,0.357-0.067,0.493-0.203l4.711-4.711l4.71,4.711c0.137,0.136,0.314,0.203,0.494,0.203c0.178,0,0.355-0.067,0.492-0.203c0.273-0.273,0.273-0.715,0-0.986l-4.711-4.711l4.711-4.711C16.172,4.759,16.172,4.317,15.898,4.045z"></path>
+            </svg>
+          </div>
+          <div>
+            {scienc.slice(0, 10).map((res) => {
+              return (
+                <div className="grid grid-cols-1 mb-2">
+                  <span className=" px-2 py-1 inline-block leading-none bg-teal-200 text-teal-800 rounded-full font-semibold uppercase tracking-wide text-xs">
+                    Score : {res.score}
+                  </span>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </div>
+      {/* Modal General Knowledge score */}
+
+      <div
+        style={{ backgroundColor: "rgba(0,0,0,0.4", overflow: "visible" }}
+        className={
+          GeneralShow
+            ? " fixed z-50 sm:pt-64 pt-24  top-0 left-0  w-full h-full overflow-auto"
+            : "hidden"
+        }
+      >
+        <div className="grid grid-cols-1 mb-2 overflow-hidden bg-white  mx-auto pb-12 w-4/5 sm:w-4/12  px-6 rounded-md">
+          <div className="flex mt-4 justify-end">
+            <svg
+              onClick={closeGeneral}
+              className="text-right svg-icon h-8 w-8 cursor-pointer justify-end"
+              viewBox="0 0 20 20"
+            >
+              <path d="M15.898,4.045c-0.271-0.272-0.713-0.272-0.986,0l-4.71,4.711L5.493,4.045c-0.272-0.272-0.714-0.272-0.986,0s-0.272,0.714,0,0.986l4.709,4.711l-4.71,4.711c-0.272,0.271-0.272,0.713,0,0.986c0.136,0.136,0.314,0.203,0.492,0.203c0.179,0,0.357-0.067,0.493-0.203l4.711-4.711l4.71,4.711c0.137,0.136,0.314,0.203,0.494,0.203c0.178,0,0.355-0.067,0.492-0.203c0.273-0.273,0.273-0.715,0-0.986l-4.711-4.711l4.711-4.711C16.172,4.759,16.172,4.317,15.898,4.045z"></path>
+            </svg>
+          </div>
+          <div>
+            {general.slice(0, 10).map((res) => {
+              return (
+                <div className="grid grid-cols-1 mb-2">
+                  <span className=" px-2 py-1 inline-block leading-none bg-teal-200 text-teal-800 rounded-full font-semibold uppercase tracking-wide text-xs">
+                    Score : {res.score}
+                  </span>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </div>
       <div
         style={{ backgroundColor: "rgba(0,0,0,0.4)" }}
         className={
@@ -335,7 +545,39 @@ const Profile = () => {
                 <center>
                   <h1 className="mb-2 font-bold text-lg">Your Game</h1>
                 </center>
-                <div className="grid grid-cols-2 gap-2">
+                {/* <div className="mx-auto  hover:-translate-y-1 max-w-sm bg-white hover:shadow-lg cursor-pointer rounded overflow-hidden">
+                  <img className="w-full" src="/img/quizbackground.png" />
+                  <div className=" py-4">
+                    <div className="font-bold text-xl mb-2 text-center">
+                      <h1>General Knowledge</h1>
+                    </div>
+                  </div>
+                  <div className=" px-2 mb-2">
+                    <div>
+                      {scoress.slice(0, 3).map((res) => {
+                        return (
+                          <div className="grid grid-cols-1 mb-2">
+                            <span className=" px-2 py-1 inline-block leading-none bg-teal-200 text-teal-800 rounded-full font-semibold uppercase tracking-wide text-xs">
+                              Score : {res.score}
+                            </span>
+                          </div>
+                        );
+                      })}
+                    </div>
+                    <button
+                      onClick={() => {
+                        setShow(true);
+                        // setHistory(data);
+                        document.body.style.overflow = "hidden";
+                      }}
+                      className="focus:outline-none bg-blue-400 px-2 rounded-full mt-2 hover:bg-blue-200"
+                    >
+                      Show More
+                    </button>
+                  </div>
+                </div> */}
+
+                {/* <div className="grid grid-cols-2 gap-2">
                   {historyData.map((data) => {
                     const { img, title, score } = data;
                     return (
@@ -372,6 +614,121 @@ const Profile = () => {
                       </div>
                     );
                   })}
+                </div> */}
+
+                <div className="grid grid-cols-2 gap-2">
+                  <div className="  hover:-translate-y-1 max-w-sm bg-white hover:shadow-lg cursor-pointer rounded overflow-hidden">
+                    <img className="w-full" src="/img/quizbackground.png" />
+                    <div className=" py-4">
+                      <div className="font-bold text-xl mb-2 text-center">
+                        <h1>Calculating</h1>
+                      </div>
+                    </div>
+                    <div className=" px-2 mb-2">
+                      <div>
+                        {calculating.slice(0, 3).map((res) => {
+                          return (
+                            <div className="grid grid-cols-1 mb-2">
+                              <span className=" px-2 py-1 inline-block leading-none bg-teal-200 text-teal-800 rounded-full font-semibold uppercase tracking-wide text-xs">
+                                Score : {res.score}
+                              </span>
+                            </div>
+                          );
+                        })}
+                      </div>
+                      <button
+                        onClick={() => {
+                          setShow(true);
+                          // setHistory(data);
+                          document.body.style.overflow = "hidden";
+                        }}
+                        className="focus:outline-none bg-blue-400 px-2 rounded-full mt-2 hover:bg-blue-200"
+                      >
+                        Show More
+                      </button>
+                    </div>
+                  </div>
+                  <div className="  hover:-translate-y-1 max-w-sm bg-white hover:shadow-lg cursor-pointer rounded overflow-hidden">
+                    <img className="w-full" src="/img/quizbackground.png" />
+                    <div className=" py-4">
+                      <div className="font-bold text-xl mb-2 text-center">
+                        <h1>History</h1>
+                      </div>
+                    </div>
+                    <div className=" px-2 mb-2">
+                      <div>
+                        {history.slice(0, 3).map((res) => {
+                          return (
+                            <div className="grid grid-cols-1 mb-2">
+                              <span className=" px-2 py-1 inline-block leading-none bg-teal-200 text-teal-800 rounded-full font-semibold uppercase tracking-wide text-xs">
+                                Score : {res.score}
+                              </span>
+                            </div>
+                          );
+                        })}
+                      </div>
+                      <button
+                        onClick={handleShowHistory}
+                        className="focus:outline-none bg-blue-400 px-2 rounded-full mt-2 hover:bg-blue-200"
+                      >
+                        Show More
+                      </button>
+                    </div>
+                  </div>
+                  <div className="  hover:-translate-y-1 max-w-sm bg-white hover:shadow-lg cursor-pointer rounded overflow-hidden">
+                    <img className="w-full" src="/img/quizbackground.png" />
+                    <div className=" py-4">
+                      <div className="font-bold text-xl mb-2 text-center">
+                        <h1>Science</h1>
+                      </div>
+                    </div>
+                    <div className=" px-2 mb-2">
+                      <div>
+                        {scienc.slice(0, 3).map((res) => {
+                          return (
+                            <div className="grid grid-cols-1 mb-2">
+                              <span className=" px-2 py-1 inline-block leading-none bg-teal-200 text-teal-800 rounded-full font-semibold uppercase tracking-wide text-xs">
+                                Score : {res.score}
+                              </span>
+                            </div>
+                          );
+                        })}
+                      </div>
+                      <button
+                        onClick={handleShowScienc}
+                        className="focus:outline-none bg-blue-400 px-2 rounded-full mt-2 hover:bg-blue-200"
+                      >
+                        Show More
+                      </button>
+                    </div>
+                  </div>
+                  <div className="  hover:-translate-y-1 max-w-sm bg-white hover:shadow-lg cursor-pointer rounded overflow-hidden">
+                    <img className="w-full" src="/img/quizbackground.png" />
+                    <div className=" py-4">
+                      <div className="font-bold text-xl mb-2 text-center">
+                        <h1>General Knowledge</h1>
+                      </div>
+                    </div>
+                    <div className=" px-2 mb-2">
+                      <div>
+                        {general.slice(0, 3).map((res) => {
+                          return (
+                            <div className="grid grid-cols-1 mb-2">
+                              <span className=" px-2 py-1 inline-block leading-none bg-teal-200 text-teal-800 rounded-full font-semibold uppercase tracking-wide text-xs">
+                                Score : {res.score}
+                              </span>
+                            </div>
+                          );
+                        })}
+                      </div>
+                      <button
+                        onClick={handleSetGeneral}
+                        className="focus:outline-none bg-blue-400 px-2 rounded-full mt-2 hover:bg-blue-200"
+                      >
+                        Show More
+                      </button>
+                    </div>
+                  </div>
                 </div>
               </div>
               {/* Zeetomic */}
