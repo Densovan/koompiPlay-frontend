@@ -1,7 +1,7 @@
 import React from "react";
 import { Helmet } from "react-helmet";
 import IosRibbonOutline from 'react-ionicons/lib/IosRibbonOutline'
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 //  
 import swal from "sweetalert";
 import { Progress } from "react-sweet-progress";
@@ -86,6 +86,9 @@ class Result extends React.Component {
         icon: "success",
         button: "Ok",
         timer: 3000,
+        closeOnClickOutside: false,
+      }).then(() =>{
+        this.props.history.push("/profile");
       });
     };
 
@@ -108,7 +111,7 @@ class Result extends React.Component {
     if (state !== undefined) {
       stats = (
         <React.Fragment>
-          <div className="m-auto flex justify-center p-0 mt-6">
+          <div className="m-auto flex justify-center p-0 mt-4">
             <span className="icon text-indigo-800 text-6xl">
               <IosRibbonOutline shake={true} fontSize="80px" color="orange"/>
             </span>
@@ -192,29 +195,21 @@ class Result extends React.Component {
               </span>
               <Progress percent={this.state.hintsUsed * 50} status="success" />
             </div>
-            {/* <Link to="/userinfo">
-              <input
-                // onClick={submitAlert}
-                type="submit"
-                value="submit"
-                className="w-32 mr-2 bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded cursor-pointer"
-              />
-            </Link> */}
               <div className="px-12 py-6">
             <input
               onClick={submitAlert}
-              className="w-32 mr-2 bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded cursor-pointer"
+              className="w-48 mr-2 bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded cursor-pointer"
               type="submit"
-              value="Win"
+              value="Get Win"
             />
-            <Link to="/profile">
+            {/* <Link to="/profile">
               <input
-                onClick={submitAlert}
+                // onClick={submitAlert}
                 className="w-32 mr-2 bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded cursor-pointer"
                 type="submit"
                 value="Home"
               />
-            </Link>
+            </Link> */}
             </div>
           </form>
         </React.Fragment>

@@ -16,7 +16,7 @@ import axios from "axios";
 
 const TITLE = "Quiz App | Play";
 
-class Play extends React.Component {
+class SciencePage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -44,7 +44,7 @@ class Play extends React.Component {
   getQuestion = async () => {
     axios({
       method: "GET",
-      url: "http://52.221.199.235:9000/question",
+      url: "https://backend.satisyou.com/science-question",
       body: JSON.stringify({
         questions: this.state.question,
       }),
@@ -63,7 +63,7 @@ class Play extends React.Component {
   };
 
   componentDidMount() {
-    this.startTimer();
+    // this.startTimer();
     this.getQuestion();
     this.readyAlert();
   }
@@ -278,7 +278,7 @@ class Play extends React.Component {
   //  for set time
 
   startTimer = () => {
-    const countDownTime = Date.now() + 360000;
+    const countDownTime = Date.now() + 420000;
     this.interval = setInterval(() => {
       const now = new Date();
       const distance = countDownTime - now;
@@ -337,9 +337,6 @@ class Play extends React.Component {
       text: "Your game has ended!",
       icon: "success",
       closeOnClickOutside: false,
-      // buttons:{
-      //   confirm: "Submit to win",
-      // },
     });
   };
 
@@ -349,10 +346,15 @@ class Play extends React.Component {
       icon: "info",
       closeOnClickOutside: false,
       button: true,
-    }).then(() => {
-      this.playButtonSound();
-      this.displayQuestions();
-      swal.close();
+    }).then((willOk) => {
+      if(willOk){
+        this.startTimer();
+        this.displayQuestions();
+        swal.close();
+      }
+      else{
+        swal.close();
+      }
     });
   };
 
@@ -447,7 +449,7 @@ class Play extends React.Component {
               <button
                 type="button"
                 onClick={this.handleOptionClick}
-                className=" transition duration-200 ease-in-out transform hover:-translate-y-1 blok mt-3 option bg-teal-400 ml-10 lg:hover:bg-teal-800 sm:ml-0 w-3/4 sm:w-2/4 lg:w-2/4 xs:w-2/4 text-white font-bold py-3 px-4 rounded-full "
+                className=" transition duration-200 ease-in-out transform hover:-translate-y-1 block mt-3 option bg-teal-400 ml-10 lg:hover:bg-teal-800 sm:ml-0 w-3/4 sm:w-2/4 lg:w-2/4 xs:w-2/4 text-white font-bold py-3 px-4 rounded-full "
               >
                 {currentQuestion.optionA}
               </button>
@@ -507,4 +509,4 @@ class Play extends React.Component {
   }
 }
 
-export default Play;
+export default SciencePage;

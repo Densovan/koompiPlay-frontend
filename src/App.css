@@ -62,7 +62,7 @@ body {
   background-size: cover;
   display: flex;
   justify-content: space-around;
-  height: 100vh;
+  height: 94vh;
   width: 100vw;
 }
 .cover-photo {
@@ -115,3 +115,25 @@ body {
   margin-left: auto !important;
   margin-right: auto !important;
 } */
+
+
+
+/* --------choice---------- */
+
+/* 
+#choice-bg{
+  background-image: url("./assets/img/phone1.jpg");
+  background-size: cover;
+  position: center;
+  width: auto;
+  height: auto;
+} */
+
+#option-start{
+  background-color: #6617cb;
+  background-image: linear-gradient(315deg, #6617cb 0%, #cb218e 74%);
+  box-shadow: 0 0 0 0 #ec008c, 0.2rem 0.2rem 30px #6617cb;
+}
+#option-start:hover{
+  box-shadow: 0 0 0 0 #ec008c, 0.2rem 0.2rem 60px #6617cb;
+}

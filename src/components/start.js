@@ -1,5 +1,5 @@
 import React from "react";
-import { Helmet } from "react-helmet";
+  import { Helmet } from "react-helmet";
 import { Link } from "react-router-dom";
 import Navbar from "../layouts/Navbar";
 // import ParticlesBg from "particles-bg";
@@ -21,11 +21,11 @@ const Start = () => (
     /> */}
     <div id="home">
       {/* <ParticlesBg type="random" bg={true} /> */}
-      <section style={{ marginTop: "90px" }} id="section">
+      <section style={{ marginTop: "90px" }}>
         <h1 className="app text-gray-100 text-center text-current">Quiz Game</h1>
         <ul>
           <li id="button">
-            <Link to="/quiz">
+            <Link to="/choice">
               <button
                 id="play-button"
                 className="transition duration-300  ease-in-out transform hover:-translate-y-1 hover:scale-110 w-full text-white font-bold py-2 px-4 mt-48 h-12 rounded-full"
