@@ -18,7 +18,7 @@ const Login = () => {
     redirectToReferrer: false,
   });
   const onSubmit = (data) => {
-    fetch("https://backend.rielcoin.com/all_login", {
+    fetch("https://backend.satisyou.com/all_login", {
       method: "POST",
 
       body: JSON.stringify({

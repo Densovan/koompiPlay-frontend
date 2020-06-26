@@ -42,11 +42,11 @@ const Navbar = () => {
           <nav className="sm:flex sm:items-center sm:px-4 ">
             <div className="px-2 pt-2 pb-5 border-b border-gray-800 sm:flex sm:border-b-0 sm:py-0">
               {/* <Link
-                to="/profile"
-                className="sm:px-2 sm:text-sm  block px-3 py-1 rounded font-semibold text-white hover:bg-gray-800"
+                to="/public"
+                className="sm:px-2  sm:text-sm sm:mt-0 block px-3 py-1 rounded font-semibold text-white hover:bg-gray-800"
                 href="#"
               >
-                Profile
+                Result
               </Link> */}
               <Link
                 to="/"
@@ -54,6 +54,13 @@ const Navbar = () => {
                 href="#"
               >
                 Play
+              </Link>
+              <Link
+                to="/public"
+                className="sm:px-2 mt-3 sm:text-sm sm:mt-0 block px-3 py-1 rounded font-semibold text-white hover:bg-gray-800"
+                href="#"
+              >
+                Result
               </Link>
               <Link
                 to="/profile"

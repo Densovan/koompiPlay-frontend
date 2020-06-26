@@ -43,6 +43,7 @@ const Profile = () => {
   };
   const closeGeneral = () => {
     setGeneralShow(false);
+    document.body.style.overflow = "unset";
   };
   const closeHistory = () => {
     setHistoryShow(false);
@@ -166,7 +167,7 @@ const Profile = () => {
 
   const refreshPage = () => {
     popUp();
-    setTimeout("window.location.reload()", 3000);
+    setTimeout("window.location.reload()", 9000);
   };
 
   const [
@@ -185,7 +186,7 @@ const Profile = () => {
   if (loading) return <p>Loading...</p>;
   if (error) return window.location.replace("/login");
   if (data) {
-    // console.log(data);
+    console.log(data);
     if (profile === null) {
       setProfile({ ...data });
     }
@@ -493,7 +494,7 @@ const Profile = () => {
         <div className="px-4 -mt-12 sm:-mt-32  py-4 z-50  ">
           <div className="blur relative h-64 bg-white rounded-lg px-4 py-3 shadow-lg h-48 sm:h-auto">
             <img
-              className=" md:-mt-20  sm:mx-auto h-24 w-24 -mt-16 md:h-32 md:w-32 rounded-full   "
+              className="border-solid border-2 border-gray-300 md:-mt-20  sm:mx-auto h-24 w-24 -mt-16 md:h-32 md:w-32 rounded-full   "
               src={profile ? profile.user_profile : ""}
             />
             <div

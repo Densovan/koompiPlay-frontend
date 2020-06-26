@@ -64,6 +64,7 @@ body {
   justify-content: space-around;
   height: 94vh;
   /* width: 100vw; */
+  width: 100vw;
 }
 .cover-photo {
   filter: blur(2px);
@@ -120,3 +121,41 @@ body {
   margin-left: auto;
   margin-right: auto;
 }
+
+@media only screen and (max-width: 640px) {
+  .container {
+    width: 100%;
+  }
+}
+/* --------choice---------- */
+
+/* 
+#choice-bg{
+  background-image: url("./assets/img/phone1.jpg");
+  background-size: cover;
+  position: center;
+  width: auto;
+  height: auto;
+} */
+
+#option-start {
+  background-color: #6617cb;
+  background-image: linear-gradient(315deg, #6617cb 0%, #cb218e 74%);
+  box-shadow: 0 0 0 0 #ec008c, 0.2rem 0.2rem 30px #6617cb;
+}
+#option-start:hover {
+  box-shadow: 0 0 0 0 #ec008c, 0.2rem 0.2rem 60px #6617cb;
+}
+
+.gender-background-image {
+  /* margin-left: 100rem; */
+  background-image: url("/img/welcome-back-school-background_3589-817.jpg");
+  /* background-size: cover; */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100vh;
+}
+/* .shad {
+  box-shadow: -7px -8px 145px 0px rgb(216, 153, 216);
+} */

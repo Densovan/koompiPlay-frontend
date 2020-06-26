@@ -6,12 +6,17 @@ import useAxios from "axios-hooks";
 
 var accessTokenObj = localStorage.getItem("token");
 function PublicResult() {
-  const [scoress, setScore] = useState([]);
+  // const [scoress, setScore] = useState([]);
+  const [general, setGeneral] = useState([]);
+  const [history, setHistory] = useState([]);
+  const [science, setScience] = useState([]);
+  const [calculating, setCalculating] = useState([]);
+  const [rank, setRank] = useState([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
 
   useEffect(() => {
     axios({
       method: "GET",
-      url: "https://backend.satisyou.com/public-rank",
+      url: "https://backend.satisyou.com/general-top",
       headers: {
         "Content-type": "application/json",
         token: accessTokenObj,
@@ -20,60 +25,94 @@ function PublicResult() {
       // .then((res) => res.json())
       .then((res) => {
         // const scoress = res.data;
-        setScore(res.data);
+        setGeneral(res.data);
         console.log(res.data);
       })
       .catch((error) => {
         console.log(error);
       });
   }, []);
-  // const [
-  //   { data, loading, error },
-  //   //  refetch
-  // ] = useAxios({
-  //   method: "get",
-  //   url: "https://backend.satisyou.com/public-rank",
-  //   headers: {
-  //     "Content-Type": "application/json",
-  //     token: accessTokenObj,
-  //     // token: accessTokenObjs,
-  //   },
-  // });
 
-  // if (loading) return <p>Loading...</p>;
-  // if (error) return window.location.replace("/login");
-  // if (data) {
-  //   console.log(data);
-  //   if (scoress === []) {
-  //     setScore({ ...data });
-  //   }
-  // }
+  // History rest api
+  useEffect(() => {
+    axios({
+      method: "GET",
+      url: "https://backend.satisyou.com/history-top",
+      headers: {
+        "Content-type": "application/json",
+        token: accessTokenObj,
+      },
+    })
+      // .then((res) => res.json())
+      .then((res) => {
+        // const scoress = res.data;
+        setHistory(res.data);
+        console.log("history", res.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+  //Science rest api
+  useEffect(() => {
+    axios({
+      method: "GET",
+      url: "https://backend.satisyou.com/science-top",
+      headers: {
+        "Content-type": "application/json",
+        token: accessTokenObj,
+      },
+    })
+      // .then((res) => res.json())
+      .then((res) => {
+        // const scoress = res.data;
+        setScience(res.data);
+        console.log("Science", res.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+
+  //Calculating res api
+  useEffect(() => {
+    axios({
+      method: "GET",
+      url: "https://backend.satisyou.com/calculating-top",
+      headers: {
+        "Content-type": "application/json",
+        token: accessTokenObj,
+      },
+    })
+      // .then((res) => res.json())
+      .then((res) => {
+        // const scoress = res.data;
+        setCalculating(res.data);
+        console.log("Calculating", res.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
 
   return (
     <React.Fragment>
-      {/* {scoress.map((res) => {
-        return <div>{res.email}</div>;
-      })} */}
-
-      <div>
+      <div
+      // style={{
+      //   backgroundColor: "#cbd5e0",
+      //   height: "100vh",
+      //   backgroundSize: "cover",
+      //   backgroundPosition: "center",
+      //   backgroundRepeat: "cover",
+      // }}
+      >
         <Navbar />
-        {/* {scoress.map((d) => (
-          <div>{d.score}</div>
-        ))}
         <center>
-          <h1 className="font-bold text-xl" style={{ marginTop: "20px" }}>
-            Hight Score
+          <h1 className="text-4xl font-bold mt-6 text-gray-800">
+            Rank Score Board
           </h1>
-        </center> */}
-        {/* <div className="mx-auto">
-          {scoress.map((res) => (
-            <div>
-              {res.score}
-              {res.playername}
-            </div>
-          ))}
-        </div> */}
-        <div className="grid lg:grid-cols-2 gap-2">
+        </center>
+        {/* <div className="grid lg:grid-cols-2 gap-2">
           {publicResult.map((res) => {
             const { title, score } = res;
             return (
@@ -108,6 +147,116 @@ function PublicResult() {
               </React.Fragment>
             );
           })}
+        </div> */}
+        <div className="grid lg:grid-cols-4 md:grid-cols-2 gap-6 rounded-full px-4 py-4 mt-16">
+          <div className="container shadow-lg bg-gray-800 rounded-lg px-4 py-4">
+            <h1 className="text-center text-3xl  font-bold text-white mb-5">
+              General Knowledge
+            </h1>
+            <div className="grid grid-cols-3">
+              <div className="text-xl text-white px-2">Rank</div>
+              <div className="text-xl text-white ">Name</div>
+              <div className="text-xl text-white ">Score</div>
+            </div>
+            <div>
+              {general.slice(0, 10).map((ress, index) => {
+                return (
+                  <div className="grid grid-cols-3 rounded-full mb-2 ">
+                    <div className="bg-gray-400  py-1 rounded-l-full  px-6">
+                      <h1 className="text-xl">{index + 1}</h1>
+                    </div>
+                    <div className=" bg-gray-400 py-1 ">
+                      <h1 className="text-xl">{ress.playername}</h1>
+                    </div>
+                    <div className="bg-gray-400 py-1 rounded-r-full ">
+                      <h1 className="text-xl">{ress.score}</h1>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+          <div className="container shadow-lg bg-gray-800 rounded-lg px-4 py-4">
+            <h1 className="text-center  text-3xl font-bold text-white mb-5">
+              World History
+            </h1>
+            <div className="grid grid-cols-3">
+              <div className="text-xl text-white px-2">Rank</div>
+              <div className="text-xl text-white ">Name</div>
+              <div className="text-xl text-white ">Score</div>
+            </div>
+            <div>
+              {history.slice(0, 10).map((ress, index) => {
+                return (
+                  <div className="grid grid-cols-3 rounded-full mb-2 ">
+                    <div className="bg-gray-400 py-1 rounded-l-full  px-6">
+                      <h1 className="text-xl">{index + 1}</h1>
+                    </div>
+                    <div className="bg-gray-400 py-1">
+                      <h1 className="text-xl">{ress.playername}</h1>
+                    </div>
+                    <div className="bg-gray-400 py-1 rounded-r-full">
+                      <h1 className="text-xl">{ress.score}</h1>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+          <div className="container shadow-lg bg-gray-800 rounded-lg px-4 py-4">
+            <h1 className="text-center  text-3xl font-bold text-white mb-5">
+              Science
+            </h1>
+            <div className="grid grid-cols-3">
+              <div className="text-xl text-white px-2">Rank</div>
+              <div className="text-xl text-white ">Name</div>
+              <div className="text-xl text-white ">Score</div>
+            </div>
+            <div>
+              {science.slice(0, 10).map((ress, index) => {
+                return (
+                  <div className="grid grid-cols-3 rounded-full mb-2 ">
+                    <div className="bg-gray-400 py-1 rounded-l-full  px-6">
+                      <h1 className="text-xl">{index + 1}</h1>
+                    </div>
+                    <div className="bg-gray-400 py-1">
+                      <h1 className="text-xl">{ress.playername}</h1>
+                    </div>
+                    <div className="bg-gray-400 py-1 rounded-r-full">
+                      <h1 className="text-xl">{ress.score}</h1>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+          <div className="container shadow-lg bg-gray-800 rounded-lg px-4 py-4">
+            <h1 className="text-center  text-3xl font-bold text-white mb-5">
+              Calculating
+            </h1>
+            <div className="grid grid-cols-3">
+              <div className="text-xl text-white px-2">Rank</div>
+              <div className="text-xl text-white ">Name</div>
+              <div className="text-xl text-white ">Score</div>
+            </div>
+            <div>
+              {calculating.slice(0, 10).map((ress, index) => {
+                return (
+                  <div className="grid grid-cols-3 rounded-full mb-2 ">
+                    <div className="bg-gray-400 py-1 rounded-l-full  px-6">
+                      <h1 className="text-xl">{index + 1}</h1>
+                    </div>
+                    <div className="bg-gray-400 py-1">
+                      <h1 className="text-xl">{ress.playername}</h1>
+                    </div>
+                    <div className="bg-gray-400 py-1 rounded-r-full">
+                      <h1 className="text-xl">{ress.score}</h1>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
         </div>
       </div>
     </React.Fragment>
