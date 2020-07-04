@@ -21,6 +21,9 @@ import GeneralResult from "./components/pages/Results/GerneralResult";
 import HistoryResult from "./components/pages/Results/HistoryResult";
 import ScienceResult from "./components/pages/Results/ScienceResult";
 import PublicResul from "./components/pages/Results/PublicResult";
+import Animation from "./components/test/Animation";
+import Transaction from "./components/zeetomic/Transaction";
+import Send from "./components/zeetomic/Send";
 
 function App() {
   return (
@@ -40,34 +43,33 @@ function App() {
           <PublicRoute exact path="/file" component={FIleupload} />
           <PublicRoute exact path="/public" component={PublicResult} />
           <PrivateRoute exact path="/profile" component={Profile} />
-          {/* <PrivateRoute exact path="/userinfo" component={UserInfo} /> */}
-          {/* <PrivateRoute exact path="/" component={Start} /> */}
-          {/* <PrivateRoute exact path="/quiz" component={Play} /> */}
           <PrivateRoute exact path="/result" component={Result} />
-          {/* <Route exact path="/pri" component={PrivateRoute}/> */}
-          {/* <PrivateRoute exact path="/file" component={FIleupload} /> */}
-          {/* 
-          <PublicRoute exact path="/start" component={Start}/>
-          <Route exact path="/start" component={Start}/>
-          <Route exact path="/quiz" component={Play}/>
-          <Route exact path="/result" component={Result}/> */}
-          {/* <Route restricted={true} exact path="/login" component={Login}/>
-          <Route exact path="/login" restricted={true} component={Login} /> */}
-          {/* <PublicRoute exact path="/logout" component={Logout} /> */}
-          {/* <PublicRoute exact path="/file" component={FIleupload} /> */}
           <PublicRoute exact path="/profile" component={Profile} />
-          {/* <PrivateRoute exact path="/userinfo" component={UserInfo} /> */}
-          <Route exact path="/start" component={Start} />
-          <Route exact path="/" component={Choice} />
-          <Route exact path="/general" component={GeneralKnowledge} />
-          <Route exact path="/history" component={HistoryPage} />
-          <Route exact path="/calculate" component={Calculating} />
-          <Route exact path="/science" component={SciencePage} />
-          <Route exact path="/result" component={Result} />
-          <Route exact path="/general-result" component={GeneralResult} />
-          <Route exact path="/history-result" component={HistoryResult} />
-          <Route exact path="/science-result" component={ScienceResult} />
-          <Route exact path="pu" component={PublicResul} />
+          <PublicRoute exact path="/a" component={Animation} />
+          <PrivateRoute exact path="/start" component={Start} />
+          <PrivateRoute exact path="/" component={Choice} />
+          <PrivateRoute exact path="/general" component={GeneralKnowledge} />
+          <PrivateRoute exact path="/history" component={HistoryPage} />
+          <PrivateRoute exact path="/calculate" component={Calculating} />
+          <PrivateRoute exact path="/science" component={SciencePage} />
+          <PrivateRoute exact path="/result" component={Result} />
+          <PrivateRoute
+            exact
+            path="/general-result"
+            component={GeneralResult}
+          />
+          <PrivateRoute
+            exact
+            path="/history-result"
+            component={HistoryResult}
+          />
+          <PrivateRoute
+            exact
+            path="/science-result"
+            component={ScienceResult}
+          />
+          <PrivateRoute exact path="/send" component={Send} />
+          <PrivateRoute exact path="/transaction" component={Transaction} />
         </Switch>
       </Router>
     </React.Fragment>

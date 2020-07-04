@@ -117,7 +117,7 @@ body {
   display: none;
 }
 .container {
-  width: 80%;
+  width: 90%;
   margin-left: auto;
   margin-right: auto;
 }
@@ -159,3 +159,69 @@ body {
 /* .shad {
   box-shadow: -7px -8px 145px 0px rgb(216, 153, 216);
 } */
+
+.circle {
+  border-radius: 50%;
+  background-color: deepskyblue;
+  width: 150px;
+  height: 150px;
+  position: absolute;
+  opacity: 0;
+}
+.circle {
+  border-radius: 50%;
+  background-color: deepskyblue;
+  width: 150px;
+  height: 150px;
+  position: absolute;
+  opacity: 0;
+  animation: scaleIn 4s infinite cubic-bezier(0.36, 0.11, 0.89, 0.32);
+}
+@keyframes scaleIn {
+  from {
+    transform: scale(0.5, 0.5);
+    opacity: 0.5;
+  }
+  to {
+    transform: scale(2.5, 2.5);
+    opacity: 0;
+  }
+}
+.circle {
+  border-radius: 50%;
+  background-color: deepskyblue;
+  width: 150px;
+  height: 150px;
+  position: absolute;
+  opacity: 0;
+}
+
+.item {
+  z-index: 100;
+  padding: 5px;
+}
+
+.item img {
+  width: 150px;
+}
+#container {
+  width: 600px;
+  height: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
+}
+.wallet-shadow {
+  box-shadow: 1px 4px 10px rgb(184, 184, 184);
+}
+.send-zeetomic-bg {
+  background-color: #222834;
+  height: 100vh;
+}
+.form-bg-send {
+  background-color: #2a303d;
+  box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.2), 0 4px 5px 0 rgba(0, 0, 0, 0.14),
+    0 1px 10px 0 rgba(0, 0, 0, 0.12) !important;
+}

@@ -6,6 +6,7 @@ import three_dots from "../assets/bars.svg";
 import FacebookLogin from "react-facebook-login";
 import GoogleLogin from "react-google-login";
 import Message from "../components/Message/Message";
+import axios from "axios";
 // import successMessage from "../components/Message/SuccessMessage";
 import SuccessMessage from "../components/Message/SuccessMessage";
 
@@ -17,10 +18,17 @@ const Login = () => {
   const [face, setFace] = useState({
     redirectToReferrer: false,
   });
+
+  const loadingHander = () => {
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+    }, 3000);
+  };
+
   const onSubmit = (data) => {
     fetch("https://backend.satisyou.com/all_login", {
       method: "POST",
-
       body: JSON.stringify({
         user_external_id: "default",
         user_name: "default",
@@ -32,18 +40,21 @@ const Login = () => {
       }),
     })
       .then((res) => res.json())
-      .then((data) => {
+      .then(async (data) => {
         console.log("local login response data: " + data);
         localStorage.setItem("token", data.string);
         console.log("data", data.string);
         const decodeToken = jwt.decode(data.string);
         console.log(decodeToken);
         if (decodeToken) {
+          setLoading(true);
+          setTimeout(() => {
+            setLoading(false);
+          }, 5000);
           setSucessMessage("Successfull");
           setTimeout(() => {
-            setSucessMessage();
+            setSucessMessage(window.location.replace("/"));
           }, 3000);
-          window.location.replace("/");
         } else {
           setMessage("Incorrect Email or Password");
           setTimeout(() => {
@@ -101,7 +112,29 @@ const Login = () => {
     let user_profile = user.picture.data.url;
     let login_type = "facebook";
 
-    fetch("https://backend.rielcoin.com/all_login", {
+    axios
+      .post("https://pro-api.zeetomic.com/apis/v1/get-wallet", {
+        apikey: "d24e5deb-353d-443c-bd3a-f4a40a5d2682",
+        apisec:
+          "NzczYjNkZWUtZTIxOS00YmY5LWEzNzMtZThjYTk0NzAyMWYxQmVhcmVyIGV5SmhiR2NpT2lKSVV6STFOaUo5LmV5SmZhV1FpT2lKa01qUmxOV1JsWWkwek5UTmtMVFEwTTJNdFltUXpZUzFtTkdFME1HRTFaREkyT0RJaUxDSmxlSEFpT2pFMU9USTFNelF3TmpSOS43bWIzQ0JXc3JSTC1kcWhCQUZvbHVHaFRPSE9MRGlPb1ZIU0dYdVRfTjBz",
+      })
+      .then((res) => {
+        console.log("wallet", res.data.message);
+
+        axios({
+          method: "POST",
+          url: "https://backend.satisyou.com/create-wallet",
+          data: {
+            wallet_id: res.data.message.id,
+            wallet: res.data.message.wallet,
+            email: user_email,
+          },
+        }).then((res) => {
+          console.log(res.data.string);
+        });
+      });
+
+    fetch("https://backend.satisyou.com/all_login", {
       method: "POST",
       header: {
         "Content-Type": "application/json",
@@ -120,8 +153,16 @@ const Login = () => {
         localStorage.setItem("token", data.string);
 
         if (localStorage.getItem("token")) {
+          setLoading(true);
+          setTimeout(() => {
+            setLoading(false);
+          }, 20000);
           setSucessMessage("Successfull");
-          window.location.replace("/");
+          setTimeout(() => {
+            setSucessMessage(window.location.replace("/"));
+          }, 20000);
+          // setSucessMessage("Successfull");
+          // window.location.replace("/");
         } else {
           setTimeout(() => {
             setMessage("login failed");
@@ -162,10 +203,8 @@ const Login = () => {
                 name="Email"
                 type="email"
               />
-              {errors.Username && (
-                <p className="text-red-500 text-xs italic">
-                  First Name required
-                </p>
+              {errors.Email && (
+                <p className="text-red-500 text-xs italic">Email required</p>
               )}
             </div>
             <div className="mb-3">
@@ -189,6 +228,8 @@ const Login = () => {
               Forgot Password?
             </span>
             <button
+              onClick={loadingHander}
+              // disabled={loading}
               type="submit"
               className="focus:outline-none mb-4 w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
             >
@@ -202,6 +243,15 @@ const Login = () => {
               ) : (
                 "Sign In"
               )}
+              {/* {loading && (
+                <img
+                  className="justify-center mx-auto w-6 h-6"
+                  src={three_dots}
+                  alt="loading image"
+                  // height="8"
+                />
+              )}
+              {!loading && <span>Sign In</span>} */}
             </button>
 
             <p className="text-center text-gray-600 mb-2">Login With</p>
@@ -209,7 +259,7 @@ const Login = () => {
               <FacebookLogin
                 textButton=""
                 cssClass="bg-blue-600 w-8 h-8 rounded-full focus:outline-none"
-                appId=""
+                appId="785994611932287"
                 fields="name,email,picture"
                 icon="fa-facebook"
                 callback={responseFacebook}
