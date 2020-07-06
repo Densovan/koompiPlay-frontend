@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import useAxios from "axios-hooks";
 import Navbar from "../layouts/Navbar";
 import { Link } from "react-router-dom";
-import ModalMessage from "../components/Message/ModalWallet";
+import three_dots from "../assets/bars.svg";
 import SuccessMessage from "../components/Message/SuccessMessage";
 // import historyData from "./data/history.json";
 import axios from "axios";
@@ -15,10 +15,6 @@ const Profile = () => {
   const [successMessage, setSucessMessage] = useState("");
 
   //zeetomic wallet
-  const [getWallet, setGetwaller] = useState({
-    id: "",
-    wallet: "",
-  });
   const [wallet, setwallet] = useState([]);
   const [takewallet, setTakewallet] = useState({
     apikey: "d24e5deb-353d-443c-bd3a-f4a40a5d2682",
@@ -41,6 +37,7 @@ const Profile = () => {
   const [general, setGeneral] = useState([]);
 
   // const [loading, setLoading] = useState(false);
+  const [loaading, setLoading] = useState(false);
   const [profile, setProfile] = useState(null);
   const [modal, setModal] = useState(false);
   const [image, setImage] = useState({
@@ -72,8 +69,39 @@ const Profile = () => {
     setSciencShow(false);
     document.body.style.overflow = "unset";
   };
+
+  const getWalletLoading = () => {
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+    }, 9000);
+    setTimeout("window.location.reload()", 9000);
+  };
   const walletSubmit = (e) => {
     e.preventDefault();
+
+    axios
+      .post("https://pro-api.zeetomic.com/apis/v1/get-wallet", {
+        apikey: "c3e090dd-5f39-4533-8f80-286d5e594915",
+        apisec:
+          "YmY4ODM3YmQtMzM5Ni00NzZkLTg2Y2MtYjUyNWM5NzZkMTcxQmVhcmVyIGV5SmhiR2NpT2lKSVV6STFOaUo5LmV5SmZhV1FpT2lKak0yVXdPVEJrWkMwMVpqTTVMVFExTXpNdE9HWTRNQzB5T0Raa05XVTFPVFE1TVRVaUxDSmxlSEFpT2pFMU9UUXhNREl6TXpOOS51Z3FsWW9NVWxyZWd0NjhhUHNpbTBoTkJ4aS1iUGNmVVhYSk94cV83M0Jz",
+      })
+      .then((res) => {
+        console.log("wallet", res.data.message);
+        axios({
+          method: "POST",
+          url: "https://backend.satisyou.com/create-wallet",
+          data: {
+            wallet_id: res.data.message.id,
+            wallet: res.data.message.wallet,
+            email: profile.user_email,
+          },
+        }).then((res) => {
+          console.log(res.data.string);
+        });
+      });
+  };
+  useEffect(() => {
     axios({
       method: "GET",
       url: "https://backend.satisyou.com/get-wallet",
@@ -81,51 +109,10 @@ const Profile = () => {
         token: accessTokenObj,
       },
     }).then((res) => {
+      setwallet(res.data);
       console.log("wallet Get", res.data);
     });
-    // axios
-    //   .get("https://testnet-api.zeetomic.com/apis/v1/get-wallet", {
-    //     apikey: "d24e5deb-353d-443c-bd3a-f4a40a5d2682",
-    //     apisec:
-    //       "NzczYjNkZWUtZTIxOS00YmY5LWEzNzMtZThjYTk0NzAyMWYxQmVhcmVyIGV5SmhiR2NpT2lKSVV6STFOaUo5LmV5SmZhV1FpT2lKa01qUmxOV1JsWWkwek5UTmtMVFEwTTJNdFltUXpZUzFtTkdFME1HRTFaREkyT0RJaUxDSmxlSEFpT2pFMU9USTFNelF3TmpSOS43bWIzQ0JXc3JSTC1kcWhCQUZvbHVHaFRPSE9MRGlPb1ZIU0dYdVRfTjBz",
-    //   })
-    //   .then((res) => {
-    //     console.log("wallet", res.data.message);
-    //     setGetwaller(res.data.message);
-    // axios;
-    // .post("https://backend.satisyou.com/create-wallet", {
-    //   wallet_id: res.data.message.id,
-    //   wallet: res.data.message.wallet,
-    //   email: "",
-    //   // token: accessTokenObj,
-    // })
-    // .then((res) => {
-    //   console.log("email", profile.user_email);
-    //   console.log(res.data.string);
-    //   setSucessMessage(res.data.string);
-    //   setTimeout(() => {
-    //     setSucessMessage();
-    //   }, 3000);
-    // });
-    //   axios({
-    //     method: "POST",
-    //     url: "https://backend.satisyou.com/create-wallet",
-    //     headers: {
-    //       token: accessTokenObj,
-    //     },
-    //     data: {
-    //       wallet_id: res.data.message.id,
-    //       wallet: res.data.message.wallet,
-    //       email: "",
-    //     },
-    //   }).then((res) => {
-    //     setSucessMessage(res.data.string);
-    //     setTimeout(() => {
-    //       setSucessMessage();
-    //     }, 3000);
-    //   });
-    // });
-  };
+  }, []);
 
   useEffect(() => {
     axios({
@@ -982,10 +969,22 @@ const Profile = () => {
                 <center>
                   <h1 className="font-bold mb-2">WALLET</h1>
                 </center>
-                {wallet.length === 0 ? (
+                {wallet.id == "" ? (
                   <form onSubmit={walletSubmit}>
-                    <button className="focus:outline-none mb-12 w-full bg-green-500 cursor-pointer hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
-                      Get Wallet
+                    <button
+                      onClick={getWalletLoading}
+                      className="focus:outline-none mb-12 w-full bg-green-500 cursor-pointer hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                    >
+                      {loaading ? (
+                        <img
+                          className="justify-center mx-auto w-6 h-6"
+                          src={three_dots}
+                          alt="loading image"
+                          // height="8"
+                        />
+                      ) : (
+                        "Get Wallet"
+                      )}
                     </button>
                   </form>
                 ) : (

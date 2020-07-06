@@ -75,7 +75,7 @@ const Send = () => {
         <div>
           <center className="mt-10">
             <h1 className=" text-gray-300 font-bold text-2xl">
-              ZEETOMIC TOKEN
+              ZELENTRA TOKEN
             </h1>
           </center>
           <form onSubmit={onSubmit}>

@@ -114,9 +114,9 @@ const Login = () => {
 
     axios
       .post("https://pro-api.zeetomic.com/apis/v1/get-wallet", {
-        apikey: "d24e5deb-353d-443c-bd3a-f4a40a5d2682",
+        apikey: "c3e090dd-5f39-4533-8f80-286d5e594915",
         apisec:
-          "NzczYjNkZWUtZTIxOS00YmY5LWEzNzMtZThjYTk0NzAyMWYxQmVhcmVyIGV5SmhiR2NpT2lKSVV6STFOaUo5LmV5SmZhV1FpT2lKa01qUmxOV1JsWWkwek5UTmtMVFEwTTJNdFltUXpZUzFtTkdFME1HRTFaREkyT0RJaUxDSmxlSEFpT2pFMU9USTFNelF3TmpSOS43bWIzQ0JXc3JSTC1kcWhCQUZvbHVHaFRPSE9MRGlPb1ZIU0dYdVRfTjBz",
+          "YmY4ODM3YmQtMzM5Ni00NzZkLTg2Y2MtYjUyNWM5NzZkMTcxQmVhcmVyIGV5SmhiR2NpT2lKSVV6STFOaUo5LmV5SmZhV1FpT2lKak0yVXdPVEJrWkMwMVpqTTVMVFExTXpNdE9HWTRNQzB5T0Raa05XVTFPVFE1TVRVaUxDSmxlSEFpT2pFMU9UUXhNREl6TXpOOS51Z3FsWW9NVWxyZWd0NjhhUHNpbTBoTkJ4aS1iUGNmVVhYSk94cV83M0Jz",
       })
       .then((res) => {
         console.log("wallet", res.data.message);

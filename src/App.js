@@ -24,6 +24,7 @@ import PublicResul from "./components/pages/Results/PublicResult";
 import Animation from "./components/test/Animation";
 import Transaction from "./components/zeetomic/Transaction";
 import Send from "./components/zeetomic/Send";
+import Recieve from "./components/zeetomic/Recieve";
 
 function App() {
   return (
@@ -69,6 +70,7 @@ function App() {
             component={ScienceResult}
           />
           <PrivateRoute exact path="/send" component={Send} />
+          <PrivateRoute exact path="/recieve" component={Recieve} />
           <PrivateRoute exact path="/transaction" component={Transaction} />
         </Switch>
       </Router>

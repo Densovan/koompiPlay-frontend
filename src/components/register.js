@@ -45,38 +45,38 @@ const Register = () => {
       phone_number: data.Phone,
       login_type: "local",
     };
-    axios
-      .post("https://pro-api.zeetomic.com/apis/v1/get-wallet", {
-        apikey: "d24e5deb-353d-443c-bd3a-f4a40a5d2682",
-        apisec:
-          "NzczYjNkZWUtZTIxOS00YmY5LWEzNzMtZThjYTk0NzAyMWYxQmVhcmVyIGV5SmhiR2NpT2lKSVV6STFOaUo5LmV5SmZhV1FpT2lKa01qUmxOV1JsWWkwek5UTmtMVFEwTTJNdFltUXpZUzFtTkdFME1HRTFaREkyT0RJaUxDSmxlSEFpT2pFMU9USTFNelF3TmpSOS43bWIzQ0JXc3JSTC1kcWhCQUZvbHVHaFRPSE9MRGlPb1ZIU0dYdVRfTjBz",
-      })
-      .then((res) => {
-        console.log("wallet", res.data.message);
+    // axios
+    //   .post("https://pro-api.zeetomic.com/apis/v1/get-wallet", {
+    //     apikey: "c3e090dd-5f39-4533-8f80-286d5e594915",
+    //     apisec:
+    //       "YmY4ODM3YmQtMzM5Ni00NzZkLTg2Y2MtYjUyNWM5NzZkMTcxQmVhcmVyIGV5SmhiR2NpT2lKSVV6STFOaUo5LmV5SmZhV1FpT2lKak0yVXdPVEJrWkMwMVpqTTVMVFExTXpNdE9HWTRNQzB5T0Raa05XVTFPVFE1TVRVaUxDSmxlSEFpT2pFMU9UUXhNREl6TXpOOS51Z3FsWW9NVWxyZWd0NjhhUHNpbTBoTkJ4aS1iUGNmVVhYSk94cV83M0Jz",
+    //   })
+    //   .then((res) => {
+    //     console.log("wallet", res.data.message);
 
-        axios({
-          method: "POST",
-          url: "https://backend.satisyou.com/create-wallet",
-          data: {
-            wallet_id: res.data.message.id,
-            wallet: res.data.message.wallet,
-            email: data.Email,
-          },
-        }).then((res) => {
-          console.log(res.data.string);
-        });
-      });
+    //     axios({
+    //       method: "POST",
+    //       url: "https://backend.satisyou.com/create-wallet",
+    //       data: {
+    //         wallet_id: res.data.message.id,
+    //         wallet: res.data.message.wallet,
+    //         email: data.Email,
+    //       },
+    //     }).then((res) => {
+    //       console.log(res.data.string);
+    //     });
+    //   });
     axios
       .post("https://backend.rielcoin.com/register", newUser)
       .then((data) => {
         setLoading(true);
         setTimeout(() => {
           setLoading(false);
-        }, 20000);
+        }, 3000);
         setSucessMessage(data.data.string);
         setTimeout(() => {
-          // setSucessMessage(window.location.replace("/login"));
-        }, 20000);
+          setSucessMessage(window.location.replace("/login"));
+        }, 3000);
       })
       .catch((err) => console.log(err));
     // axios
