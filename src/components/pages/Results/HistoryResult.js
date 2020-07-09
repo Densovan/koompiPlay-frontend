@@ -1,15 +1,15 @@
-import React from "react";
-import { Helmet } from "react-helmet";
-import IosRibbonOutline from "react-ionicons/lib/IosRibbonOutline";
+import React from 'react';
+import { Helmet } from 'react-helmet';
+import IosRibbonOutline from 'react-ionicons/lib/IosRibbonOutline';
 // import { Link } from "react-router-dom";
 //
-import swal from "sweetalert";
-import { Progress } from "react-sweet-progress";
-import "react-sweet-progress/lib/style.css";
-import ParticlesBg from "particles-bg";
-import buttonSound from "../../../assets/sound/button-sound.mp3";
+import swal from 'sweetalert';
+import { Progress } from 'react-sweet-progress';
+import 'react-sweet-progress/lib/style.css';
+import ParticlesBg from 'particles-bg';
+import buttonSound from '../../../assets/sound/button-sound.mp3';
 
-const TITLE = "HistoryResult | Quiz app";
+const TITLE = 'HistoryResult | Quiz app';
 
 class HistoryResult extends React.Component {
   constructor(props) {
@@ -46,28 +46,28 @@ class HistoryResult extends React.Component {
   };
 
   handleChange = (e) => {
-    console.log("hello");
+    console.log('hello');
     this.setState({ ...this.state, [e.target.name]: e.target.value });
   };
 
   handleSubmit = (e) => {
     e.preventDefault();
-    console.log("hello world");
-    var accessTokenObj = localStorage.getItem("token");
+    console.log('hello world');
+    var accessTokenObj = localStorage.getItem('token');
     // console.log(accessTokenObj);
     const newResult = {
       score: this.state.score,
     };
     console.log(newResult);
-    fetch("https://backend.satisyou.com/play_info", {
-      method: "POST",
+    fetch('https://backend.satisyou.com/play_info', {
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
         token: accessTokenObj,
       },
       body: JSON.stringify({
         score: this.state.correctAnswers,
-        result_category: "history",
+        result_category: 'history',
       }),
     });
     // axios({
@@ -82,13 +82,13 @@ class HistoryResult extends React.Component {
     const submitAlert = () => {
       this.playButtonSound();
       swal({
-        title: "Thank you so much!",
-        icon: "success",
-        button: "Ok",
+        title: 'Thank you so much!',
+        icon: 'success',
+        button: 'Ok',
         timer: 3000,
         closeOnClickOutside: false,
       }).then(() => {
-        this.props.history.push("/");
+        this.props.history.push('/');
       });
     };
 
@@ -97,13 +97,13 @@ class HistoryResult extends React.Component {
     const userScore = this.state.score;
 
     if (userScore <= 30) {
-      remark = "You need more practice !";
+      remark = 'You need more practice !';
     } else if (userScore > 30 && userScore <= 50) {
-      remark = "Better luck for the next time !";
+      remark = 'Better luck for the next time !';
     } else if (userScore > 50 && userScore <= 70) {
       remark = "Wow it's better !";
     } else if (userScore >= 71 && userScore <= 84) {
-      remark = "You did it greate!";
+      remark = 'You did it greate!';
     } else {
       remark = "You're an absolute genuis!";
     }
@@ -150,14 +150,14 @@ class HistoryResult extends React.Component {
                 strokeWidth={8}
                 theme={{
                   error: {
-                    symbol: this.state.score.toFixed(0) + "%",
-                    trailColor: "pink",
-                    color: "red",
+                    symbol: this.state.score.toFixed(0) + '%',
+                    trailColor: 'pink',
+                    color: 'red',
                   },
                   active: {
-                    symbol: this.state.score.toFixed(0) + "%",
-                    trailColor: "	#E0FFFF",
-                    color: "#0F1EF0",
+                    symbol: this.state.score.toFixed(0) + '%',
+                    trailColor: '	#E0FFFF',
+                    color: '#0F1EF0',
                   },
                 }}
               />
@@ -172,7 +172,7 @@ class HistoryResult extends React.Component {
               <br />
               <br />
               <span onChange={this.handleChange}>
-                Number of attempted questions:{" "}
+                Number of attempted questions:{' '}
                 {this.state.numberOfAnsweredQuestions}
               </span>
               <Progress percent={100} status="active" />

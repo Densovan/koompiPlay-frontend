@@ -1,30 +1,31 @@
-import React from "react";
-import "./App.css";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import Login from "./components/login";
-import Register from "./components/register";
-import UserInfo from "./components/userInfo";
-import PrivateRoute from "./PrivateRoute";
-import Start from "./components/start";
-import Choice from "./components/Choice";
-import GeneralKnowledge from "./components/pages/General";
-import Result from "./components/pages/Results/Result";
-import Logout from "./layouts/Logout";
-import Profile from "./components/Profile";
-import PublicRoute from "./PublicRoute";
-import FIleupload from "./components/FIleupload";
-import PublicResult from "./components/PublicResult";
-import HistoryPage from "./components/pages/History";
-import Calculating from "./components/pages/Calculate";
-import SciencePage from "./components/pages/Science";
-import GeneralResult from "./components/pages/Results/GerneralResult";
-import HistoryResult from "./components/pages/Results/HistoryResult";
-import ScienceResult from "./components/pages/Results/ScienceResult";
-import PublicResul from "./components/pages/Results/PublicResult";
-import Animation from "./components/test/Animation";
-import Transaction from "./components/zeetomic/Transaction";
-import Send from "./components/zeetomic/Send";
-import Recieve from "./components/zeetomic/Recieve";
+import React from 'react';
+import './App.css';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import Login from './components/login';
+import Register from './components/register';
+import UserInfo from './components/userInfo';
+import PrivateRoute from './PrivateRoute';
+import Start from './components/start';
+import Choice from './components/Choice';
+import GeneralKnowledge from './components/pages/General';
+import Result from './components/pages/Results/Result';
+import Logout from './layouts/Logout';
+import Profile from './components/Profile';
+import PublicRoute from './PublicRoute';
+import FIleupload from './components/FIleupload';
+import PublicResult from './components/PublicResult';
+import HistoryPage from './components/pages/History';
+import Calculating from './components/pages/Calculate';
+import SciencePage from './components/pages/Science';
+import GeneralResult from './components/pages/Results/GerneralResult';
+import HistoryResult from './components/pages/Results/HistoryResult';
+import ScienceResult from './components/pages/Results/ScienceResult';
+import PublicResul from './components/pages/Results/PublicResult';
+import Animation from './components/test/Animation';
+import Transaction from './components/zeetomic/Transaction';
+import Send from './components/zeetomic/Send';
+import Recieve from './components/zeetomic/Recieve';
+import Telegram from './components/SocialLogin/Telegram';
 
 function App() {
   return (
@@ -41,6 +42,7 @@ function App() {
 
           <Route exact path="/login" restricted={true} component={Login} />
           <PublicRoute exact path="/logout" component={Logout} />
+          <PublicRoute exact path="/telegram-login" component={Telegram} />
           <PublicRoute exact path="/file" component={FIleupload} />
           <PublicRoute exact path="/public" component={PublicResult} />
           <PrivateRoute exact path="/profile" component={Profile} />

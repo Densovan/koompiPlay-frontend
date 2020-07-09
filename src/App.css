@@ -1,7 +1,7 @@
-@import url("https://fonts.googleapis.com/css2?family=PT+Sans&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=PT+Sans&display=swap');
 
 body {
-  font-family: "PT Sans", sans-serif;
+  font-family: 'PT Sans', sans-serif;
 }
 .App {
   text-align: center;
@@ -54,11 +54,11 @@ body {
 } */
 .app {
   font-size: 80px;
-  font-family: "Quicksand", sans-serif;
+  font-family: 'Quicksand', sans-serif;
 }
 
 #home {
-  background-image: url("./assets/img/background3.jpeg");
+  background-image: url('./assets/img/background3.jpeg');
   background-size: cover;
   display: flex;
   justify-content: space-around;
@@ -149,7 +149,7 @@ body {
 
 .gender-background-image {
   /* margin-left: 100rem; */
-  background-image: url("/img/welcome-back-school-background_3589-817.jpg");
+  background-image: url('/img/welcome-back-school-background_3589-817.jpg');
   /* background-size: cover; */
   background-position: center;
   background-repeat: no-repeat;
@@ -224,4 +224,9 @@ body {
   background-color: #2a303d;
   box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.2), 0 4px 5px 0 rgba(0, 0, 0, 0.14),
     0 1px 10px 0 rgba(0, 0, 0, 0.12) !important;
+}
+
+.telegram-login-size {
+  width: 38px;
+  margin-top: -3px;
 }

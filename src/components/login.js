@@ -1,19 +1,19 @@
-import React, { useState, useEffect } from "react";
-import { useForm } from "react-hook-form";
-import { Link, Redirect } from "react-router-dom";
-import jwt from "jsonwebtoken";
-import three_dots from "../assets/bars.svg";
-import FacebookLogin from "react-facebook-login";
-import GoogleLogin from "react-google-login";
-import Message from "../components/Message/Message";
-import axios from "axios";
+import React, { useState, useEffect } from 'react';
+import { useForm } from 'react-hook-form';
+import { Link, Redirect } from 'react-router-dom';
+import jwt from 'jsonwebtoken';
+import three_dots from '../assets/bars.svg';
+import FacebookLogin from 'react-facebook-login';
+import GoogleLogin from 'react-google-login';
+import Message from '../components/Message/Message';
+import axios from 'axios';
 // import successMessage from "../components/Message/SuccessMessage";
-import SuccessMessage from "../components/Message/SuccessMessage";
+import SuccessMessage from '../components/Message/SuccessMessage';
 
 const Login = () => {
   const { register, handleSubmit, errors } = useForm();
-  const [message, setMessage] = useState("");
-  const [successMessage, setSucessMessage] = useState("");
+  const [message, setMessage] = useState('');
+  const [successMessage, setSucessMessage] = useState('');
   const [loading, setLoading] = useState(false);
   const [face, setFace] = useState({
     redirectToReferrer: false,
@@ -27,23 +27,23 @@ const Login = () => {
   };
 
   const onSubmit = (data) => {
-    fetch("https://backend.satisyou.com/all_login", {
-      method: "POST",
+    fetch('https://backend.satisyou.com/all_login', {
+      method: 'POST',
       body: JSON.stringify({
-        user_external_id: "default",
-        user_name: "default",
-        user_gender: "default",
+        user_external_id: 'default',
+        user_name: 'default',
+        user_gender: 'default',
         user_email: data.Email,
         user_password: data.Password,
-        user_profile: "default",
-        login_type: "local",
+        user_profile: 'default',
+        login_type: 'local',
       }),
     })
       .then((res) => res.json())
       .then(async (data) => {
-        console.log("local login response data: " + data);
-        localStorage.setItem("token", data.string);
-        console.log("data", data.string);
+        console.log('local login response data: ' + data);
+        localStorage.setItem('token', data.string);
+        console.log('data', data.string);
         const decodeToken = jwt.decode(data.string);
         console.log(decodeToken);
         if (decodeToken) {
@@ -51,12 +51,12 @@ const Login = () => {
           setTimeout(() => {
             setLoading(false);
           }, 5000);
-          setSucessMessage("Successfull");
+          setSucessMessage('Successfull');
           setTimeout(() => {
-            setSucessMessage(window.location.replace("/"));
+            setSucessMessage(window.location.replace('/'));
           }, 3000);
         } else {
-          setMessage("Incorrect Email or Password");
+          setMessage('Incorrect Email or Password');
           setTimeout(() => {
             setMessage();
           }, 3000);
@@ -74,15 +74,15 @@ const Login = () => {
 
     let user_external_id = user.googleId;
     let user_name = user.name;
-    let user_gender = "default";
+    let user_gender = 'default';
     let user_email = user.email;
     let user_profile = user.imageUrl;
-    let login_type = "google";
+    let login_type = 'google';
 
-    fetch("https://backend.rielcoin.com/all_login", {
-      method: "POST",
+    fetch('https://backend.rielcoin.com/all_login', {
+      method: 'POST',
       header: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify({
         user_external_id: user_external_id,
@@ -102,42 +102,42 @@ const Login = () => {
   //Signup with Facebook
   const responseFacebook = (response) => {
     console.log(response);
-    console.log("facebook login");
+    console.log('facebook login');
     let user = response;
 
     let user_external_id = user.userID;
     let user_name = user.name;
-    let user_gender = "default";
+    let user_gender = 'default';
     let user_email = user.email;
     let user_profile = user.picture.data.url;
-    let login_type = "facebook";
+    let login_type = 'facebook';
 
-    axios
-      .post("https://pro-api.zeetomic.com/apis/v1/get-wallet", {
-        apikey: "c3e090dd-5f39-4533-8f80-286d5e594915",
-        apisec:
-          "YmY4ODM3YmQtMzM5Ni00NzZkLTg2Y2MtYjUyNWM5NzZkMTcxQmVhcmVyIGV5SmhiR2NpT2lKSVV6STFOaUo5LmV5SmZhV1FpT2lKak0yVXdPVEJrWkMwMVpqTTVMVFExTXpNdE9HWTRNQzB5T0Raa05XVTFPVFE1TVRVaUxDSmxlSEFpT2pFMU9UUXhNREl6TXpOOS51Z3FsWW9NVWxyZWd0NjhhUHNpbTBoTkJ4aS1iUGNmVVhYSk94cV83M0Jz",
-      })
-      .then((res) => {
-        console.log("wallet", res.data.message);
+    // axios
+    //   .post('https://pro-api.zeetomic.com/apis/v1/get-wallet', {
+    //     apikey: 'c3e090dd-5f39-4533-8f80-286d5e594915',
+    //     apisec:
+    //       'YmY4ODM3YmQtMzM5Ni00NzZkLTg2Y2MtYjUyNWM5NzZkMTcxQmVhcmVyIGV5SmhiR2NpT2lKSVV6STFOaUo5LmV5SmZhV1FpT2lKak0yVXdPVEJrWkMwMVpqTTVMVFExTXpNdE9HWTRNQzB5T0Raa05XVTFPVFE1TVRVaUxDSmxlSEFpT2pFMU9UUXhNREl6TXpOOS51Z3FsWW9NVWxyZWd0NjhhUHNpbTBoTkJ4aS1iUGNmVVhYSk94cV83M0Jz',
+    //   })
+    //   .then((res) => {
+    //     console.log('wallet', res.data.message);
 
-        axios({
-          method: "POST",
-          url: "https://backend.satisyou.com/create-wallet",
-          data: {
-            wallet_id: res.data.message.id,
-            wallet: res.data.message.wallet,
-            email: user_email,
-          },
-        }).then((res) => {
-          console.log(res.data.string);
-        });
-      });
+    //     axios({
+    //       method: 'POST',
+    //       url: 'https://backend.satisyou.com/create-wallet',
+    //       data: {
+    //         wallet_id: res.data.message.id,
+    //         wallet: res.data.message.wallet,
+    //         email: user_email,
+    //       },
+    //     }).then((res) => {
+    //       console.log(res.data.string);
+    //     });
+    //   });
 
-    fetch("https://backend.satisyou.com/all_login", {
-      method: "POST",
+    fetch('https://backend.satisyou.com/all_login', {
+      method: 'POST',
       header: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify({
         user_external_id: user_external_id,
@@ -150,32 +150,32 @@ const Login = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        localStorage.setItem("token", data.string);
+        localStorage.setItem('token', data.string);
 
-        if (localStorage.getItem("token")) {
+        if (localStorage.getItem('token')) {
           setLoading(true);
           setTimeout(() => {
             setLoading(false);
           }, 20000);
-          setSucessMessage("Successfull");
+          setSucessMessage('Successfull');
           setTimeout(() => {
-            setSucessMessage(window.location.replace("/"));
+            setSucessMessage(window.location.replace('/'));
           }, 20000);
           // setSucessMessage("Successfull");
           // window.location.replace("/");
         } else {
           setTimeout(() => {
-            setMessage("login failed");
+            setMessage('login failed');
             setSucessMessage();
           }, 3000);
         }
       });
   };
   const componentClicked = () => {
-    console.log("clicked");
+    console.log('clicked');
   };
-  if (face.redirectToReferrer || sessionStorage.getItem("userData")) {
-    return <Redirect to={"/profile"} />;
+  if (face.redirectToReferrer || sessionStorage.getItem('userData')) {
+    return <Redirect to={'/profile'} />;
   }
 
   return (
@@ -241,7 +241,7 @@ const Login = () => {
                   // height="8"
                 />
               ) : (
-                "Sign In"
+                'Sign In'
               )}
               {/* {loading && (
                 <img
@@ -281,8 +281,14 @@ const Login = () => {
                   buttonText="Google"
                   onSuccess={responseGoogle}
                   onFailure={responseGoogle}
-                  cookiePolicy={"single_host_origin"}
+                  cookiePolicy={'single_host_origin'}
                 ></GoogleLogin>
+              </div>
+              <div className="pl-1">
+                <img
+                  className="telegram-login-size cursor-pointer "
+                  src="/img/icons8-telegram-app-48.png"
+                />
               </div>
             </div>
 

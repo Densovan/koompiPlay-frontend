@@ -1,73 +1,26 @@
-import React, { useState } from "react";
-import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import React, { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { Link } from 'react-router-dom';
 // import ParticlesBg from "particles-bg";
-import SuccessfulMessage from "./Message/SuccessMessage";
-import axios from "axios";
-import three_dots from "../assets/bars.svg";
+import SuccessfulMessage from './Message/SuccessMessage';
+import axios from 'axios';
+import three_dots from '../assets/bars.svg';
 
 const Register = () => {
   const { register, handleSubmit, errors } = useForm();
-  const [successMessage, setSucessMessage] = useState("");
+  const [successMessage, setSucessMessage] = useState('');
   const [loading, setLoading] = useState(false);
   const onSubmit = (data) => {
-    // console.log(data);
-    // fetch("http://52.221.199.235:9000/register", {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //     // Host: "localhost:8000",
-    //   },
-
-    //   body: JSON.stringify({
-    // user_name: data.Username,
-    // user_gender: data.gender,
-    // user_email: data.Email,
-    // user_password: data.Password,
-    // phone_number: data.Phone,
-    //   }),
-    // })
-    //   .then((res) => res.text())
-    //   .then((data) => {
-    //     if (data) {
-    //       window.location.replace("/login");
-    //     } else {
-    //       alert("err");
-    //     }
-    //     // window.location.replace("/login");
-    //     alert(data);
-    //   });
     const newUser = {
       user_name: data.Username,
       user_gender: data.gender,
       user_email: data.Email,
       user_password: data.Password,
       phone_number: data.Phone,
-      login_type: "local",
+      login_type: 'local',
     };
-    // axios
-    //   .post("https://pro-api.zeetomic.com/apis/v1/get-wallet", {
-    //     apikey: "c3e090dd-5f39-4533-8f80-286d5e594915",
-    //     apisec:
-    //       "YmY4ODM3YmQtMzM5Ni00NzZkLTg2Y2MtYjUyNWM5NzZkMTcxQmVhcmVyIGV5SmhiR2NpT2lKSVV6STFOaUo5LmV5SmZhV1FpT2lKak0yVXdPVEJrWkMwMVpqTTVMVFExTXpNdE9HWTRNQzB5T0Raa05XVTFPVFE1TVRVaUxDSmxlSEFpT2pFMU9UUXhNREl6TXpOOS51Z3FsWW9NVWxyZWd0NjhhUHNpbTBoTkJ4aS1iUGNmVVhYSk94cV83M0Jz",
-    //   })
-    //   .then((res) => {
-    //     console.log("wallet", res.data.message);
-
-    //     axios({
-    //       method: "POST",
-    //       url: "https://backend.satisyou.com/create-wallet",
-    //       data: {
-    //         wallet_id: res.data.message.id,
-    //         wallet: res.data.message.wallet,
-    //         email: data.Email,
-    //       },
-    //     }).then((res) => {
-    //       console.log(res.data.string);
-    //     });
-    //   });
     axios
-      .post("https://backend.rielcoin.com/register", newUser)
+      .post('https://backend.rielcoin.com/register', newUser)
       .then((data) => {
         setLoading(true);
         setTimeout(() => {
@@ -75,31 +28,10 @@ const Register = () => {
         }, 3000);
         setSucessMessage(data.data.string);
         setTimeout(() => {
-          setSucessMessage(window.location.replace("/login"));
+          setSucessMessage(window.location.replace('/login'));
         }, 3000);
       })
       .catch((err) => console.log(err));
-    // axios
-    //   .post("https://testnet-api.zeetomic.com/apis/v1/get-wallet", {
-    //     apikey: "d24e5deb-353d-443c-bd3a-f4a40a5d2682",
-    //     apisec:
-    //       "NzczYjNkZWUtZTIxOS00YmY5LWEzNzMtZThjYTk0NzAyMWYxQmVhcmVyIGV5SmhiR2NpT2lKSVV6STFOaUo5LmV5SmZhV1FpT2lKa01qUmxOV1JsWWkwek5UTmtMVFEwTTJNdFltUXpZUzFtTkdFME1HRTFaREkyT0RJaUxDSmxlSEFpT2pFMU9USTFNelF3TmpSOS43bWIzQ0JXc3JSTC1kcWhCQUZvbHVHaFRPSE9MRGlPb1ZIU0dYdVRfTjBz",
-    //   })
-    //   .then((res) => {
-    //     console.log("wallet", res.data.message);
-
-    //     axios({
-    //       method: "POST",
-    //       url: "https://backend.satisyou.com/create-wallet",
-    //       data: {
-    //         wallet_id: res.data.message.id,
-    //         wallet: res.data.message.wallet,
-    //         email: data.Email,
-    //       },
-    //     }).then((res) => {
-    //       console.log(res.data.string);
-    //     });
-    //   });
   };
   return (
     <div>
@@ -223,21 +155,20 @@ const Register = () => {
                   // height="8"
                 />
               ) : (
-                "Sign Up"
+                'Sign Up'
               )}
             </button>
             <p className="text-center text-gray-600 mb-4">
               Have an account yet?
             </p>
 
-            <Link to="/login">
-              <button
-                type="submit"
-                className="mb-6 w-full border text-blue-700 hover:bg-gray-300 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-              >
-                Sign In
-              </button>
-            </Link>
+            <button
+              type="submit"
+              className="mb-6 w-full border text-blue-700 hover:bg-gray-300 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+            >
+              Sign In
+            </button>
+
             <p className="text-center text-gray-600 ">Terms and conditions</p>
           </form>
         </div>

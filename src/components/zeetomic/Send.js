@@ -1,15 +1,22 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
-import { setLogLevel } from "firebase";
+import React, { useState, useEffect } from 'react';
+import SuccessMessage from '../../components/Message/SuccessMessage';
+import axios from 'axios';
+import three_dots from '../../assets/bars.svg';
+import { data } from 'autoprefixer';
 const Send = () => {
   const [send, setSend] = useState({
-    recieve: "",
-    amount: "",
-    memo: "",
-    select: "zto",
+    recieve: '',
+    amount: '',
+    memo: '',
+    select: 'ZTO',
+    apikey: 'c3e090dd-5f39-4533-8f80-286d5e594915',
+    apisec:
+      'YmY4ODM3YmQtMzM5Ni00NzZkLTg2Y2MtYjUyNWM5NzZkMTcxQmVhcmVyIGV5SmhiR2NpT2lKSVV6STFOaUo5LmV5SmZhV1FpT2lKak0yVXdPVEJrWkMwMVpqTTVMVFExTXpNdE9HWTRNQzB5T0Raa05XVTFPVFE1TVRVaUxDSmxlSEFpT2pFMU9UUXhNREl6TXpOOS51Z3FsWW9NVWxyZWd0NjhhUHNpbTBoTkJ4aS1iUGNmVVhYSk94cV83M0Jz',
   });
-  var accessTokenObj = localStorage.getItem("token");
+  var accessTokenObj = localStorage.getItem('token');
+  const [loading, setLoading] = useState(false);
   const [wallet, setgetWallet] = useState([]);
+  const [successMessage, setSucessMessage] = useState('');
 
   const handleChange = (e) => {
     setSend({ ...send, [e.target.name]: e.target.value });
@@ -20,14 +27,14 @@ const Send = () => {
 
   useEffect(() => {
     axios({
-      method: "GET",
-      url: "https://backend.satisyou.com/get-wallet",
+      method: 'GET',
+      url: 'https://backend.satisyou.com/get-wallet',
       headers: {
         token: accessTokenObj,
       },
     }).then((res) => {
       setgetWallet(res.data);
-      console.log(res.data.id);
+      console.log(res.data);
     });
   }, []);
 
@@ -35,43 +42,57 @@ const Send = () => {
     e.preventDefault();
 
     axios({
-      method: "GET",
-      url: "https://backend.satisyou.com/get-wallet",
+      method: 'GET',
+      url: 'https://backend.satisyou.com/get-wallet',
       headers: {
         token: accessTokenObj,
       },
     }).then((res) => {
-      console.log("wallet Get", res.data);
+      console.log('wallet Get', res.data);
     });
 
     axios({
-      method: "POST",
-      url: "https://pro-api.zeetomic.com/apis/v1/payment",
+      method: 'POST',
+      url: 'https://pro-api.zeetomic.com/apis/v1/payment',
       data: {
-        id: wallet.id,
-        apikey: "d24e5deb-353d-443c-bd3a-f4a40a5d2682",
-        apisec:
-          "NzczYjNkZWUtZTIxOS00YmY5LWEzNzMtZThjYTk0NzAyMWYxQmVhcmVyIGV5SmhiR2NpT2lKSVV6STFOaUo5LmV5SmZhV1FpT2lKa01qUmxOV1JsWWkwek5UTmtMVFEwTTJNdFltUXpZUzFtTkdFME1HRTFaREkyT0RJaUxDSmxlSEFpT2pFMU9USTFNelF3TmpSOS43bWIzQ0JXc3JSTC1kcWhCQUZvbHVHaFRPSE9MRGlPb1ZIU0dYdVRfTjBz",
+        id: wallet.wallet_id,
+        apikey: send.apikey,
+        apisec: send.apisec,
         destination: send.recieve,
         amount: send.amount,
         asset_code: send.select,
         memo: send.memo,
       },
+    }).then((res) => {
+      console.log(res.data.message);
+
+      setLoading(true);
+      setTimeout(() => {
+        setLoading(false);
+        // setSucessMessage(res.data.message);
+      }, 5000);
+      setSucessMessage(res.data.message);
+      setTimeout(() => {
+        setSucessMessage();
+      }, 3000);
     });
 
     const newUser = {
-      recieve: send.recieve,
+      id: wallet.wallet_id,
+      apikey: send.apikey,
+      apisec: send.apisec,
+      destination: send.recieve,
       amount: send.amount,
+      asset_code: send.select,
       memo: send.memo,
-      select: send.select,
-      id: wallet.id,
     };
-    console.log("helo", newUser);
+    console.log('helo', newUser);
   };
 
   return (
     <div className="send-zeetomic-bg overflow-hidden">
       <div className="overflow-hidden mx-auto max-w-md form-bg-send mt-40 shadow-xl px-6 rounded-lg">
+        {successMessage ? <SuccessMessage msg={successMessage} /> : null}
         <div>
           <center className="mt-10">
             <h1 className=" text-gray-300 font-bold text-2xl">
@@ -156,14 +177,14 @@ const Send = () => {
               ></textarea>
             </div>
             <div>
-              {send.recieve === "" ||
-              send.amount === "" ||
-              send.memo === "" ||
-              send.select === "" ||
-              send.select === "" ? (
+              {send.recieve === '' ||
+              send.amount === '' ||
+              send.memo === '' ||
+              send.select === '' ||
+              send.select === '' ? (
                 <button
                   disabled={
-                    send.recieve == "" || send.amount == "" || send.memo == ""
+                    send.recieve == '' || send.amount == '' || send.memo == ''
                       ? true
                       : false
                   }
@@ -177,7 +198,16 @@ const Send = () => {
                   className="focus:outline-none mb-12 w-full bg-green-500 cursor-pointer hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                   type="submit"
                 >
-                  Send
+                  {loading ? (
+                    <img
+                      className="justify-center mx-auto w-6 h-6"
+                      src={three_dots}
+                      alt="loading image"
+                      // height="8"
+                    />
+                  ) : (
+                    'Send'
+                  )}
                 </button>
               )}
             </div>

@@ -1,25 +1,25 @@
-import React, { useState, useEffect } from "react";
-import useAxios from "axios-hooks";
-import Navbar from "../layouts/Navbar";
-import { Link } from "react-router-dom";
-import three_dots from "../assets/bars.svg";
-import SuccessMessage from "../components/Message/SuccessMessage";
+import React, { useState, useEffect } from 'react';
+import useAxios from 'axios-hooks';
+import Navbar from '../layouts/Navbar';
+import { Link } from 'react-router-dom';
+import three_dots from '../assets/bars.svg';
+import SuccessMessage from '../components/Message/SuccessMessage';
 // import historyData from "./data/history.json";
-import axios from "axios";
+import axios from 'axios';
 //Global Token
-var accessTokenObj = localStorage.getItem("token");
+var accessTokenObj = localStorage.getItem('token');
 
 const Profile = () => {
   //Error
-  const [modalWallet, setModalWallet] = useState("");
-  const [successMessage, setSucessMessage] = useState("");
+  const [modalWallet, setModalWallet] = useState('');
+  const [successMessage, setSucessMessage] = useState('');
 
   //zeetomic wallet
   const [wallet, setwallet] = useState([]);
   const [takewallet, setTakewallet] = useState({
-    apikey: "d24e5deb-353d-443c-bd3a-f4a40a5d2682",
+    apikey: 'd24e5deb-353d-443c-bd3a-f4a40a5d2682',
     apisec:
-      "NzczYjNkZWUtZTIxOS00YmY5LWEzNzMtZThjYTk0NzAyMWYxQmVhcmVyIGV5SmhiR2NpT2lKSVV6STFOaUo5LmV5SmZhV1FpT2lKa01qUmxOV1JsWWkwek5UTmtMVFEwTTJNdFltUXpZUzFtTkdFME1HRTFaREkyT0RJaUxDSmxlSEFpT2pFMU9USTFNelF3TmpSOS43bWIzQ0JXc3JSTC1kcWhCQUZvbHVHaFRPSE9MRGlPb1ZIU0dYdVRfTjBz",
+      'NzczYjNkZWUtZTIxOS00YmY5LWEzNzMtZThjYTk0NzAyMWYxQmVhcmVyIGV5SmhiR2NpT2lKSVV6STFOaUo5LmV5SmZhV1FpT2lKa01qUmxOV1JsWWkwek5UTmtMVFEwTTJNdFltUXpZUzFtTkdFME1HRTFaREkyT0RJaUxDSmxlSEFpT2pFMU9USTFNelF3TmpSOS43bWIzQ0JXc3JSTC1kcWhCQUZvbHVHaFRPSE9MRGlPb1ZIU0dYdVRfTjBz',
   });
 
   //modal all show score
@@ -42,55 +42,54 @@ const Profile = () => {
   const [modal, setModal] = useState(false);
   const [image, setImage] = useState({
     // preview: "",
-    raw: "",
+    raw: '',
   });
 
   const handleShowHistory = () => {
     setHistoryShow(true);
-    document.body.style.overflow = "hidden";
+    document.body.style.overflow = 'hidden';
   };
   const handleShowScienc = () => {
     setSciencShow(true);
-    document.body.style.overflow = "hidden";
+    document.body.style.overflow = 'hidden';
   };
   const handleSetGeneral = () => {
     setGeneralShow(true);
-    document.body.style.overflow = "hidden";
+    document.body.style.overflow = 'hidden';
   };
   const closeGeneral = () => {
     setGeneralShow(false);
-    document.body.style.overflow = "unset";
+    document.body.style.overflow = 'unset';
   };
   const closeHistory = () => {
     setHistoryShow(false);
-    document.body.style.overflow = "unset";
+    document.body.style.overflow = 'unset';
   };
   const closeScienc = () => {
     setSciencShow(false);
-    document.body.style.overflow = "unset";
+    document.body.style.overflow = 'unset';
   };
 
   const getWalletLoading = () => {
     setLoading(true);
     setTimeout(() => {
       setLoading(false);
-    }, 9000);
-    setTimeout("window.location.reload()", 9000);
+    }, 20000);
+    setTimeout('window.location.reload()', 20000);
   };
   const walletSubmit = (e) => {
     e.preventDefault();
-
     axios
-      .post("https://pro-api.zeetomic.com/apis/v1/get-wallet", {
-        apikey: "c3e090dd-5f39-4533-8f80-286d5e594915",
+      .post('https://pro-api.zeetomic.com/apis/v1/get-wallet', {
+        apikey: 'c3e090dd-5f39-4533-8f80-286d5e594915',
         apisec:
-          "YmY4ODM3YmQtMzM5Ni00NzZkLTg2Y2MtYjUyNWM5NzZkMTcxQmVhcmVyIGV5SmhiR2NpT2lKSVV6STFOaUo5LmV5SmZhV1FpT2lKak0yVXdPVEJrWkMwMVpqTTVMVFExTXpNdE9HWTRNQzB5T0Raa05XVTFPVFE1TVRVaUxDSmxlSEFpT2pFMU9UUXhNREl6TXpOOS51Z3FsWW9NVWxyZWd0NjhhUHNpbTBoTkJ4aS1iUGNmVVhYSk94cV83M0Jz",
+          'YmY4ODM3YmQtMzM5Ni00NzZkLTg2Y2MtYjUyNWM5NzZkMTcxQmVhcmVyIGV5SmhiR2NpT2lKSVV6STFOaUo5LmV5SmZhV1FpT2lKak0yVXdPVEJrWkMwMVpqTTVMVFExTXpNdE9HWTRNQzB5T0Raa05XVTFPVFE1TVRVaUxDSmxlSEFpT2pFMU9UUXhNREl6TXpOOS51Z3FsWW9NVWxyZWd0NjhhUHNpbTBoTkJ4aS1iUGNmVVhYSk94cV83M0Jz',
       })
       .then((res) => {
-        console.log("wallet", res.data.message);
+        console.log('wallet', res.data.message);
         axios({
-          method: "POST",
-          url: "https://backend.satisyou.com/create-wallet",
+          method: 'POST',
+          url: 'https://backend.satisyou.com/create-wallet',
           data: {
             wallet_id: res.data.message.id,
             wallet: res.data.message.wallet,
@@ -103,25 +102,25 @@ const Profile = () => {
   };
   useEffect(() => {
     axios({
-      method: "GET",
-      url: "https://backend.satisyou.com/get-wallet",
+      method: 'GET',
+      url: 'https://backend.satisyou.com/get-wallet',
       headers: {
         token: accessTokenObj,
       },
     }).then((res) => {
       setwallet(res.data);
-      console.log("wallet Get", res.data);
+      console.log('wallet Get', res.data);
     });
   }, []);
 
   useEffect(() => {
     axios({
-      method: "GET",
-      url: "https://backend.satisyou.com/last-calculating-result",
+      method: 'GET',
+      url: 'https://backend.satisyou.com/last-calculating-result',
 
       headers: {
-        Accept: "application/json, text/plain, */*",
-        "Content-type": "application/json",
+        Accept: 'application/json, text/plain, */*',
+        'Content-type': 'application/json',
         token: accessTokenObj,
       },
     })
@@ -138,12 +137,12 @@ const Profile = () => {
 
   useEffect(() => {
     axios({
-      method: "GET",
-      url: "https://backend.satisyou.com/last-history-result",
+      method: 'GET',
+      url: 'https://backend.satisyou.com/last-history-result',
 
       headers: {
-        Accept: "application/json, text/plain, */*",
-        "Content-type": "application/json",
+        Accept: 'application/json, text/plain, */*',
+        'Content-type': 'application/json',
         token: accessTokenObj,
       },
     })
@@ -151,7 +150,7 @@ const Profile = () => {
       .then((res) => {
         // const scoress = res.data;
         setHistory(res.data);
-        console.log("history", res.data);
+        console.log('history', res.data);
       })
       .catch((error) => {
         console.log(error);
@@ -159,12 +158,12 @@ const Profile = () => {
   }, []);
   useEffect(() => {
     axios({
-      method: "GET",
-      url: "https://backend.satisyou.com/last-science-result",
+      method: 'GET',
+      url: 'https://backend.satisyou.com/last-science-result',
 
       headers: {
-        Accept: "application/json, text/plain, */*",
-        "Content-type": "application/json",
+        Accept: 'application/json, text/plain, */*',
+        'Content-type': 'application/json',
         token: accessTokenObj,
       },
     })
@@ -172,7 +171,7 @@ const Profile = () => {
       .then((res) => {
         // const scoress = res.data;
         setScienc(res.data);
-        console.log("scienc", res.data);
+        console.log('scienc', res.data);
       })
       .catch((error) => {
         console.log(error);
@@ -180,12 +179,12 @@ const Profile = () => {
   }, []);
   useEffect(() => {
     axios({
-      method: "GET",
-      url: "https://backend.satisyou.com/last-general-result",
+      method: 'GET',
+      url: 'https://backend.satisyou.com/last-general-result',
 
       headers: {
-        Accept: "application/json, text/plain, */*",
-        "Content-type": "application/json",
+        Accept: 'application/json, text/plain, */*',
+        'Content-type': 'application/json',
         token: accessTokenObj,
       },
     })
@@ -201,7 +200,7 @@ const Profile = () => {
   }, []);
   const closeShowMore = () => {
     setShow(!show);
-    document.body.style.overflow = "unset";
+    document.body.style.overflow = 'unset';
   };
 
   const handleImageChange = (e) => {
@@ -227,23 +226,23 @@ const Profile = () => {
 
   const refreshPage = () => {
     popUp();
-    setTimeout("window.location.reload()", 9000);
+    setTimeout('window.location.reload()', 9000);
   };
 
   const [
     { data, loading, error },
     //  refetch
   ] = useAxios({
-    method: "get",
-    url: "https://backend.satisyou.com/userData",
+    method: 'get',
+    url: 'https://backend.satisyou.com/userData',
     headers: {
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
       token: accessTokenObj,
       // token: accessTokenObjs,
     },
   });
 
-  if (loading) return "Loading....";
+  if (loading) return 'Loading....';
   // <div id="outerContainer">
   //   <div id="container">
   //     <div class="item">
@@ -255,7 +254,7 @@ const Profile = () => {
   //     <div class="circle" style={{ animationDelay: "3s" }}></div>
   //   </div>
   // </div>
-  if (error) return window.location.replace("/login");
+  if (error) return window.location.replace('/login');
   if (data) {
     console.log(data);
     if (profile === null) {
@@ -268,10 +267,10 @@ const Profile = () => {
     // console.log("hello");
 
     /*update name*/
-    fetch("https://backend.satisyou.com/updateName", {
-      method: "POST",
+    fetch('https://backend.satisyou.com/updateName', {
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
         token: accessTokenObj,
       },
       body: JSON.stringify({
@@ -284,10 +283,10 @@ const Profile = () => {
       });
 
     // phone_Number
-    fetch("https://backend.satisyou.com/updatePhone", {
-      method: "POST",
+    fetch('https://backend.satisyou.com/updatePhone', {
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
         token: accessTokenObj,
       },
       body: JSON.stringify({
@@ -304,10 +303,10 @@ const Profile = () => {
 
     const formData = new FormData();
     console.log([image, setImage][0].raw);
-    formData.set("image", [image, setImage][0].raw);
+    formData.set('image', [image, setImage][0].raw);
 
-    fetch("https://backend.satisyou.com/uploadProfile", {
-      method: "POST",
+    fetch('https://backend.satisyou.com/uploadProfile', {
+      method: 'POST',
       headers: {
         token: accessTokenObj,
       },
@@ -324,11 +323,11 @@ const Profile = () => {
 
       {/* Modal Calculating score*/}
       <div
-        style={{ backgroundColor: "rgba(0,0,0,0.4", overflow: "visible" }}
+        style={{ backgroundColor: 'rgba(0,0,0,0.4', overflow: 'visible' }}
         className={
           show
-            ? " fixed z-50 sm:pt-64 pt-24  top-0 left-0  w-full h-full overflow-auto"
-            : "hidden"
+            ? ' fixed z-50 sm:pt-64 pt-24  top-0 left-0  w-full h-full overflow-auto'
+            : 'hidden'
         }
       >
         <center>
@@ -371,11 +370,11 @@ const Profile = () => {
 
       {/* modal Histroy Score */}
       <div
-        style={{ backgroundColor: "rgba(0,0,0,0.4", overflow: "visible" }}
+        style={{ backgroundColor: 'rgba(0,0,0,0.4', overflow: 'visible' }}
         className={
           historyShow
-            ? " fixed z-50 sm:pt-64 pt-24  top-0 left-0  w-full h-full overflow-auto"
-            : "hidden"
+            ? ' fixed z-50 sm:pt-64 pt-24  top-0 left-0  w-full h-full overflow-auto'
+            : 'hidden'
         }
       >
         <center>
@@ -419,11 +418,11 @@ const Profile = () => {
       {/* Modal Science score */}
 
       <div
-        style={{ backgroundColor: "rgba(0,0,0,0.4", overflow: "visible" }}
+        style={{ backgroundColor: 'rgba(0,0,0,0.4', overflow: 'visible' }}
         className={
           sciencShow
-            ? " fixed z-50 sm:pt-64 pt-24  top-0 left-0  w-full h-full overflow-auto"
-            : "hidden"
+            ? ' fixed z-50 sm:pt-64 pt-24  top-0 left-0  w-full h-full overflow-auto'
+            : 'hidden'
         }
       >
         <center>
@@ -466,11 +465,11 @@ const Profile = () => {
       {/* Modal General Knowledge score */}
 
       <div
-        style={{ backgroundColor: "rgba(0,0,0,0.4", overflow: "visible" }}
+        style={{ backgroundColor: 'rgba(0,0,0,0.4', overflow: 'visible' }}
         className={
           GeneralShow
-            ? " fixed z-50 sm:pt-64 pt-24  top-0 left-0  w-full h-full overflow-auto"
-            : "hidden"
+            ? ' fixed z-50 sm:pt-64 pt-24  top-0 left-0  w-full h-full overflow-auto'
+            : 'hidden'
         }
       >
         <center>
@@ -511,11 +510,11 @@ const Profile = () => {
         </center>
       </div>
       <div
-        style={{ backgroundColor: "rgba(0,0,0,0.4)" }}
+        style={{ backgroundColor: 'rgba(0,0,0,0.4)' }}
         className={
           modal
-            ? "fixed z-50 sm:pt-64 pt-24  top-0 left-0  w-full h-full overflow-auto"
-            : "hidden"
+            ? 'fixed z-50 sm:pt-64 pt-24  top-0 left-0  w-full h-full overflow-auto'
+            : 'hidden'
         }
       >
         <div className="bg-white  mx-auto pb-12 w-4/5 sm:w-3/6 px-6 rounded-md">
@@ -526,7 +525,7 @@ const Profile = () => {
               <label htmlFor="upload-button">
                 {image.preview ? (
                   <img
-                    style={{ marginTop: "-6px" }}
+                    style={{ marginTop: '-6px' }}
                     className=" md:-mt-20  sm:mx-auto h-24 w-24 -mt-16 md:h-32 md:w-32 rounded-full   "
                     src={image.preview}
                     // src={profile ? profile.user_profile : ""}
@@ -537,9 +536,9 @@ const Profile = () => {
                 ) : (
                   <>
                     <img
-                      style={{ marginTop: "-27px" }}
+                      style={{ marginTop: '-27px' }}
                       className=" md:-mt-20  sm:mx-auto h-24 w-24 -mt-16 md:h-32 md:w-32 rounded-full   "
-                      src={profile ? profile.user_profile : ""}
+                      src={profile ? profile.user_profile : ''}
                     />
                   </>
                 )}
@@ -549,7 +548,7 @@ const Profile = () => {
                 multiple
                 accept="image/*"
                 id="upload-button"
-                style={{ display: "none" }}
+                style={{ display: 'none' }}
                 onChange={handleImageChange}
               />
             </div>
@@ -559,7 +558,7 @@ const Profile = () => {
               className="rounded bg-gray-400 focus:outline-none py-1 px-1 block mb-2 w-full sm:w-full"
               // type="text"
               // name="name"change profile picture in react js
-              value={profile ? profile.user_name : ""}
+              value={profile ? profile.user_name : ''}
               // ref={register({ required: true, minLength: 5 })}
               name="name"
               type="text"
@@ -575,7 +574,7 @@ const Profile = () => {
               className="rounded bg-gray-400 focus:outline-none py-1 px-1 block mb-2 w-full sm:w-full"
               // type="text"
               // name="name"change profile picture in react js
-              value={profile ? profile.phone_number : ""}
+              value={profile ? profile.phone_number : ''}
               // ref={register({ required: true, minLength: 5 })}
               name="phone"
               type="number"
@@ -614,14 +613,14 @@ const Profile = () => {
           <div className="blur relative h-64 bg-white rounded-lg px-4 py-3 shadow-lg h-48 sm:h-auto">
             <img
               className="border-solid border-2 border-gray-300 md:-mt-20  sm:mx-auto h-24 w-24 -mt-16 md:h-32 md:w-32 rounded-full   "
-              src={profile ? profile.user_profile : ""}
+              src={profile ? profile.user_profile : ''}
             />
             <div
               // onClick={popUp}
               className="mt-2 flex  text-xl font-bold text-blue-600 text-gray-600"
             >
               <span className="ml-2 sm:mx-auto ">
-                {profile ? profile.user_name : ""}
+                {profile ? profile.user_name : ''}
               </span>
             </div>
             <div className=" mt-16">
@@ -633,7 +632,7 @@ const Profile = () => {
                   <path d="M17.388,4.751H2.613c-0.213,0-0.389,0.175-0.389,0.389v9.72c0,0.216,0.175,0.389,0.389,0.389h14.775c0.214,0,0.389-0.173,0.389-0.389v-9.72C17.776,4.926,17.602,4.751,17.388,4.751 M16.448,5.53L10,11.984L3.552,5.53H16.448zM3.002,6.081l3.921,3.925l-3.921,3.925V6.081z M3.56,14.471l3.914-3.916l2.253,2.253c0.153,0.153,0.395,0.153,0.548,0l2.253-2.253l3.913,3.916H3.56z M16.999,13.931l-3.921-3.925l3.921-3.925V13.931z"></path>
                 </svg>
                 <span className="text-gray-700 text-lg font-semibold">
-                  {profile ? profile.user_email : ""}
+                  {profile ? profile.user_email : ''}
                 </span>
               </div>
               <div className="flex mt-1 sm:justify-center rounded-md ">
@@ -644,7 +643,7 @@ const Profile = () => {
                   <path d="M13.372,1.781H6.628c-0.696,0-1.265,0.569-1.265,1.265v13.91c0,0.695,0.569,1.265,1.265,1.265h6.744c0.695,0,1.265-0.569,1.265-1.265V3.045C14.637,2.35,14.067,1.781,13.372,1.781 M13.794,16.955c0,0.228-0.194,0.421-0.422,0.421H6.628c-0.228,0-0.421-0.193-0.421-0.421v-0.843h7.587V16.955z M13.794,15.269H6.207V4.731h7.587V15.269z M13.794,3.888H6.207V3.045c0-0.228,0.194-0.421,0.421-0.421h6.744c0.228,0,0.422,0.194,0.422,0.421V3.888z"></path>
                 </svg>
                 <span className="text-gray-700 text-lg font-semibold">
-                  {profile ? profile.phone_number : ""}
+                  {profile ? profile.phone_number : ''}
                 </span>
               </div>
               <input
@@ -784,7 +783,7 @@ const Profile = () => {
                               onClick={() => {
                                 setShow(true);
                                 // setHistory(data);
-                                document.body.style.overflow = "hidden";
+                                document.body.style.overflow = 'hidden';
                               }}
                               className="focus:outline-none bg-blue-400 px-2 rounded-full mt-2 hover:bg-blue-200"
                             >
@@ -969,7 +968,10 @@ const Profile = () => {
                 <center>
                   <h1 className="font-bold mb-2">WALLET</h1>
                 </center>
-                {wallet.id == "" ? (
+                {wallet.email == 'default' ||
+                wallet.id == '' ||
+                wallet.wallet_id == 'default' ||
+                wallet.email == 'default' ? (
                   <form onSubmit={walletSubmit}>
                     <button
                       onClick={getWalletLoading}
@@ -983,14 +985,14 @@ const Profile = () => {
                           // height="8"
                         />
                       ) : (
-                        "Get Wallet"
+                        'Get Wallet'
                       )}
                     </button>
                   </form>
                 ) : (
                   <div>
                     <div
-                      style={{ borderRadius: "30px" }}
+                      style={{ borderRadius: '30px' }}
                       className="mx-auto justify-center flex px-3 py-3 bg-gray-200 wallet-shadow rounded-lg h-56"
                     >
                       <div className="mt-12">
@@ -1042,9 +1044,11 @@ const Profile = () => {
                         </svg>
                       </div>
                       <div>
-                        <h1 className="ml-6 text-gray-700 font-medium text-2xl">
-                          Send
-                        </h1>
+                        <Link to="/send">
+                          <h1 className="ml-6 text-gray-700 font-medium text-2xl">
+                            Send
+                          </h1>
+                        </Link>
                       </div>
                     </div>
                     <div
@@ -1060,9 +1064,11 @@ const Profile = () => {
                         </svg>
                       </div>
                       <div>
-                        <h1 className="ml-6 text-gray-700 font-medium text-2xl">
-                          Recieve
-                        </h1>
+                        <Link to="/recieve">
+                          <h1 className="ml-6 text-gray-700 font-medium text-2xl">
+                            Recieve
+                          </h1>
+                        </Link>
                       </div>
                     </div>
                   </div>

@@ -1,15 +1,17 @@
-import React from "react";
-import { Helmet } from "react-helmet";
-import IosRibbonOutline from "react-ionicons/lib/IosRibbonOutline";
+import React from 'react';
+import axios from 'axios';
+import { Helmet } from 'react-helmet';
+import IosRibbonOutline from 'react-ionicons/lib/IosRibbonOutline';
 // import { Link } from "react-router-dom";
 //
-import swal from "sweetalert";
-import { Progress } from "react-sweet-progress";
-import "react-sweet-progress/lib/style.css";
-import ParticlesBg from "particles-bg";
-import buttonSound from "../../../assets/sound/button-sound.mp3";
+import swal from 'sweetalert';
+import { Progress } from 'react-sweet-progress';
+import 'react-sweet-progress/lib/style.css';
+import ParticlesBg from 'particles-bg';
+import buttonSound from '../../../assets/sound/button-sound.mp3';
 
-const TITLE = "GeneralResult | Quiz app";
+const TITLE = 'GeneralResult | Quiz app';
+var accessTokenObj = localStorage.getItem('token');
 
 class GeneralResult extends React.Component {
   constructor(props) {
@@ -18,9 +20,17 @@ class GeneralResult extends React.Component {
       score: 0,
       numberOfQuestions: 0,
       numberOfAnsweredQuestions: 0,
-      correctAnswers: 0,
+      correctAnswers: '',
       wrongAnswers: 0,
       hintsUsed: 0,
+      //Submit game
+      subAccoutId: '6fefcf5b-7939-460d-a3a1-ab67fc4686e5',
+      // amount: '1',
+      memo: 'game coin send',
+      select: 'ZTO',
+      apikey: 'c3e090dd-5f39-4533-8f80-286d5e594915',
+      apisec:
+        'YmY4ODM3YmQtMzM5Ni00NzZkLTg2Y2MtYjUyNWM5NzZkMTcxQmVhcmVyIGV5SmhiR2NpT2lKSVV6STFOaUo5LmV5SmZhV1FpT2lKak0yVXdPVEJrWkMwMVpqTTVMVFExTXpNdE9HWTRNQzB5T0Raa05XVTFPVFE1TVRVaUxDSmxlSEFpT2pFMU9UUXhNREl6TXpOOS51Z3FsWW9NVWxyZWd0NjhhUHNpbTBoTkJ4aS1iUGNmVVhYSk94cV83M0Jz',
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -28,6 +38,16 @@ class GeneralResult extends React.Component {
   }
 
   componentDidMount() {
+    axios({
+      method: 'GET',
+      url: 'https://backend.satisyou.com/get-wallet',
+      headers: {
+        token: accessTokenObj,
+      },
+    }).then((res) => {
+      this.setState(res.data);
+      console.log(res.data);
+    });
     const { state } = this.props.location;
     if (state) {
       this.setState({
@@ -46,49 +66,69 @@ class GeneralResult extends React.Component {
   };
 
   handleChange = (e) => {
-    console.log("hello");
+    console.log('hello');
     this.setState({ ...this.state, [e.target.name]: e.target.value });
   };
 
   handleSubmit = (e) => {
     e.preventDefault();
-    console.log("hello world");
-    var accessTokenObj = localStorage.getItem("token");
+    console.log('hello world');
+    var accessTokenObj = localStorage.getItem('token');
     // console.log(accessTokenObj);
     const newResult = {
       score: this.state.score,
     };
     console.log(newResult);
-    fetch("https://backend.satisyou.com/play_info", {
-      method: "POST",
+    fetch('https://backend.satisyou.com/play_info', {
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
         token: accessTokenObj,
       },
       body: JSON.stringify({
         score: this.state.correctAnswers,
-        result_category: "general",
+        result_category: 'general',
       }),
     });
-    // axios({
-    //   method: "post",
-    //   url: "http://52.221.199.235:9000/play_info",
-    //   data: JSON.stringify({
-    //     score: newResult,
-    //   }),
-    // }).then((res) => res.json());
+
+    axios({
+      method: 'POST',
+      url: 'https://pro-api.zeetomic.com/apis/v1/payment',
+      data: {
+        id: this.state.subAccoutId,
+        apikey: this.state.apikey,
+        apisec: this.state.apisec,
+        destination: this.state.wallet,
+        amount: this.state.correctAnswers.toString(),
+        // amount: this.state.amount,
+        asset_code: this.state.select,
+        memo: this.state.memo,
+      },
+    }).then((res) => {
+      console.log(res.data.message);
+    });
+    const newsend = {
+      id: this.state.subAccoutId,
+      apikey: this.state.apikey,
+      apisec: this.state.apisec,
+      destination: this.state.wallet,
+      amount: this.state.correctAnswers,
+      asset_code: this.state.select,
+      memo: this.state.memo,
+    };
+    console.log('result wallet', newsend);
   };
   render() {
     const submitAlert = () => {
       this.playButtonSound();
       swal({
-        title: "Thank you so much!",
-        icon: "success",
-        button: "Ok",
+        title: 'Thank you so much!',
+        icon: 'success',
+        button: 'Ok',
         timer: 3000,
         closeOnClickOutside: false,
       }).then(() => {
-        this.props.history.push("/");
+        this.props.history.push('/');
       });
     };
 
@@ -97,13 +137,13 @@ class GeneralResult extends React.Component {
     const userScore = this.state.score;
 
     if (userScore <= 30) {
-      remark = "You need more practice !";
+      remark = 'You need more practice !';
     } else if (userScore > 30 && userScore <= 50) {
-      remark = "Better luck for the next time !";
+      remark = 'Better luck for the next time !';
     } else if (userScore > 50 && userScore <= 70) {
       remark = "Wow it's better !";
     } else if (userScore >= 71 && userScore <= 84) {
-      remark = "You did it greate!";
+      remark = 'You did it greate!';
     } else {
       remark = "You're an absolute genuis!";
     }
@@ -150,14 +190,14 @@ class GeneralResult extends React.Component {
                 strokeWidth={8}
                 theme={{
                   error: {
-                    symbol: this.state.score.toFixed(0) + "%",
-                    trailColor: "pink",
-                    color: "red",
+                    symbol: this.state.score.toFixed(0) + '%',
+                    trailColor: 'pink',
+                    color: 'red',
                   },
                   active: {
-                    symbol: this.state.score.toFixed(0) + "%",
-                    trailColor: "	#E0FFFF",
-                    color: "#0F1EF0",
+                    symbol: this.state.score.toFixed(0) + '%',
+                    trailColor: '	#E0FFFF',
+                    color: '#0F1EF0',
                   },
                 }}
               />
@@ -172,7 +212,7 @@ class GeneralResult extends React.Component {
               <br />
               <br />
               <span onChange={this.handleChange}>
-                Number of attempted questions:{" "}
+                Number of attempted questions:{' '}
                 {this.state.numberOfAnsweredQuestions}
               </span>
               <Progress percent={100} status="active" />

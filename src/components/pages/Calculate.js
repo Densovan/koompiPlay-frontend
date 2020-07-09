@@ -1,20 +1,20 @@
-import React from "react";
-import { Helmet } from "react-helmet";
-import IosLinkOutline from "react-ionicons/lib/IosLinkOutline";
-import MdClock from "react-ionicons/lib/MdClock";
-import MdBulb from "react-ionicons/lib/MdBulb";
+import React from 'react';
+import { Helmet } from 'react-helmet';
+import IosLinkOutline from 'react-ionicons/lib/IosLinkOutline';
+import MdClock from 'react-ionicons/lib/MdClock';
+import MdBulb from 'react-ionicons/lib/MdBulb';
 // import M from "materialize-css";
-import swal from "@sweetalert/with-react";
+import swal from '@sweetalert/with-react';
 // import ParticlesBg from "particles-bg"
 
 // import questions from "../data/questions.json";
-import isEmpty from "../../utilis/is-empty";
-import correctNotification from "../../assets/sound/right-answer2.mp3";
-import wrongNotification from "../../assets/sound/wrong-answer2.mp3";
-import buttonSound from "../../assets/sound/button-sound.mp3";
-import axios from "axios";
+import isEmpty from '../../utilis/is-empty';
+import correctNotification from '../../assets/sound/right-answer2.mp3';
+import wrongNotification from '../../assets/sound/wrong-answer2.mp3';
+import buttonSound from '../../assets/sound/button-sound.mp3';
+import axios from 'axios';
 
-const TITLE = "Quiz App | Play";
+const TITLE = 'Quiz App | Play';
 
 class Calculating extends React.Component {
   constructor(props) {
@@ -24,7 +24,7 @@ class Calculating extends React.Component {
       currentQuestion: [],
       nextQuestion: [],
       previousQuestion: [],
-      answer: "",
+      answer: '',
       numberOfQuestions: 0,
       numberOfAnsweredQuestions: 0,
       currentQuestionIndex: 0,
@@ -43,14 +43,14 @@ class Calculating extends React.Component {
 
   getQuestion = async () => {
     axios({
-      method: "GET",
-      url: "https://backend.satisyou.com/calculating-question",
+      method: 'GET',
+      url: 'https://backend.satisyou.com/calculating-question',
       body: JSON.stringify({
         questions: this.state.question,
       }),
       headers: {
-        Accept: "application/json, text/plain, */*",
-        "Content-type": "application/json",
+        Accept: 'application/json, text/plain, */*',
+        'Content-type': 'application/json',
       },
     })
       .then((res) => {
@@ -145,11 +145,11 @@ class Calculating extends React.Component {
 
   handleButtonClick = (e) => {
     switch (e.target.id) {
-      case "next-button":
+      case 'next-button':
         this.handleNextButtonClick();
         break;
 
-      case "previous-button":
+      case 'previous-button':
         this.handlePreviousButtonClick();
         break;
 
@@ -230,9 +230,9 @@ class Calculating extends React.Component {
   // for show the option
 
   showOptions = () => {
-    const options = Array.from(document.querySelectorAll(".option"));
+    const options = Array.from(document.querySelectorAll('.option'));
     options.forEach((option) => {
-      option.style.visibility = "visible";
+      option.style.visibility = 'visible';
     });
   };
 
@@ -241,7 +241,7 @@ class Calculating extends React.Component {
   handleHints = () => {
     this.playButtonSound();
     if (this.state.hints > 0) {
-      const options = Array.from(document.querySelectorAll(".option"));
+      const options = Array.from(document.querySelectorAll('.option'));
       let indexOfAnswer;
       options.forEach((option, index) => {
         if (
@@ -259,7 +259,7 @@ class Calculating extends React.Component {
         ) {
           options.forEach((option, index) => {
             if (index === randomNumber) {
-              option.style.visibility = "hidden";
+              option.style.visibility = 'hidden';
               this.setState((prevState) => ({
                 hints: prevState.hints - 1,
                 previousRandomNumbers: prevState.previousRandomNumbers.concat(
@@ -325,7 +325,7 @@ class Calculating extends React.Component {
       hintsUsed: 2 - state.hints,
     };
     setTimeout(() => {
-      this.props.history.push("/result", playerStats);
+      this.props.history.push('/result', playerStats);
     }, 2000);
   };
 
@@ -333,17 +333,17 @@ class Calculating extends React.Component {
 
   endAlert = () => {
     swal({
-      title: "Good job!",
-      text: "Your game has ended!",
-      icon: "success",
+      title: 'Good job!',
+      text: 'Your game has ended!',
+      icon: 'success',
       closeOnClickOutside: false,
     });
   };
 
   readyAlert = () => {
     swal({
-      title: "Are you ready?",
-      icon: "info",
+      title: 'Are you ready?',
+      icon: 'info',
       closeOnClickOutside: false,
       button: true,
     }).then((willOk) => {
@@ -361,19 +361,19 @@ class Calculating extends React.Component {
     const quitAlert = () => {
       this.playButtonSound();
       swal({
-        title: "Are you sure to close it?",
-        icon: "warning",
+        title: 'Are you sure to close it?',
+        icon: 'warning',
         buttons: true,
         dangerMode: true,
       }).then((willClose) => {
         if (willClose) {
           this.playButtonSound();
-          swal("Thank you so much!", {
-            icon: "success",
-            timer: "3000",
+          swal('Thank you so much!', {
+            icon: 'success',
+            timer: '3000',
           }).then(() => {
             this.playButtonSound();
-            this.props.history.push("/profile");
+            this.props.history.push('/profile');
           });
         }
       });

@@ -1,9 +1,9 @@
-import React from "react";
-import { Helmet } from "react-helmet";
-import { Link } from "react-router-dom";
-import Navbar from "../layouts/Navbar";
+import React from 'react';
+import { Helmet } from 'react-helmet';
+import { Link } from 'react-router-dom';
+import Navbar from '../layouts/Navbar';
 
-const TITTLE = "Koompi Play | Options";
+const TITTLE = 'Koompi Play | Options';
 
 const Choice = () => (
   <React.Fragment>
@@ -166,7 +166,7 @@ const Choice = () => (
           </div>
         </div> */}
         <div
-          style={{ width: "90%", marginLeft: "auto", marginRight: "auto" }}
+          style={{ width: '90%', marginLeft: 'auto', marginRight: 'auto' }}
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-2"
         >
           <div className="max-w-sm mx-auto bg-white lg:mr-2 hover:shadow-lg cursor-pointer rounded overflow-hidden">
@@ -271,7 +271,7 @@ const Choice = () => (
           </div>
         </div>
         <div
-          style={{ width: "90%", marginLeft: "auto", marginRight: "auto" }}
+          style={{ width: '90%', marginLeft: 'auto', marginRight: 'auto' }}
           className="sm:flex "
         >
           <div className="hover:shadow-lg max-w-sm mx-auto w-full lg:max-w-full lg:flex md:mt-4">
