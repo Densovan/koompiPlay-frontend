@@ -284,12 +284,12 @@ const Login = () => {
                   cookiePolicy={'single_host_origin'}
                 ></GoogleLogin>
               </div>
-              <div className="pl-1">
+              <Link to="/telegram-login" className="pl-1">
                 <img
                   className="telegram-login-size cursor-pointer "
                   src="/img/icons8-telegram-app-48.png"
                 />
-              </div>
+              </Link>
             </div>
 
             <p className="text-center text-gray-600 mb-4">

@@ -55,7 +55,9 @@ const Telegram = () => {
                 type="number"
               />
               {errors.phone && (
-                <p className="text-red-500 text-xs italic">Email required</p>
+                <p className="text-red-500 text-xs italic">
+                  Phone number required
+                </p>
               )}
             </div>
             <button

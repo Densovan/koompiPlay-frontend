@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 import { Helmet } from 'react-helmet';
 import IosRibbonOutline from 'react-ionicons/lib/IosRibbonOutline';
 // import { Link } from "react-router-dom";
@@ -9,18 +10,31 @@ import 'react-sweet-progress/lib/style.css';
 import ParticlesBg from 'particles-bg';
 import buttonSound from '../../../assets/sound/button-sound.mp3';
 
-const TITLE = 'HistoryResult | Quiz app';
+const TITLE = 'Result | Quiz app';
 
-class HistoryResult extends React.Component {
+var accessTokenObj = localStorage.getItem('token');
+class Result extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       score: 0,
       numberOfQuestions: 0,
       numberOfAnsweredQuestions: 0,
-      correctAnswers: 0,
+      correctAnswers: '',
       wrongAnswers: 0,
       hintsUsed: 0,
+      //submit win game
+      subAccoutId: '6fefcf5b-7939-460d-a3a1-ab67fc4686e5',
+      amount: '',
+      memo: 'game coin send',
+      select: 'ZTO',
+      apikey: 'c3e090dd-5f39-4533-8f80-286d5e594915',
+      apisec:
+        'YmY4ODM3YmQtMzM5Ni00NzZkLTg2Y2MtYjUyNWM5NzZkMTcxQmVhcmVyIGV5SmhiR2NpT2lKSVV6STFOaUo5LmV5SmZhV1FpT2lKak0yVXdPVEJrWkMwMVpqTTVMVFExTXpNdE9HWTRNQzB5T0Raa05XVTFPVFE1TVRVaUxDSmxlSEFpT2pFMU9UUXhNREl6TXpOOS51Z3FsWW9NVWxyZWd0NjhhUHNpbTBoTkJ4aS1iUGNmVVhYSk94cV83M0Jz',
+      //submit lost game
+      lostAccId: '',
+      lostAmount: '',
+      subAcc: 'GCPIQSXP77TPZHPVT25X6XMBLJJK46TIARN5XKNC7Q2DESYATBHPEXCF',
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -28,6 +42,16 @@ class HistoryResult extends React.Component {
   }
 
   componentDidMount() {
+    axios({
+      method: 'GET',
+      url: 'https://backend.satisyou.com/get-wallet',
+      headers: {
+        token: accessTokenObj,
+      },
+    }).then((res) => {
+      this.setState(res.data);
+      console.log(res.data);
+    });
     const { state } = this.props.location;
     if (state) {
       this.setState({
@@ -51,33 +75,111 @@ class HistoryResult extends React.Component {
   };
 
   handleSubmit = (e) => {
-    e.preventDefault();
-    console.log('hello world');
-    var accessTokenObj = localStorage.getItem('token');
-    // console.log(accessTokenObj);
-    const newResult = {
-      score: this.state.score,
-    };
-    console.log(newResult);
-    fetch('https://backend.satisyou.com/play_info', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        token: accessTokenObj,
-      },
-      body: JSON.stringify({
-        score: this.state.correctAnswers,
-        result_category: 'history',
-      }),
-    });
-    // axios({
-    //   method: "post",
-    //   url: "http://52.221.199.235:9000/play_info",
-    //   data: JSON.stringify({
-    //     score: newResult,
-    //   }),
-    // }).then((res) => res.json());
+    if (
+      this.state.correctAnswers === 5 ||
+      this.state.correctAnswers === 4 ||
+      this.state.correctAnswers === 3
+    ) {
+      e.preventDefault();
+      console.log('hello world');
+      var accessTokenObj = localStorage.getItem('token');
+      // console.log(accessTokenObj);
+      const newResult = {
+        score: this.state.score,
+      };
+      console.log(newResult);
+      fetch('https://backend.satisyou.com/play_info', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          token: accessTokenObj,
+        },
+        body: JSON.stringify({
+          score: this.state.correctAnswers,
+          result_category: 'general',
+        }),
+      });
+
+      axios({
+        method: 'POST',
+        url: 'https://pro-api.zeetomic.com/apis/v1/payment',
+        data: {
+          id: this.state.subAccoutId,
+          apikey: this.state.apikey,
+          apisec: this.state.apisec,
+          destination: this.state.wallet,
+          // amount: this.state.correctAnswers.toString(),
+          amount: this.state.amount.toString(),
+          asset_code: this.state.select,
+          memo: this.state.memo,
+        },
+      }).then((res) => {
+        console.log(res.data.message);
+      });
+      const newsend = {
+        id: this.state.subAccoutId,
+        apikey: this.state.apikey,
+        apisec: this.state.apisec,
+        destination: this.state.wallet,
+        amount: this.state.amount,
+        asset_code: this.state.select,
+        memo: this.state.memo,
+      };
+      console.log('result wallet', newsend);
+    } else if (
+      this.state.correctAnswers === 2 ||
+      this.state.correctAnswers === 1 ||
+      this.state.correctAnswers === 0
+    ) {
+      e.preventDefault();
+      console.log('hello world');
+      var accessTokenObj = localStorage.getItem('token');
+      // console.log(accessTokenObj);
+      const newResult = {
+        score: this.state.score,
+      };
+      console.log(newResult);
+      fetch('https://backend.satisyou.com/play_info', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          token: accessTokenObj,
+        },
+        body: JSON.stringify({
+          score: this.state.correctAnswers,
+          result_category: 'history',
+        }),
+      });
+
+      axios({
+        method: 'POST',
+        url: 'https://pro-api.zeetomic.com/apis/v1/payment',
+        data: {
+          id: this.state.wallet_id,
+          apikey: this.state.apikey,
+          apisec: this.state.apisec,
+          destination: this.state.subAcc,
+          // amount: this.state.correctAnswers.toString(),
+          amount: this.state.lostAmount.toString(),
+          asset_code: this.state.select,
+          memo: this.state.memo,
+        },
+      }).then((res) => {
+        console.log(res.data.message);
+      });
+      const newsend = {
+        id: this.state.subAccoutId,
+        apikey: this.state.apikey,
+        apisec: this.state.apisec,
+        destination: this.state.wallet,
+        amount: this.state.correctAnswers,
+        asset_code: this.state.select,
+        memo: this.state.memo,
+      };
+      console.log('result wallet', newsend);
+    }
   };
+
   render() {
     const submitAlert = () => {
       this.playButtonSound();
@@ -95,6 +197,7 @@ class HistoryResult extends React.Component {
     const { state } = this.props.location;
     let stats, remark;
     const userScore = this.state.score;
+    const answer = this.state.correctAnswers;
 
     if (userScore <= 30) {
       remark = 'You need more practice !';
@@ -106,6 +209,20 @@ class HistoryResult extends React.Component {
       remark = 'You did it greate!';
     } else {
       remark = "You're an absolute genuis!";
+    }
+
+    if (answer === 5) {
+      this.state.amount = 5;
+    } else if (answer === 4) {
+      this.state.amount = 3;
+    } else if (answer === 3) {
+      this.state.amount = 1;
+    } else if (answer === 2) {
+      this.state.lostAmount = 1;
+    } else if (answer === 1) {
+      this.state.lostAmount = 3;
+    } else if (answer === 0) {
+      this.state.lostAmount = 5;
     }
 
     if (state !== undefined) {
@@ -241,4 +358,4 @@ class HistoryResult extends React.Component {
   }
 }
 
-export default HistoryResult;
+export default Result;
