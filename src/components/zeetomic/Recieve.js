@@ -10,7 +10,7 @@ const Recieve = () => {
   useEffect(() => {
     axios({
       method: 'GET',
-      url: 'https://backend.satisyou.com/get-wallet',
+      url: 'https://backend.rielcoin.com/get-wallet',
       headers: {
         token: accessTokenObj,
       },
@@ -29,7 +29,7 @@ const Recieve = () => {
         {/* <input
           value={wallet.wallet}
           onChange={({ target: { value } }) => {
-            getWallet(wallet.wallet);
+            getWallet(wallet.wallet);                       
             setCopied(false);
           }}
         /> */}

@@ -27,7 +27,7 @@ const Login = () => {
   };
 
   const onSubmit = (data) => {
-    fetch('https://backend.satisyou.com/all_login', {
+    fetch('https://backend.rielcoin.com/all_login', {
       method: 'POST',
       body: JSON.stringify({
         user_external_id: 'default',
@@ -112,29 +112,7 @@ const Login = () => {
     let user_profile = user.picture.data.url;
     let login_type = 'facebook';
 
-    // axios
-    //   .post('https://pro-api.zeetomic.com/apis/v1/get-wallet', {
-    //     apikey: 'c3e090dd-5f39-4533-8f80-286d5e594915',
-    //     apisec:
-    //       'YmY4ODM3YmQtMzM5Ni00NzZkLTg2Y2MtYjUyNWM5NzZkMTcxQmVhcmVyIGV5SmhiR2NpT2lKSVV6STFOaUo5LmV5SmZhV1FpT2lKak0yVXdPVEJrWkMwMVpqTTVMVFExTXpNdE9HWTRNQzB5T0Raa05XVTFPVFE1TVRVaUxDSmxlSEFpT2pFMU9UUXhNREl6TXpOOS51Z3FsWW9NVWxyZWd0NjhhUHNpbTBoTkJ4aS1iUGNmVVhYSk94cV83M0Jz',
-    //   })
-    //   .then((res) => {
-    //     console.log('wallet', res.data.message);
-
-    //     axios({
-    //       method: 'POST',
-    //       url: 'https://backend.satisyou.com/create-wallet',
-    //       data: {
-    //         wallet_id: res.data.message.id,
-    //         wallet: res.data.message.wallet,
-    //         email: user_email,
-    //       },
-    //     }).then((res) => {
-    //       console.log(res.data.string);
-    //     });
-    //   });
-
-    fetch('https://backend.satisyou.com/all_login', {
+    fetch('https://backend.rielcoin.com/all_login', {
       method: 'POST',
       header: {
         'Content-Type': 'application/json',

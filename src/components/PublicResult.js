@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from "react";
-import publicResult from "./data/publicResult.json";
-import Navbar from "../layouts/Navbar.js";
-import axios from "axios";
-import useAxios from "axios-hooks";
+import React, { useState, useEffect } from 'react';
+import publicResult from './data/publicResult.json';
+import Navbar from '../layouts/Navbar.js';
+import axios from 'axios';
+import useAxios from 'axios-hooks';
 
-var accessTokenObj = localStorage.getItem("token");
+var accessTokenObj = localStorage.getItem('token');
 function PublicResult() {
   // const [scoress, setScore] = useState([]);
   const [general, setGeneral] = useState([]);
@@ -15,10 +15,10 @@ function PublicResult() {
 
   useEffect(() => {
     axios({
-      method: "GET",
-      url: "https://backend.satisyou.com/general-top",
+      method: 'GET',
+      url: 'https://backend.rielcoin.com/general-top',
       headers: {
-        "Content-type": "application/json",
+        'Content-type': 'application/json',
         token: accessTokenObj,
       },
     })
@@ -36,10 +36,10 @@ function PublicResult() {
   // History rest api
   useEffect(() => {
     axios({
-      method: "GET",
-      url: "https://backend.satisyou.com/history-top",
+      method: 'GET',
+      url: 'https://backend.rielcoin.com/history-top',
       headers: {
-        "Content-type": "application/json",
+        'Content-type': 'application/json',
         token: accessTokenObj,
       },
     })
@@ -47,7 +47,7 @@ function PublicResult() {
       .then((res) => {
         // const scoress = res.data;
         setHistory(res.data);
-        console.log("history", res.data);
+        console.log('history', res.data);
       })
       .catch((error) => {
         console.log(error);
@@ -56,10 +56,10 @@ function PublicResult() {
   //Science rest api
   useEffect(() => {
     axios({
-      method: "GET",
-      url: "https://backend.satisyou.com/science-top",
+      method: 'GET',
+      url: 'https://backend.rielcoin.com/science-top',
       headers: {
-        "Content-type": "application/json",
+        'Content-type': 'application/json',
         token: accessTokenObj,
       },
     })
@@ -67,7 +67,7 @@ function PublicResult() {
       .then((res) => {
         // const scoress = res.data;
         setScience(res.data);
-        console.log("Science", res.data);
+        console.log('Science', res.data);
       })
       .catch((error) => {
         console.log(error);
@@ -77,10 +77,10 @@ function PublicResult() {
   //Calculating res api
   useEffect(() => {
     axios({
-      method: "GET",
-      url: "https://backend.satisyou.com/calculating-top",
+      method: 'GET',
+      url: 'https://backend.rielcoin.com/calculating-top',
       headers: {
-        "Content-type": "application/json",
+        'Content-type': 'application/json',
         token: accessTokenObj,
       },
     })
@@ -88,7 +88,7 @@ function PublicResult() {
       .then((res) => {
         // const scoress = res.data;
         setCalculating(res.data);
-        console.log("Calculating", res.data);
+        console.log('Calculating', res.data);
       })
       .catch((error) => {
         console.log(error);

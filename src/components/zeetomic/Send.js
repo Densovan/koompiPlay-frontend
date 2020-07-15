@@ -184,7 +184,9 @@ const Send = () => {
               send.select === '' ? (
                 <button
                   disabled={
-                    send.recieve == '' || send.amount == '' || send.memo == ''
+                    send.recieve === '' ||
+                    send.amount === '' ||
+                    send.memo === ''
                       ? true
                       : false
                   }

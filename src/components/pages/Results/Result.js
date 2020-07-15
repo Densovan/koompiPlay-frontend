@@ -44,7 +44,7 @@ class Result extends React.Component {
   componentDidMount() {
     axios({
       method: 'GET',
-      url: 'https://backend.satisyou.com/get-wallet',
+      url: 'https://backend.rielcoin.com/get-wallet',
       headers: {
         token: accessTokenObj,
       },
@@ -88,7 +88,7 @@ class Result extends React.Component {
         score: this.state.score,
       };
       console.log(newResult);
-      fetch('https://backend.satisyou.com/play_info', {
+      fetch('https://backend.rielcoin.com/play_info', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -135,7 +135,7 @@ class Result extends React.Component {
         score: this.state.score,
       };
       console.log(newResult);
-      fetch('https://backend.satisyou.com/play_info', {
+      fetch('https://backend.rielcoin.com/play_info', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

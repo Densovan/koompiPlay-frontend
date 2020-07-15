@@ -1,6 +1,7 @@
 import React from 'react';
-import axios from 'axios';
 import { Helmet } from 'react-helmet';
+import axios from 'axios';
+
 import IosRibbonOutline from 'react-ionicons/lib/IosRibbonOutline';
 // import { Link } from "react-router-dom";
 //
@@ -11,12 +12,18 @@ import ParticlesBg from 'particles-bg';
 import buttonSound from '../../../assets/sound/button-sound.mp3';
 
 const TITLE = 'Result | Quiz app';
-
 var accessTokenObj = localStorage.getItem('token');
+
 class Result extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      score: 0,
+      numberOfQuestions: 0,
+      numberOfAnsweredQuestions: 0,
+      correctAnswers: 0,
+      wrongAnswers: 0,
+      hintsUsed: 0,
       score: 0,
       numberOfQuestions: 0,
       numberOfAnsweredQuestions: 0,
@@ -44,7 +51,7 @@ class Result extends React.Component {
   componentDidMount() {
     axios({
       method: 'GET',
-      url: 'https://backend.satisyou.com/get-wallet',
+      url: 'https://backend.rielcoin.com/get-wallet',
       headers: {
         token: accessTokenObj,
       },
@@ -74,6 +81,27 @@ class Result extends React.Component {
     this.setState({ ...this.state, [e.target.name]: e.target.value });
   };
 
+  // handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   console.log('hello world');
+  //   var accessTokenObj = localStorage.getItem('token');
+  //   // console.log(accessTokenObj);
+  //   const newResult = {
+  //     score: this.state.score,
+  //   };
+  //   console.log(newResult);
+  //   fetch('https://backend.rielcoin.com/play_info', {
+  //     method: 'POST',
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //       token: accessTokenObj,
+  //     },
+  //     body: JSON.stringify({
+  //       score: this.state.correctAnswers,
+  //       result_category: 'history',
+  //     }),
+  //   });
+  // };
   handleSubmit = (e) => {
     if (
       this.state.correctAnswers === 5 ||
@@ -88,7 +116,7 @@ class Result extends React.Component {
         score: this.state.score,
       };
       console.log(newResult);
-      fetch('https://backend.satisyou.com/play_info', {
+      fetch('https://backend.rielcoin.com/play_info', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -96,7 +124,7 @@ class Result extends React.Component {
         },
         body: JSON.stringify({
           score: this.state.correctAnswers,
-          result_category: 'general',
+          result_category: 'history',
         }),
       });
 
@@ -126,11 +154,7 @@ class Result extends React.Component {
         memo: this.state.memo,
       };
       console.log('result wallet', newsend);
-    } else if (
-      this.state.correctAnswers === 2 ||
-      this.state.correctAnswers === 1 ||
-      this.state.correctAnswers === 0
-    ) {
+    } else if (this.state.correctAnswers <= 2) {
       e.preventDefault();
       console.log('hello world');
       var accessTokenObj = localStorage.getItem('token');
@@ -139,7 +163,7 @@ class Result extends React.Component {
         score: this.state.score,
       };
       console.log(newResult);
-      fetch('https://backend.satisyou.com/play_info', {
+      fetch('https://backend.rielcoin.com/play_info', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -166,20 +190,20 @@ class Result extends React.Component {
         },
       }).then((res) => {
         console.log(res.data.message);
+        console.log('wallet IDD', this.state.wallet_id);
       });
       const newsend = {
-        id: this.state.subAccoutId,
+        id: this.state.wallet_id,
         apikey: this.state.apikey,
         apisec: this.state.apisec,
-        destination: this.state.wallet,
+        destination: this.state.subAcc,
         amount: this.state.correctAnswers,
         asset_code: this.state.select,
         memo: this.state.memo,
       };
-      console.log('result wallet', newsend);
+      console.log('lost wallet', newsend);
     }
   };
-
   render() {
     const submitAlert = () => {
       this.playButtonSound();
@@ -190,7 +214,7 @@ class Result extends React.Component {
         timer: 3000,
         closeOnClickOutside: false,
       }).then(() => {
-        this.props.history.push('/');
+        this.props.history.push('/profile');
       });
     };
 

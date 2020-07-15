@@ -44,7 +44,7 @@ class GeneralKnowledge extends React.Component {
   getQuestion = async () => {
     axios({
       method: 'GET',
-      url: 'https://backend.satisyou.com/general-question',
+      url: 'https://backend.rielcoin.com/general-question',
       body: JSON.stringify({
         questions: this.state.question,
       }),

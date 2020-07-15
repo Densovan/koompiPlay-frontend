@@ -44,7 +44,7 @@ class Calculating extends React.Component {
   getQuestion = async () => {
     axios({
       method: 'GET',
-      url: 'https://backend.satisyou.com/calculating-question',
+      url: 'https://backend.rielcoin.com/calculating-question',
       body: JSON.stringify({
         questions: this.state.question,
       }),

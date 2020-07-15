@@ -26,6 +26,7 @@ import Transaction from './components/zeetomic/Transaction';
 import Send from './components/zeetomic/Send';
 import Recieve from './components/zeetomic/Recieve';
 import Telegram from './components/SocialLogin/Telegram';
+import TelegramConfirmCode from './components/SocialLogin/TelegramConfirmCode';
 
 function App() {
   return (
@@ -41,6 +42,7 @@ function App() {
           /> */}
 
           <Route exact path="/login" restricted={true} component={Login} />
+          <PublicRoute exact path="/verify" component={TelegramConfirmCode} />
           <PublicRoute exact path="/logout" component={Logout} />
           <PublicRoute exact path="/telegram-login" component={Telegram} />
           <PublicRoute exact path="/file" component={FIleupload} />

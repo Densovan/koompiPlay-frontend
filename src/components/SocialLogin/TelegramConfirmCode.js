@@ -3,7 +3,10 @@ import { useForm } from 'react-hook-form';
 import three_dots from '../../assets/bars.svg';
 import axios from 'axios';
 
-const Telegram = ({ Telegram }) => {
+var phone_code_hash = localStorage.getItem('code_hash');
+var phone = localStorage.getItem('phone_number');
+
+const TelegramConfirmCode = () => {
   const [loaading, setLoading] = useState(false);
   const { register, handleSubmit, errors } = useForm();
   const [click, setClick] = useState(true);
@@ -11,30 +14,43 @@ const Telegram = ({ Telegram }) => {
   const onSubmit = (data) => {
     axios({
       method: 'POST',
-      url: 'https://telegram.rielcoin.com/api/login/telegram_auth',
+      url: 'https://telegram.rielcoin.com/api/login/telegram_confirm',
       data: {
-        phone: data.phone,
+        phone: phone,
+        phone_code_hash: phone_code_hash,
+        code: data.code,
       },
     }).then((res) => {
-      console.log(res.data);
-      localStorage.setItem('code_hash', res.data.phone_code_hash);
-      localStorage.setItem('phone_number', res.data.phone);
+      console.log(res.data.id);
+      axios({
+        method: 'POST',
+        url: 'https://backend.rielcoin.com/all_login',
+        data: {
+          // user_external_id: res.data.id,
+          user_name: res.data.first_name,
+          phone_number: res.data.phone,
+          user_gender: 'default',
+          user_email: 'default',
+          user_password: 'default',
+          user_profile: 'default',
+          login_type: 'telegram',
+        },
+      }).then((res) => {
+        console.log('token', res.data.string);
+      });
     });
     const newUser = {
-      phone_number: data.phone,
+      code_number: data.code,
     };
-    // const handleClick = () => {
-    setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-      setClick(false);
-      // window.location.replace('/verify');
-    }, 5000);
+    // console.log('phone', newUser);
+    // setLoading(true);
+    // setTimeout(() => {
+    //   setLoading(false);
+    //   setClick(false);
+    //   // window.location.replace('/profile');
+    // }, 5000);
     // console.log('clicked');
-
-    console.log('phone', newUser);
   };
-
   return (
     <div className="flex  items-center justify-center h-screen ">
       <div className="w-full max-w-md">
@@ -44,20 +60,19 @@ const Telegram = ({ Telegram }) => {
         >
           <div className="mb-4">
             <label className="block text-gray-700 text-sm font-bold mb-2">
-              Your Phone Number
+              Verify Code
             </label>
             <input
               className=" appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              ref={register({ required: true, minLength: 9 })}
-              name="phone"
+              ref={register({ required: true })}
+              name="code"
               type="number"
-              // value={+855}
             />
-            {errors.phone && (
+            {/* {errors.code && (
               <p className="text-red-500 text-xs italic">
                 Phone number required
               </p>
-            )}
+            )} */}
           </div>
           <button
             // onClick={handleClick}
@@ -73,39 +88,15 @@ const Telegram = ({ Telegram }) => {
                 // height="8"
               />
             ) : (
-              'Next'
+              'Verify'
             )}
             {/* Sing Up */}
           </button>
+          {/* <Telegram Telegram={Telegram} /> */}
         </form>
-        {/* 
-        <form
-          onSubmit={handleSubmit(onSubmitVerify)}
-          className=" appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-        >
-          <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-bold mb-2">
-              Verify
-            </label>
-            <input
-              className=" appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              // ref={register({ required: true, minLength: 9 })}
-              name="verifyy"
-              type="number"
-            />
-            
-          </div>
-          <button
-            value="local"
-            type="submit"
-            className="mb-4 w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-          >
-            Verify
-          </button>
-        </form> */}
       </div>
     </div>
   );
 };
 
-export default Telegram;
+export default TelegramConfirmCode;

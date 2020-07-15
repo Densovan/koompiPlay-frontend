@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
-import firebase, { auth } from "firebase";
-import axios from "axios";
+import React, { useState, useEffect } from 'react';
+import firebase, { auth } from 'firebase';
+import axios from 'axios';
 // import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
-import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
-import { FirebaseAuth } from "react-firebaseui";
+import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
+import { FirebaseAuth } from 'react-firebaseui';
 
 // firebase.initializeApp({
 //   // apiKey: "AIzaSyCs-PhYAG1ZEYuF9Hbhinn7Iwh9ZhwrNJ4",
@@ -15,7 +15,7 @@ const Authfirebase = () => {
     isSingedIn: false,
   });
   const uiConfig = {
-    signInFlow: "popup",
+    signInFlow: 'popup',
     signInOptions: [
       firebase.auth.GoogleAuthProvider.PROVIDER_ID,
       firebase.auth.FacebookAuthProvider.PROVIDER_ID,
@@ -30,22 +30,22 @@ const Authfirebase = () => {
   useEffect(() => {
     firebase.auth().onAuthStateChanged((user) => {
       setState({ isSingedIn: !!user });
-      console.log("user", user);
+      console.log('user', user);
       console.log(uiConfig.signInOptions);
       console.log(user.providerData[0].providerId);
 
-      if (user.providerData[0].providerId == "google.com") {
+      if (user.providerData[0].providerId == 'google.com') {
         let user_external_id = user.uid;
         let user_name = user.displayName;
-        let user_gender = "default";
+        let user_gender = 'default';
         let user_email = user.email;
         let user_profile = user.photoURL;
-        let login_type = "google";
+        let login_type = 'google';
 
-        fetch("http://localhost:8000/all_register", {
-          method: "POST",
+        fetch('http://localhost:8000/all_register', {
+          method: 'POST',
           header: {
-            "Content-Type": "application/json",
+            'Content-Type': 'application/json',
           },
           body: JSON.stringify({
             user_external_id: user_external_id,
@@ -60,18 +60,18 @@ const Authfirebase = () => {
           .then((data) => {
             console.log(data.string);
           });
-      } else if (user.providerData[0].providerId == "facebook.com") {
+      } else if (user.providerData[0].providerId == 'facebook.com') {
         let user_external_id = user.uid;
         let user_name = user.displayName;
-        let user_gender = "default";
+        let user_gender = 'default';
         let user_email = user.email;
         let user_profile = user.photoURL;
-        let login_type = "facebook";
+        let login_type = 'facebook';
 
-        fetch("http://localhost:8000/all_register", {
-          method: "POST",
+        fetch('http://localhost:8000/all_register', {
+          method: 'POST',
           header: {
-            "Content-Type": "application/json",
+            'Content-Type': 'application/json',
           },
           body: JSON.stringify({
             user_external_id: user_external_id,
