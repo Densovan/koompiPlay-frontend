@@ -7,7 +7,7 @@ import swal from "sweetalert";
 import { Progress } from "react-sweet-progress";
 import "react-sweet-progress/lib/style.css";
 import ParticlesBg from "particles-bg";
-import buttonSound from '../../assets/sound/button-sound.mp3';
+import buttonSound from '../../assets/sound/button-click-sound-effect.mp3';
 
 
 const TITLE = "Result | Quiz app";
