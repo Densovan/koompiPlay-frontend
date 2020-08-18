@@ -121,10 +121,15 @@ body {
   margin-left: auto;
   margin-right: auto;
 }
+.game-container {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
 
 @media only screen and (max-width: 640px) {
   .container {
-    width: 100%;
+    /* width: 100%; */
   }
 }
 /* --------choice---------- */
@@ -159,7 +164,9 @@ body {
 /* .shad {
   box-shadow: -7px -8px 145px 0px rgb(216, 153, 216);
 } */
-
+.background-profile {
+  background-color: #f6f6f6;
+}
 .circle {
   border-radius: 50%;
   background-color: deepskyblue;
@@ -229,4 +236,58 @@ body {
 .telegram-login-size {
   width: 38px;
   margin-top: -3px;
+}
+.background-general {
+  background-image: url('./assets/img/General knowledge.png');
+  max-width: 100%;
+  height: 250px;
+  width: 100%;
+  max-width: 100%;
+  background-size: cover;
+  background-position: 50%;
+  background-repeat: no-repeat;
+  border-radius: 3px 3px 0 0 !important;
+}
+.science-image {
+  background-image: url('./assets/img/Science.png');
+  /* max-width: 100%; */
+  height: 250px;
+  width: 80%;
+  /* max-width: 100%; */
+  background-size: cover;
+  /* background-position: center; */
+  margin-left: 30px;
+  background-repeat: no-repeat;
+  border-radius: 3px 3px 0 0 !important;
+}
+.background-history {
+  background-image: url('./assets/img/World History.png');
+  max-width: 100%;
+  height: 250px;
+  width: 80%;
+  margin-left: 30px;
+  max-width: 100%;
+  background-size: cover;
+  background-position: 50%;
+  background-repeat: no-repeat;
+  border-radius: 3px 3px 0 0 !important;
+}
+.background-calculating {
+  background-image: url('./assets/img/Calculating.png');
+  max-width: 100%;
+  height: 250px;
+  width: 100%;
+  max-width: 100%;
+  background-size: cover;
+  background-position: 50%;
+  background-repeat: no-repeat;
+  border-radius: 3px 3px 0 0 !important;
+}
+.background-which-choice {
+  height: 500px;
+}
+@media only screen and (max-width: 640px) {
+  .edit-button {
+    margin-top: -42px;
+  }
 }

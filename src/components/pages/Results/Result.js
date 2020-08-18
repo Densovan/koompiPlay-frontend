@@ -24,17 +24,17 @@ class Result extends React.Component {
       wrongAnswers: 0,
       hintsUsed: 0,
       //submit win game
-      subAccoutId: '6fefcf5b-7939-460d-a3a1-ab67fc4686e5',
+      subAccoutId: '7b2f0b6e-030e-442a-b163-9821779551b9',
       amount: '',
       memo: 'game coin send',
-      select: 'ZTO',
-      apikey: 'c3e090dd-5f39-4533-8f80-286d5e594915',
+      select: 'SET',
+      apikey: 'c9c3cce7-61c1-43e8-97f7-495d75c51b18',
       apisec:
-        'YmY4ODM3YmQtMzM5Ni00NzZkLTg2Y2MtYjUyNWM5NzZkMTcxQmVhcmVyIGV5SmhiR2NpT2lKSVV6STFOaUo5LmV5SmZhV1FpT2lKak0yVXdPVEJrWkMwMVpqTTVMVFExTXpNdE9HWTRNQzB5T0Raa05XVTFPVFE1TVRVaUxDSmxlSEFpT2pFMU9UUXhNREl6TXpOOS51Z3FsWW9NVWxyZWd0NjhhUHNpbTBoTkJ4aS1iUGNmVVhYSk94cV83M0Jz',
+        'ZTc3NGQ2NTEtMTYzMy00YjVjLWI4ZmQtNmQwNDI5NmUxYzRlQmVhcmVyIGV5SmhiR2NpT2lKSVV6STFOaUo5LmV5SmZhV1FpT2lKak9XTXpZMk5sTnkwMk1XTXhMVFF6WlRndE9UZG1OeTAwT1RWa056VmpOVEZpTVRnaUxDSmxlSEFpT2pFMU9UYzRNakkxTVRkOS5iazdoXzJzQ1JlZlFfZ1EtNW9LRWNBMjFoWFd5U3JkUlVGdDJJQ1c4dmU4',
       //submit lost game
       lostAccId: '',
       lostAmount: '',
-      subAcc: 'GCPIQSXP77TPZHPVT25X6XMBLJJK46TIARN5XKNC7Q2DESYATBHPEXCF',
+      subAcc: 'GA5TLEFV22D4YBALJR4D5DKXFKVWNXVYJ3CVKIFHDL2GSF7YF2FREZNZ',
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -81,7 +81,7 @@ class Result extends React.Component {
       this.state.correctAnswers === 3
     ) {
       e.preventDefault();
-      console.log('hello world');
+      // console.log('hello world');
       var accessTokenObj = localStorage.getItem('token');
       // console.log(accessTokenObj);
       const newResult = {
@@ -102,7 +102,7 @@ class Result extends React.Component {
 
       axios({
         method: 'POST',
-        url: 'https://pro-api.zeetomic.com/apis/v1/payment',
+        url: 'https://testnet-api.selendra.com/apis/v1/payment',
         data: {
           id: this.state.subAccoutId,
           apikey: this.state.apikey,

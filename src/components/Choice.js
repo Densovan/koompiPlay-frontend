@@ -14,263 +14,118 @@ const Choice = () => (
       <Navbar />
       <form
         id="choice-bg"
-        className="bg-gray-100 container shadow-xl rounded-lg pb-5 mx-auto h-auto relative z-1"
+        className=" container  pb-5 mx-auto h-auto relative z-1"
       >
         <h4 className="lg:mt-5 text-center text-6xl font-medium py-5">
           Enjoying!
         </h4>
-        {/* <div className="mx-auto justify-center lg:px-20">
-          <div className="sm:flex">
-            <div className="max-w-sm mx-auto bg-white lg:mr-2 hover:shadow-lg cursor-pointer rounded overflow-hidden">
-              <img className="w-full h-48" src="/img/general.jpg" />
-              <Link to="/general">
-                <button
-                  type="button"
-                  id="option-start"
-                  className="flex mx-auto text-white font-bold mt-3 rounded-full h-16 w-16 items-center justify-center"
-                >
-                  Start
-                </button>
-              </Link>
-              <div className=" py-4">
-                <div className="font-bold text-xl mb-2 text-center">
-                  <h1>General knowledge</h1>
-                </div>
-              </div>
-              <div className="flex px-2 mb-2">
-                <span className=" px-2 py-1 inline-block leading-none bg-teal-200 text-teal-800 rounded-full font-semibold uppercase tracking-wide text-xs">
-                  10 Qs
-                </span>
-                <span className="ml-2 px-2 py-1 inline-block leading-none bg-teal-200 text-teal-800 rounded-full font-semibold uppercase tracking-wide text-xs">
-                  3.7k play
-                </span>
-              </div>
-            </div>
-            <div className="max-w-sm mx-auto bg-white hover:shadow-lg cursor-pointer rounded overflow-hidden">
-              <img className="w-full h-48" src="/img/card2.jpg" />
-              <Link to="/history">
-                <button
-                  type="button"
-                  id="option-start"
-                  className="flex mx-auto text-white font-bold mt-3 rounded-full h-16 w-16 items-center justify-center"
-                >
-                  Start
-                </button>
-              </Link>
-              <div className=" py-4">
-                <div className="font-bold text-xl mb-2 text-center">
-                  <h1>World History</h1>
-                </div>
-              </div>
-              <div className="flex px-2 mb-2">
-                <span className=" px-2 py-1 inline-block leading-none bg-teal-200 text-teal-800 rounded-full font-semibold uppercase tracking-wide text-xs">
-                  10 Qs
-                </span>
-                <span className="ml-2 px-2 py-1 inline-block leading-none bg-teal-200 text-teal-800 rounded-full font-semibold uppercase tracking-wide text-xs">
-                  3.7k play
-                </span>
-              </div>
-            </div>
-            <div className="max-w-sm mx-auto bg-white hover:shadow-lg lg:ml-2 cursor-pointer rounded overflow-hidden">
-              <img className="w-full h-48" src="/img/card3.jpg" />
-              <Link to="/calculate">
-                <button
-                  type="button"
-                  id="option-start"
-                  className="flex mx-auto text-white font-bold mt-3 rounded-full h-16 w-16 items-center justify-center"
-                >
-                  Start
-                </button>
-              </Link>
-              <div className=" py-4">
-                <div className="font-bold text-xl mb-2 text-center">
-                  <h1>Calculating</h1>
-                </div>
-              </div>
-              <div className="flex px-2 mb-2">
-                <span className=" px-2 py-1 inline-block leading-none bg-teal-200 text-teal-800 rounded-full font-semibold uppercase tracking-wide text-xs">
-                  10 Qs
-                </span>
-                <span className="ml-2 px-2 py-1 inline-block leading-none bg-teal-200 text-teal-800 rounded-full font-semibold uppercase tracking-wide text-xs">
-                  3.7k play
-                </span>
-              </div>
-            </div>
-            <div className="max-w-sm mx-auto bg-white hover:shadow-lg lg:ml-2 cursor-pointer rounded overflow-hidden">
-              <img className="w-full h-48" src="/img/explore.jpg" />
+
+        <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-8 lg:gap-2 ">
+          <div className="background-which-choice max-w-sm rounded shadow-lg">
+            <div className="background-history"></div>
+            <div className="px-4 ">
+              <h1 className="font-bold text-center text-3xl">History</h1>
               <Link to="/science">
                 <button
                   type="button"
                   id="option-start"
-                  className="flex mx-auto text-white font-bold mt-3 rounded-full h-16 w-16 items-center justify-center"
+                  className="flex mx-auto mt-10 text-white font-bold  rounded-full h-16 w-16 items-center justify-center"
                 >
                   Start
                 </button>
               </Link>
-              <div className=" py-4">
-                <div className="font-bold text-xl mb-2 text-center">
-                  <h1>Science</h1>
-                </div>
-              </div>
-              <div className="flex px-2 mb-2">
-                <span className=" px-2 py-1 inline-block leading-none bg-teal-200 text-teal-800 rounded-full font-semibold uppercase tracking-wide text-xs">
-                  10 Qs
+              <div className="px-6  mt-8 mb-2">
+                <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">
+                  3k Player
                 </span>
-                <span className="ml-2 px-2 py-1 inline-block leading-none bg-teal-200 text-teal-800 rounded-full font-semibold uppercase tracking-wide text-xs">
-                  3.7k play
+                <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">
+                  5 Question
                 </span>
               </div>
             </div>
           </div>
-          <div className="sm:flex">
-            <div className="hover:shadow-lg max-w-sm mx-auto w-full lg:max-w-full lg:flex lg:mt-4">
-              <div className="h-48 lg:h-auto lg:w-48 flex-none bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden">
-                <img className="w-full h-full" src="/img/coming.jpg" />
-              </div>
-              <div className="border-r border-b border-l border-gray-400 lg:border-l-0 lg:border-t lg:border-gray-400 bg-white rounded-b lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between leading-normal">
-                <div className="mb-8">
-                  <p className="text-sm text-gray-600 flex items-center">
-                    <svg
-                      className="fill-current text-gray-500 w-3 h-3 mr-2"
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 20 20"
-                    >
-                      <path d="M4 8V6a6 6 0 1 1 12 0v2h1a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-8c0-1.1.9-2 2-2h1zm5 6.73V17h2v-2.27a2 2 0 1 0-2 0zM7 6v2h6V6a3 3 0 0 0-6 0z" />
-                    </svg>
-                    New Game
-                  </p>
-                  <div className="text-gray-900 font-bold text-xl mb-2">
-                    Comming soon...
-                  </div>
-                  <p className="text-gray-700 text-base">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                    Voluptatibus quia, nulla! Maiores et perferendis eaque,
-                    exercitationem praesentium nihil.
-                  </p>
-                </div>
-                <div className="flex items-center">
-                  <img
-                    className="w-10 h-10 rounded-full mr-4"
-                    src="/img/card1.jpeg"
-                    alt="Avatar of Jonathan Reinink"
-                  />
-                  <div className="text-sm">
-                    <p className="text-gray-900 leading-none">
-                      KoompiPlay teams
-                    </p>
-                    <p className="text-gray-600">Aug 18</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div> */}
-        <div
-          style={{ width: '90%', marginLeft: 'auto', marginRight: 'auto' }}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-2"
-        >
-          <div className="max-w-sm mx-auto bg-white lg:mr-2 hover:shadow-lg cursor-pointer rounded overflow-hidden">
-            <img className="w-full h-48" src="/img/general.jpg" />
-            <Link to="/general">
-              <button
-                type="button"
-                id="option-start"
-                className="flex mx-auto text-white font-bold mt-3 rounded-full h-16 w-16 items-center justify-center"
+          <div className="background-which-choice max-w-sm rounded h-full shadow-lg">
+            <div className="background-general"></div>
+            {/* <img
+              className="w-full h-full px-4 py-4 bg-green-100"
+              src="/img/General knowledge.png"
+              alt="Sunset in the mountains"
+            /> */}
+            <div className="px-6 py-4">
+              <div
+                style={{ marginTop: '-22px' }}
+                className="font-bold  mb-2 text-center text-3xl"
               >
-                Start
-              </button>
-            </Link>
-            <div className=" py-4">
-              <div className="font-bold text-xl mb-2 text-center">
-                <h1>General knowledge</h1>
+                General knowledge
               </div>
+              <Link to="/general">
+                <button
+                  type="button"
+                  id="option-start"
+                  className="flex mx-auto mt-12 text-white font-bold  rounded-full h-16 w-16 items-center justify-center"
+                >
+                  Start
+                </button>
+              </Link>
             </div>
-            <div className="flex px-2 mb-2">
-              <span className=" px-2 py-1 inline-block leading-none bg-teal-200 text-teal-800 rounded-full font-semibold uppercase tracking-wide text-xs">
-                10 Qs
+            <div className="px-6 py-4">
+              <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">
+                3k Player
               </span>
-              <span className="ml-2 px-2 py-1 inline-block leading-none bg-teal-200 text-teal-800 rounded-full font-semibold uppercase tracking-wide text-xs">
-                3.7k play
+              <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">
+                5 Question
               </span>
             </div>
           </div>
-          <div className="max-w-sm mx-auto bg-white lg:mr-2 hover:shadow-lg cursor-pointer rounded overflow-hidden">
-            <img className="w-full h-48" src="/img/general.jpg" />
-            <Link to="/history">
-              <button
-                type="button"
-                id="option-start"
-                className="flex mx-auto text-white font-bold mt-3 rounded-full h-16 w-16 items-center justify-center"
-              >
-                Start
-              </button>
-            </Link>
-            <div className=" py-4">
-              <div className="font-bold text-xl mb-2 text-center">
-                <h1>World History</h1>
+          <div className="background-which-choice max-w-sm rounded shadow-lg">
+            <div className="science-image"></div>
+            <div className="px-4 ">
+              <h1 className="font-bold text-center text-3xl">Science</h1>
+              <Link to="/science">
+                <button
+                  type="button"
+                  id="option-start"
+                  className="flex mx-auto mt-10 text-white font-bold  rounded-full h-16 w-16 items-center justify-center"
+                >
+                  Start
+                </button>
+              </Link>
+              <div className="px-6  mt-8 mb-2">
+                <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">
+                  3k Player
+                </span>
+                <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">
+                  5 Question
+                </span>
               </div>
-            </div>
-            <div className="flex px-2 mb-2">
-              <span className=" px-2 py-1 inline-block leading-none bg-teal-200 text-teal-800 rounded-full font-semibold uppercase tracking-wide text-xs">
-                10 Qs
-              </span>
-              <span className="ml-2 px-2 py-1 inline-block leading-none bg-teal-200 text-teal-800 rounded-full font-semibold uppercase tracking-wide text-xs">
-                3.7k play
-              </span>
             </div>
           </div>
-          <div className="max-w-sm mx-auto bg-white lg:mr-2 hover:shadow-lg cursor-pointer rounded overflow-hidden">
-            <img className="w-full h-48" src="/img/general.jpg" />
-            <Link to="/science">
-              <button
-                type="button"
-                id="option-start"
-                className="flex mx-auto text-white font-bold mt-3 rounded-full h-16 w-16 items-center justify-center"
-              >
-                Start
-              </button>
-            </Link>
-            <div className=" py-4">
-              <div className="font-bold text-xl mb-2 text-center">
-                <h1>Science</h1>
+          <div className="background-which-choice max-w-sm rounded shadow-lg">
+            <div className="background-calculating"></div>
+            <div className="px-4 ">
+              <h1 className="font-bold text-center text-3xl">Calculating</h1>
+              <Link to="/calculate">
+                <button
+                  type="button"
+                  id="option-start"
+                  className="flex mx-auto mt-10 text-white font-bold  rounded-full h-16 w-16 items-center justify-center"
+                >
+                  Start
+                </button>
+              </Link>
+              <div className="px-6  mt-8 mb-2">
+                <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">
+                  3k Player
+                </span>
+                <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">
+                  5 Question
+                </span>
               </div>
-            </div>
-            <div className="flex px-2 mb-2">
-              <span className=" px-2 py-1 inline-block leading-none bg-teal-200 text-teal-800 rounded-full font-semibold uppercase tracking-wide text-xs">
-                10 Qs
-              </span>
-              <span className="ml-2 px-2 py-1 inline-block leading-none bg-teal-200 text-teal-800 rounded-full font-semibold uppercase tracking-wide text-xs">
-                3.7k play
-              </span>
-            </div>
-          </div>
-          <div className="max-w-sm mx-auto bg-white lg:mr-2 hover:shadow-lg cursor-pointer rounded overflow-hidden">
-            <img className="w-full h-48" src="/img/general.jpg" />
-            <Link to="/calculate">
-              <button
-                type="button"
-                id="option-start"
-                className="flex mx-auto text-white font-bold mt-3 rounded-full h-16 w-16 items-center justify-center"
-              >
-                Start
-              </button>
-            </Link>
-            <div className=" py-4">
-              <div className="font-bold text-xl mb-2 text-center">
-                <h1>Calculating</h1>
-              </div>
-            </div>
-            <div className="flex px-2 mb-2">
-              <span className=" px-2 py-1 inline-block leading-none bg-teal-200 text-teal-800 rounded-full font-semibold uppercase tracking-wide text-xs">
-                10 Qs
-              </span>
-              <span className="ml-2 px-2 py-1 inline-block leading-none bg-teal-200 text-teal-800 rounded-full font-semibold uppercase tracking-wide text-xs">
-                3.7k play
-              </span>
             </div>
           </div>
         </div>
-        <div
+
+        {/* <div
           style={{ width: '90%', marginLeft: 'auto', marginRight: 'auto' }}
           className="sm:flex "
         >
@@ -312,10 +167,10 @@ const Choice = () => (
               </div>
             </div>
           </div>
-        </div>
+        </div> */}
       </form>
     </React.Fragment>
-    <div className="lg:-mt-64 z-32">
+    {/* <div className="lg:-mt-64 z-32">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
         <path
           fill="#0099ff"
@@ -324,7 +179,7 @@ const Choice = () => (
         ></path>
         <h1>hello</h1>
       </svg>
-    </div>
+    </div> */}
   </React.Fragment>
 );
 

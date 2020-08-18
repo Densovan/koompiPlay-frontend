@@ -8,10 +8,10 @@ const Send = () => {
     recieve: '',
     amount: '',
     memo: '',
-    select: 'ZTO',
-    apikey: 'c3e090dd-5f39-4533-8f80-286d5e594915',
+    select: 'SEL',
+    apikey: 'c9c3cce7-61c1-43e8-97f7-495d75c51b18',
     apisec:
-      'YmY4ODM3YmQtMzM5Ni00NzZkLTg2Y2MtYjUyNWM5NzZkMTcxQmVhcmVyIGV5SmhiR2NpT2lKSVV6STFOaUo5LmV5SmZhV1FpT2lKak0yVXdPVEJrWkMwMVpqTTVMVFExTXpNdE9HWTRNQzB5T0Raa05XVTFPVFE1TVRVaUxDSmxlSEFpT2pFMU9UUXhNREl6TXpOOS51Z3FsWW9NVWxyZWd0NjhhUHNpbTBoTkJ4aS1iUGNmVVhYSk94cV83M0Jz',
+      'ZTc3NGQ2NTEtMTYzMy00YjVjLWI4ZmQtNmQwNDI5NmUxYzRlQmVhcmVyIGV5SmhiR2NpT2lKSVV6STFOaUo5LmV5SmZhV1FpT2lKak9XTXpZMk5sTnkwMk1XTXhMVFF6WlRndE9UZG1OeTAwT1RWa056VmpOVEZpTVRnaUxDSmxlSEFpT2pFMU9UYzRNakkxTVRkOS5iazdoXzJzQ1JlZlFfZ1EtNW9LRWNBMjFoWFd5U3JkUlVGdDJJQ1c4dmU4',
   });
   var accessTokenObj = localStorage.getItem('token');
   const [loading, setLoading] = useState(false);
@@ -28,7 +28,7 @@ const Send = () => {
   useEffect(() => {
     axios({
       method: 'GET',
-      url: 'https://backend.satisyou.com/get-wallet',
+      url: 'https://backend.rielcoin.com/get-wallet',
       headers: {
         token: accessTokenObj,
       },
@@ -43,7 +43,7 @@ const Send = () => {
 
     axios({
       method: 'GET',
-      url: 'https://backend.satisyou.com/get-wallet',
+      url: 'https://backend.rielcoin.com/get-wallet',
       headers: {
         token: accessTokenObj,
       },
@@ -53,7 +53,7 @@ const Send = () => {
 
     axios({
       method: 'POST',
-      url: 'https://pro-api.zeetomic.com/apis/v1/payment',
+      url: 'https://testnet-api.selendra.com/apis/v1/payment',
       data: {
         id: wallet.wallet_id,
         apikey: send.apikey,
@@ -96,7 +96,7 @@ const Send = () => {
         <div>
           <center className="mt-10">
             <h1 className=" text-gray-300 font-bold text-2xl">
-              ZELENTRA TOKEN
+              SELENTRA TOKEN
             </h1>
           </center>
           <form onSubmit={onSubmit}>
@@ -146,7 +146,7 @@ const Send = () => {
                   id="grid-state"
                 >
                   <option value="zto">ZTO</option>
-                  <option value="native">Native</option>
+                  {/* <option value="native">Native</option> */}
                 </select>
                 <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
                   <svg
