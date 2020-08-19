@@ -31,7 +31,7 @@ class SciencePage extends React.Component {
       score: 0,
       correctAnswers: 0,
       wrongAnswers: 0,
-      hints: 2,
+      hints: 4,
       previousRandomNumbers: [],
       time: {},
     };
@@ -322,7 +322,7 @@ class SciencePage extends React.Component {
       numberOfAnsweredQuestions: state.correctAnswers + state.wrongAnswers,
       correctAnswers: state.correctAnswers,
       wrongAnswers: state.wrongAnswers,
-      hintsUsed: 2 - state.hints,
+      hintsUsed: 5 - state.hints,
     };
     setTimeout(() => {
       this.props.history.push("/result", playerStats);
