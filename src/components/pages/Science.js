@@ -322,7 +322,7 @@ class SciencePage extends React.Component {
       numberOfAnsweredQuestions: state.correctAnswers + state.wrongAnswers,
       correctAnswers: state.correctAnswers,
       wrongAnswers: state.wrongAnswers,
-      hintsUsed: 5 - state.hints,
+      hintsUsed: 4 - state.hints,
     };
     setTimeout(() => {
       this.props.history.push("/result", playerStats);
@@ -347,12 +347,11 @@ class SciencePage extends React.Component {
       closeOnClickOutside: false,
       button: true,
     }).then((willOk) => {
-      if(willOk){
+      if (willOk) {
         this.startTimer();
         this.displayQuestions();
         swal.close();
-      }
-      else{
+      } else {
         swal.close();
       }
     });
@@ -389,16 +388,16 @@ class SciencePage extends React.Component {
     } = this.state;
     return (
       <React.Fragment>
-      <Helmet>
-        <title>{TITLE}</title>
-      </Helmet>
-      <React.Fragment>
-        <audio ref={this.correctSound} src={correctNotification}></audio>
-        <audio ref={this.wrongSound} src={wrongNotification}></audio>
-        <audio ref={this.buttonSound} src={buttonSound}></audio>
-      </React.Fragment>
-      <div className="lg:-mb-64 h-auto overflow-hidden">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+        <Helmet>
+          <title>{TITLE}</title>
+        </Helmet>
+        <React.Fragment>
+          <audio ref={this.correctSound} src={correctNotification}></audio>
+          <audio ref={this.wrongSound} src={wrongNotification}></audio>
+          <audio ref={this.buttonSound} src={buttonSound}></audio>
+        </React.Fragment>
+        <div className="lg:-mb-64 h-auto overflow-hidden">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
             <path
               fill="#273036"
               fillOpacity="0.4"
@@ -418,98 +417,97 @@ class SciencePage extends React.Component {
               fill="#5000ca"
               fillOpacity="0.6"
               d="M0,224L20,202.7C40,181,80,139,120,112C160,85,200,75,240,101.3C280,128,320,192,360,192C400,192,440,128,480,128C520,128,560,192,600,213.3C640,235,680,213,720,224C760,235,800,277,840,288C880,299,920,277,960,229.3C1000,181,1040,107,1080,69.3C1120,32,1160,32,1200,64C1240,96,1280,160,1320,208C1360,256,1400,288,1420,304L1440,320L1440,0L1420,0C1400,0,1360,0,1320,0C1280,0,1240,0,1200,0C1160,0,1120,0,1080,0C1040,0,1000,0,960,0C920,0,880,0,840,0C800,0,760,0,720,0C680,0,640,0,600,0C560,0,520,0,480,0C440,0,400,0,360,0C320,0,280,0,240,0C200,0,160,0,120,0C80,0,40,0,20,0L0,0Z"
-            >        
-            </path>
+            ></path>
           </svg>
         </div>
-        <h1 className="text-center lg:text-white text-5xl p-0">Quiz Game</h1>     
-      <React.Fragment>        
-        <form
-          id="backgrond"
-          className=" bg-gray-100 shadow-xl rounded-lg mx-auto w-full h-auto pb-56 z-1"
-        >
-          <div className=" fill-current text-xl pb-10 flex justify-between container mx-auto lg:mt-12">
-            <div className="transition duration-200 ease-in-out transform hover:-translate-y-1 text-gray-900 lg:ml-48">
-              <IosLinkOutline fontSize="35px" rotate={true} />
-              {currentQuestionIndex + 1} of {numberOfQuestions}
-            </div>
-            <div className="transition duration-200 ease-in-out transform hover:-translate-y-1 text-red-600">
-              <MdClock fontSize="35px" color="red" beat={true} />
-              {time.minutes}:{time.seconds}
-            </div>
-            <div
-              onClick={this.handleHints}
-              className="transition duration-200 ease-in-out transform hover:-translate-y-1 text-red-600 lg:mr-48"
-            >
-              <MdBulb shake={true} fontSize="35px" color="red" />
-              {hints}
-            </div>
-          </div>
-          <div className="max-w-4xl mx-auto justify-center flex p-8 bg-white rounded-lg shadow-xl h-auto text-2xl">
-            <h5>{currentQuestion.question}</h5>
-          </div>
-          <div className="mx-auto justify-center lg:px-12 mt-6 container">
-            <div className="sm:flex">
-              <button
-                type="button"
-                onClick={this.handleOptionClick}
-                className="focus:outline-none transition duration-200 ease-in-out transform hover:-translate-y-1 block mt-3 option bg-teal-400 ml-10 lg:hover:bg-teal-800 sm:ml-0 w-3/4 sm:w-2/4 lg:w-2/4 xs:w-2/4 text-white font-bold py-3 px-4 rounded-full "
+        <h1 className="text-center lg:text-white text-5xl p-0">Quiz Game</h1>
+        <React.Fragment>
+          <form
+            id="backgrond"
+            className=" bg-gray-100 shadow-xl rounded-lg mx-auto w-full h-auto pb-56 z-1"
+          >
+            <div className=" fill-current text-xl pb-10 flex justify-between container mx-auto lg:mt-12">
+              <div className="transition duration-200 ease-in-out transform hover:-translate-y-1 text-gray-900 lg:ml-48">
+                <IosLinkOutline fontSize="35px" rotate={true} />
+                {currentQuestionIndex + 1} of {numberOfQuestions}
+              </div>
+              <div className="transition duration-200 ease-in-out transform hover:-translate-y-1 text-red-600">
+                <MdClock fontSize="35px" color="red" beat={true} />
+                {time.minutes}:{time.seconds}
+              </div>
+              <div
+                onClick={this.handleHints}
+                className="transition duration-200 ease-in-out transform hover:-translate-y-1 text-red-600 lg:mr-48"
               >
-                {currentQuestion.optionA}
+                <MdBulb shake={true} fontSize="35px" color="red" />
+                {hints}
+              </div>
+            </div>
+            <div className="max-w-4xl mx-auto justify-center flex p-8 bg-white rounded-lg shadow-xl h-auto text-2xl">
+              <h5>{currentQuestion.question}</h5>
+            </div>
+            <div className="mx-auto justify-center lg:px-12 mt-6 container">
+              <div className="sm:flex">
+                <button
+                  type="button"
+                  onClick={this.handleOptionClick}
+                  className="focus:outline-none transition duration-200 ease-in-out transform hover:-translate-y-1 block mt-3 option bg-teal-400 ml-10 lg:hover:bg-teal-800 sm:ml-0 w-3/4 sm:w-2/4 lg:w-2/4 xs:w-2/4 text-white font-bold py-3 px-4 rounded-full "
+                >
+                  {currentQuestion.optionA}
+                </button>
+                <button
+                  type="button"
+                  onClick={this.handleOptionClick}
+                  className="focus:outline-none transition duration-200 ease-in-out transform hover:-translate-y-1 sm:ml-6 mt-3 block option bg-teal-400 lg:hover:bg-teal-800 ml-10 sm:ml-0 w-3/4 sm:w-2/4  text-white font-bold py-3 px-4 rounded-full"
+                >
+                  {currentQuestion.optionB}
+                </button>
+              </div>
+              <div className="sm:flex mt-6">
+                <button
+                  type="button"
+                  onClick={this.handleOptionClick}
+                  className=" focus:outline-none transition duration-200 ease-in-out transform hover:-translate-y-1 block mt-3 option bg-teal-400 lg:hover:bg-teal-800 ml-10 sm:ml-0 w-3/4 sm:w-2/4 text-white font-bold py-3 px-4 rounded-full"
+                >
+                  {currentQuestion.optionC}
+                </button>
+                <button
+                  type="button"
+                  onClick={this.handleOptionClick}
+                  className="focus:outline-none transition duration-200 ease-in-out transform hover:-translate-y-1 sm:ml-6 mt-3 block option bg-teal-400 lg:hover:bg-teal-800 ml-10 sm:ml-0 w-3/4 sm:w-2/4 text-white font-bold py-3 px-4 rounded-full"
+                >
+                  {currentQuestion.optionD}
+                </button>
+              </div>
+            </div>
+            <div className=" justify-center text-center mx-auto">
+              <button
+                id="previous-button"
+                type="button"
+                onClick={this.handleButtonClick}
+                className="focus:outline-none bg-yellow-600 hover:bg-yellow-800 mt-10 mx-2 w-32 shadow-lg text-white font-bold py-2 px-4 rounded justify-center text-center"
+              >
+                Prev
+              </button>
+              <button
+                id="next-button"
+                type="button"
+                onClick={this.handleButtonClick}
+                className="focus:outline-none bg-indigo-600 hover:bg-indigo-800 mt-10 w-32 shadow-lg text-white font-bold py-2 px-4 rounded justify-center text-center"
+              >
+                Next
               </button>
               <button
                 type="button"
-                onClick={this.handleOptionClick}
-                className="focus:outline-none transition duration-200 ease-in-out transform hover:-translate-y-1 sm:ml-6 mt-3 block option bg-teal-400 lg:hover:bg-teal-800 ml-10 sm:ml-0 w-3/4 sm:w-2/4  text-white font-bold py-3 px-4 rounded-full"
+                onClick={quitAlert}
+                className="focus:outline-none bg-red-600 hover:bg-red-800 mt-10 mx-2 w-32 shadow-lg text-white font-bold py-2 px-4 rounded justify-center text-center"
               >
-                {currentQuestion.optionB}
+                quit
               </button>
             </div>
-            <div className="sm:flex mt-6">
-              <button
-                type="button"
-                onClick={this.handleOptionClick}
-                className=" focus:outline-none transition duration-200 ease-in-out transform hover:-translate-y-1 block mt-3 option bg-teal-400 lg:hover:bg-teal-800 ml-10 sm:ml-0 w-3/4 sm:w-2/4 text-white font-bold py-3 px-4 rounded-full"
-              >
-                {currentQuestion.optionC}
-              </button>
-              <button
-                type="button"
-                onClick={this.handleOptionClick}
-                className="focus:outline-none transition duration-200 ease-in-out transform hover:-translate-y-1 sm:ml-6 mt-3 block option bg-teal-400 lg:hover:bg-teal-800 ml-10 sm:ml-0 w-3/4 sm:w-2/4 text-white font-bold py-3 px-4 rounded-full"
-              >
-                {currentQuestion.optionD}
-              </button>
-            </div>
-          </div>
-          <div className=" justify-center text-center mx-auto">
-            <button
-              id="previous-button"
-              type="button"
-              onClick={this.handleButtonClick}
-              className="focus:outline-none bg-yellow-600 hover:bg-yellow-800 mt-10 mx-2 w-32 shadow-lg text-white font-bold py-2 px-4 rounded justify-center text-center"
-            >
-              Prev
-            </button>
-            <button
-              id="next-button"
-              type="button"
-              onClick={this.handleButtonClick}
-              className="focus:outline-none bg-indigo-600 hover:bg-indigo-800 mt-10 w-32 shadow-lg text-white font-bold py-2 px-4 rounded justify-center text-center"
-            >
-              Next
-            </button>
-            <button
-              type="button"
-              onClick={quitAlert}
-              className="focus:outline-none bg-red-600 hover:bg-red-800 mt-10 mx-2 w-32 shadow-lg text-white font-bold py-2 px-4 rounded justify-center text-center"
-            >
-              quit
-            </button>
-          </div>
-        </form>
+          </form>
+        </React.Fragment>
       </React.Fragment>
-    </React.Fragment>
     );
   }
 }

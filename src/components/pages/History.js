@@ -322,7 +322,7 @@ class HistoryPage extends React.Component {
       numberOfAnsweredQuestions: state.correctAnswers + state.wrongAnswers,
       correctAnswers: state.correctAnswers,
       wrongAnswers: state.wrongAnswers,
-      hintsUsed: 5 - state.hints,
+      hintsUsed: 4 - state.hints,
     };
     setTimeout(() => {
       this.props.history.push("/result", playerStats);
